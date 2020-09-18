@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/f33dir/projects/GODOT/RTS/build",
-  "command": "/usr/bin/g++-8   -isystem /usr/local/include/OGRE/Bites -isystem /usr/local/include/OGRE -isystem /usr/local/include/OGRE/Overlay -isystem /usr/local/include/OGRE/RTShaderSystem  -g   -o CMakeFiles/RTS.dir/main.cpp.o -c /home/f33dir/projects/GODOT/RTS/main.cpp",
-  "file": "/home/f33dir/projects/GODOT/RTS/main.cpp"
-}
-]

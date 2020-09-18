@@ -1,1 +1,0 @@
-/usr/bin/g++-8  -g  -rdynamic CMakeFiles/RTS.dir/main.cpp.o  -o RTS  -Wl,-rpath,/usr/local/lib /usr/local/lib/libOgreBites.so.1.12.9 /usr/local/lib/libOgreRTShaderSystem.so.1.12.9 /usr/local/lib/libOgreOverlay.so.1.12.9 /usr/local/lib/libOgreMain.so.1.12.9 -lpthread 
