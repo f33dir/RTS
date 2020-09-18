@@ -1,1 +1,12 @@
 /Bin/ogreBuild
+/build
+*.o
+*.os
+*.so
+*.obj
+*.pyc
+*.dblite
+*.pdb
+*.lib
+*.includes
+/.vscode
