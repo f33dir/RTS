@@ -7,6 +7,12 @@ set(OGRE_DIR /usr/share/OGRE/build/sdk/CMake)
 set(OGRE_CONFIG_DIR Bin/orgeBuild/bin)
 find_package(OGRE 1.12.7 REQUIRED COMPONENTS Bites RTShaderSystem)
 file(COPY ${OGRE_CONFIG_DIR}/resources.cfg DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(GLOB SOURCES
+    Src/*/*.h
+    Src/*/*.cpp
+    Src/*/*/*.h
+    Src/*/*/*.cpp
+)
 add_executable(RTS main.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
