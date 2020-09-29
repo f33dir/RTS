@@ -8,7 +8,15 @@ namespace Map{
         LeftSlope,
         RightSlope,
         Pit
-    }   
+    }
+    /*
+    .--------X
+    | . . . . 
+    | . . . .
+    | . . . .
+    Y
+    
+    */
     class Map
     {
         //fields
@@ -17,10 +25,14 @@ namespace Map{
         private int SizeY;
         //methods
         public void SetTile(MapTile inputTile,int x,int y){
-            
+            Matrix[x,y] = inputTile;
         }
         public void PrintMap(){
-            for(int i = 0;i<size;i++)
+            for(int i = 0;i<SizeY;i++){
+                for(int j = 0;j<SizeX;j++){
+                    GD.Print(Matrix.ToString());
+                }
+            }
         }
     }
 }
