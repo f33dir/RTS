@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="Rts"
 config/icon="res://icon.png"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "godot-navigation-lite" )
+
 [input]
 
 action_command={
