@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-
 namespace Map{
     enum TileType
     {
@@ -24,18 +23,26 @@ namespace Map{
     | . . . .
     Y
     */
-    class Map : Node
+    class Map 
     {
-        //fields
+        String MapName;
+        List<string> GridMapPaths;
         private int SizeX;
         private int SizeY;
-        private MapTile[][] Matrix;
+        public MapTile[,] Matrix{get;set;}
         //methods
-        public void SetTile(MapTile inputTile,int x,int y){
-            Matrix[x][y] = inputTile;
+        public void SetTile(MapTile inputTile,int x,int y)
+        {
+            Matrix[x,y] = inputTile;
         }
 
-        public void PrintMap(){
+        public void AddGridmap(int index)
+        {
+
+        }
+
+        public void PrintMap()
+        {
             for(int i = 0;i<SizeY;i++){
                 for(int j = 0;j<SizeX;j++){
                     GD.Print(Matrix.ToString());
@@ -43,16 +50,18 @@ namespace Map{
             }
         }
 
-        public override void  _Ready(){
-            
+        public Map()
+        {
+            SizeX = 10;
+            SizeY = 10;
+            Matrix = new MapTile[SizeX,SizeY];
         }
-        public Map(){
-            this.SizeX = 10;
-            this.SizeY = 10;
-        }
-        public Map(int Sizex,int Sizey){
-            this.SizeX = Sizex;
-            this.SizeY = Sizey;
+
+        public Map(int Sizex,int Sizey)
+        {
+            SizeX = Sizex;
+            SizeY = Sizey;
+            Matrix = new MapTile[SizeX,SizeY];
         }
     }
 }

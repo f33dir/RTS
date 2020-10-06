@@ -23,5 +23,18 @@
     <Compile Include="Src\Map\MapFileManager.cs" />
     <Compile Include="Src\Map\MapManager.cs" />
     <Compile Include="Src\Map\Map.cs" />
+    <Content Include=".mono\assemblies\Debug\GodotSharp.pdb" />
+    <Content Include=".mono\assemblies\Debug\api_hash_cache.cfg" />
+    <Content Include=".mono\assemblies\Debug\GodotSharp.dll" />
+    <Content Include=".mono\assemblies\Debug\GodotSharp.xml" />
+    <Content Include=".mono\assemblies\Debug\GodotSharpEditor.xml" />
+    <Content Include=".mono\assemblies\Debug\GodotSharpEditor.pdb" />
+    <Content Include=".mono\assemblies\Debug\GodotSharpEditor.dll" />
+    <Content Include=".mono\temp\obj\Rts.csproj.nuget.dgspec.json" />
+    <Content Include=".mono\temp\obj\Debug\Rts.assets.cache" />
+    <Content Include=".mono\temp\obj\project.assets.json" />
+    <Content Include=".mono\temp\obj\Rts.csproj.nuget.g.props" />
+    <Content Include=".mono\temp\obj\Rts.csproj.nuget.g.targets" />
+    <Content Include=".mono\temp\obj\project.nuget.cache" />
   </ItemGroup>
 </Project>

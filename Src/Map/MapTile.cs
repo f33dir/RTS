@@ -1,18 +1,15 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 namespace Map{
     public class MapTile
     {
         private TileType Type{get;set;}
         public double Rotation;// 0-3 I suppose
+        public int TileSet = 0; 
         public int Height;
         public int Color;
-
-        // public override string ToString()
-        // {
-        //     return Type.ToString() + " " + Rotation +" " + Height +" " +Color;
-        // }
-
+        
         public MapTile(int type, int rotation, int height, int color)
         {
             Type = (TileType)type;
@@ -33,5 +30,9 @@ namespace Map{
         {
             
         }
+        // public override string ToString()
+        // {
+        //     return Type.ToString() + " " + Rotation +" " + Height +" " +Color;
+        // }
     }
 }
