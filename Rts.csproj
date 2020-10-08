@@ -19,7 +19,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Src\Map\MapTile.cs" />
     <Compile Include="Src\Map\Map.cs" />
-    <Compile Include="Src\Object\Object.cs" />
-    <Compile Include="Src\Object\TestWorld.cs" />
+    <Compile Include="Src\Object\Body.cs" />
+    <Compile Include="Src\Object\Unit.cs" />
   </ItemGroup>
 </Project>
