@@ -19,6 +19,10 @@ config/name="Rts"
 run/main_scene="res://Src/Object/TestWorld.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/vsync/use_vsync=false
+
 [editor_plugins]
 
 enabled=PoolStringArray( "godot-navigation-lite" )
@@ -64,6 +68,7 @@ Action={
 [mono]
 
 profiler/enabled=true
+debugger_agent/wait_for_debugger=true
 debugger_agent/wait_timeout=10000
 export/include_scripts_content=true
 
