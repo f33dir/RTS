@@ -23,6 +23,10 @@ config/icon="res://icon.png"
 
 MapFileManager="*res://Src/Map/MapFileManager.cs"
 
+[display]
+
+window/vsync/use_vsync=false
+
 [input]
 
 debug={
@@ -34,8 +38,7 @@ debug={
 [mono]
 
 profiler/enabled=true
-debugger_agent/wait_for_debugger=true
-debugger_agent/wait_timeout=20000
+debugger_agent/wait_timeout=20004
 
 [rendering]
 

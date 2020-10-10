@@ -19,6 +19,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Src\Camera\EditorCamera.cs" />
     <Compile Include="Src\Map\MapTile.cs" />
     <Compile Include="Src\Map\MapFileManager.cs" />
     <Compile Include="Src\Map\MapManager.cs" />

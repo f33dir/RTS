@@ -2,20 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 namespace Map{
-    enum TileType
-    {
-        Plain = 0,
-        Slope,
-        LeftSlope,
-        RightSlope,
-        Pit,
-        Edge,
-        EdgeCorner,
-        EdgeInsideCorner,
-        PitEdge,
-        PitEdgeCorner,
-        PitEdgeInsideCorner,
-    }
+
     /*
     .--------X
     | . . . . 
@@ -26,7 +13,6 @@ namespace Map{
     class Map 
     {
         String MapName;
-        List<string> GridMapPaths;
         private int SizeX;
         private int SizeY;
         public MapTile[,] Matrix{get;set;}
@@ -36,9 +22,12 @@ namespace Map{
             Matrix[x,y] = inputTile;
         }
 
-        public void AddGridmap(int index)
-        {
+        public int GetSizeX(){
+            return SizeX;
+        }
 
+        public int GetSizeY(){
+            return SizeY;
         }
 
         public void PrintMap()
@@ -52,8 +41,8 @@ namespace Map{
 
         public Map()
         {
-            SizeX = 10;
-            SizeY = 10;
+            SizeX = 2;
+            SizeY = 2;
             Matrix = new MapTile[SizeX,SizeY];
         }
 
