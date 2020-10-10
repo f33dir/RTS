@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3e6351bf-015b-4ab8-ab3f-b5f83413e52b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Resources/GridMaps/TestGridMap.meshlib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Rts.csproj.old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Scenes/GridMapTest.tscn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Scenes/Test.tscn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Src/Camera/EditorCamera.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Src/Map/MapFileManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Src/Map/MapManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TempRes/Cube.mesh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TempRes/Cube001.mesh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TempRes/Material.material" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TempRes/box.glb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TempRes/box.glb.import" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Rts.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/Map/Map.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Src/Map/Map.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Src/Map/MapTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Src/Map/MapTile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.godot" beforeDir="false" afterPath="$PROJECT_DIR$/project.godot" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Src/Camera/EditorCamera.cs" />
+        <option value="$PROJECT_DIR$/Src/Map/MapFileManager.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1ih7eSuHpfh26s1ksnKeE6Q6qmL" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34997258" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.30005485" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunManager" selected="Start and Debug.Player">
+    <configuration name="Attach to Player" type="ConnectRemote" factoryName="Mono Remote" show_console_on_std_err="false" show_console_on_std_out="false" port="23685" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="selectedOptions">
+        <set />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Editor" type="GODOT_DEBUG_RUN_CONFIGURATION" factoryName="Start and Debug">
+      <option name="EXE_PATH" value="$USER_HOME$/GODOT/Godot#.64" />
+      <option name="PROGRAM_PARAMETERS" value="--path &quot;$PROJECT_DIR$&quot; --editor" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2">
+        <option name="Build Solution" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Player" type="GODOT_DEBUG_RUN_CONFIGURATION" factoryName="Start and Debug">
+      <option name="EXE_PATH" value="$USER_HOME$/GODOT/Godot#.64" />
+      <option name="PROGRAM_PARAMETERS" value="--path &quot;$PROJECT_DIR$&quot;" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2">
+        <option name="Build Solution" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3e6351bf-015b-4ab8-ab3f-b5f83413e52b" name="Default Changelist" comment="" />
+      <created>1602348068365</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1602348068365</updated>
+      <workItem from="1602348072209" duration="20000" />
+      <workItem from="1602348118649" duration="543000" />
+      <workItem from="1602348891358" duration="1087000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="100" y="100" width="1720" height="832" key="DiffContextDialog" timestamp="1602348641725">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="100" y="100" width="1720" height="832" key="DiffContextDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1602348641725" />
+    <state width="1854" height="351" key="GridCell.Tab.0.bottom" timestamp="1602358485254">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1854" height="351" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1602358485254" />
+    <state width="1854" height="351" key="GridCell.Tab.0.center" timestamp="1602358485254">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1854" height="351" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1602358485254" />
+    <state width="1854" height="351" key="GridCell.Tab.0.left" timestamp="1602358485253">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1854" height="351" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1602358485253" />
+    <state width="1854" height="351" key="GridCell.Tab.0.right" timestamp="1602358485254">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1854" height="351" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1602358485254" />
+    <state width="1854" height="351" key="GridCell.Tab.1.bottom" timestamp="1602358485254">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1854" height="351" key="GridCell.Tab.1.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1602358485254" />
+    <state width="1854" height="351" key="GridCell.Tab.1.center" timestamp="1602358485254">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1854" height="351" key="GridCell.Tab.1.center/0.0.1920.1032@0.0.1920.1032" timestamp="1602358485254" />
+    <state width="1854" height="351" key="GridCell.Tab.1.left" timestamp="1602358485254">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1854" height="351" key="GridCell.Tab.1.left/0.0.1920.1032@0.0.1920.1032" timestamp="1602358485254" />
+    <state width="1854" height="351" key="GridCell.Tab.1.right" timestamp="1602358485254">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1854" height="351" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1602358485254" />
+    <state width="1854" height="351" key="GridCell.Tab.2.bottom" timestamp="1602358485255">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1854" height="351" key="GridCell.Tab.2.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1602358485255" />
+    <state width="1854" height="351" key="GridCell.Tab.2.center" timestamp="1602358485254">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1854" height="351" key="GridCell.Tab.2.center/0.0.1920.1032@0.0.1920.1032" timestamp="1602358485254" />
+    <state width="1854" height="351" key="GridCell.Tab.2.left" timestamp="1602358485254">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1854" height="351" key="GridCell.Tab.2.left/0.0.1920.1032@0.0.1920.1032" timestamp="1602358485254" />
+    <state width="1854" height="351" key="GridCell.Tab.2.right" timestamp="1602358485254">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1854" height="351" key="GridCell.Tab.2.right/0.0.1920.1032@0.0.1920.1032" timestamp="1602358485254" />
+    <state width="1854" height="351" key="GridCell.Tab.3.bottom" timestamp="1602358485255">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1854" height="351" key="GridCell.Tab.3.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1602358485255" />
+    <state width="1854" height="351" key="GridCell.Tab.3.center" timestamp="1602358485255">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1854" height="351" key="GridCell.Tab.3.center/0.0.1920.1032@0.0.1920.1032" timestamp="1602358485255" />
+    <state width="1854" height="351" key="GridCell.Tab.3.left" timestamp="1602358485255">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1854" height="351" key="GridCell.Tab.3.left/0.0.1920.1032@0.0.1920.1032" timestamp="1602358485255" />
+    <state width="1854" height="351" key="GridCell.Tab.3.right" timestamp="1602358485255">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1854" height="351" key="GridCell.Tab.3.right/0.0.1920.1032@0.0.1920.1032" timestamp="1602358485255" />
+    <state x="411" y="151" key="SettingsEditor" timestamp="1602348641367">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="411" y="151" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1602348641367" />
+  </component>
+</project>
