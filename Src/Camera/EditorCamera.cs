@@ -6,12 +6,12 @@ namespace Camera
     {
         class CameraMove
         {
-            public float _mouseMargin = 50;
+            public float _mouseMargin = 30;
             public float _XSpeed;
             public float _YSpeed;
-            public float _MaxXSpeed = 40;
-            public float _MaxYSpeed = 40;
-            public float _acceleration = 5;
+            public float _MaxXSpeed = 4;
+            public float _MaxYSpeed = 4;
+            public float _acceleration = 3;
             public Vector3 Calculate(Viewport input)
             {
                 Vector2 mousePos = input.GetMousePosition();
@@ -23,7 +23,10 @@ namespace Camera
                 {
                     _XSpeed-=_acceleration;
                 }
-                else _XSpeed = 0;
+                else
+                {
+                    _XSpeed=0;
+                }
                 if(mousePos.y<_mouseMargin)
                 {
                     _YSpeed+=_acceleration;
@@ -32,7 +35,19 @@ namespace Camera
                 {
                   _YSpeed-=_acceleration;
                 }
-                else _YSpeed = 0;
+                else
+                {
+                    _YSpeed =0;
+                }
+            
+                // if(_XSpeed > 0){_XSpeed-=_acceleration;}
+                // else if (_XSpeed< 0){_XSpeed+=_acceleration;};
+
+                // if(_YSpeed > 0){_YSpeed-=_acceleration/2;}
+                // else if (_YSpeed< 0){_YSpeed+=_acceleration/2;};
+
+                Mathf.Clamp(_XSpeed,-_MaxXSpeed,_MaxXSpeed);
+                Mathf.Clamp(_YSpeed,-_MaxYSpeed,_MaxYSpeed);
                 Vector3 moveVector3 = new Vector3();
                 moveVector3.x = _XSpeed;
                 moveVector3.z = _YSpeed;
@@ -46,7 +61,7 @@ namespace Camera
         {
             CurrentMap = GetTree().CurrentScene.GetNode<Map.MapManager>("MapManager");
             ViewCam = GetNode<Godot.Camera>("Camera");
-            
+            Input.SetMouseMode(Input.MouseMode.Confined);
         }
 
         public override void _PhysicsProcess(float delta)
