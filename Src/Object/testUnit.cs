@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace testUnit // прототип для теста фич aka выделение, pathfinding, атака и тд...
+namespace Unit // прототип для теста фич aka выделение, pathfinding, атака и тд...
 {
     public class testUnit : KinematicBody
     {

@@ -1,8 +1,9 @@
 using Godot;
 using System;
-using Unit;
 
-public class Building: Unit
-{
-    // здесь что-то должно быть...
+namespace Unit{
+    public class Building: Unit
+    {
+        // здесь что-то должно быть...
+    }
 }
