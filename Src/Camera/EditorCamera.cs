@@ -9,9 +9,9 @@ namespace Camera
             public float _mouseMargin = 30;
             public float _XSpeed;
             public float _YSpeed;
-            public float _MaxXSpeed = 2;
-            public float _MaxYSpeed = 2;
-            public float _acceleration = 1;
+            public float _MaxXSpeed = 1;
+            public float _MaxYSpeed = 1;
+            public float _acceleration = 0.5f;
             public Vector3 Calculate(Viewport input)
             {
                 Vector2 mousePos = input.GetMousePosition();
@@ -25,6 +25,7 @@ namespace Camera
                 }
                 else
                 {
+                    
                     _XSpeed=0;
                 }
                 if(mousePos.y<_mouseMargin)
@@ -45,9 +46,8 @@ namespace Camera
 
                 // if(_YSpeed > 0){_YSpeed-=_acceleration/2;}
                 // else if (_YSpeed< 0){_YSpeed+=_acceleration/2;};
-
-                Mathf.Clamp(_XSpeed,-_MaxXSpeed,_MaxXSpeed);
-                Mathf.Clamp(_YSpeed,-_MaxYSpeed,_MaxYSpeed);
+                _XSpeed=Math.Min(Math.Max(_XSpeed,-_MaxXSpeed),_MaxXSpeed);
+                _YSpeed=Math.Min(Math.Max(_YSpeed,-_MaxYSpeed),_MaxYSpeed);
                 Vector3 moveVector3 = new Vector3();
                 moveVector3.x = _XSpeed;
                 moveVector3.z = _YSpeed;
