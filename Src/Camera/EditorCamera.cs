@@ -9,9 +9,9 @@ namespace Camera
             public float _mouseMargin = 30;
             public float _XSpeed;
             public float _YSpeed;
-            public float _MaxXSpeed = 4;
-            public float _MaxYSpeed = 4;
-            public float _acceleration = 3;
+            public float _MaxXSpeed = 2;
+            public float _MaxYSpeed = 2;
+            public float _acceleration = 1;
             public Vector3 Calculate(Viewport input)
             {
                 Vector2 mousePos = input.GetMousePosition();
@@ -70,7 +70,7 @@ namespace Camera
         }
         public void Move()
         {
-            MoveAndSlide(_cameraMove.Calculate(GetViewport()),new Vector3(0,1,0));
+            this.Translate(_cameraMove.Calculate(GetViewport()));
         }
     }
 }
