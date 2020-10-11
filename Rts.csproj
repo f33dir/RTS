@@ -1,4 +1,5 @@
-﻿<Project Sdk="Godot.NET.Sdk/3.2.3">
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Godot.NET.Sdk/3.2.3">
   <PropertyGroup>
     <ProjectGuid>{4C444AA6-851F-43F0-AA08-70B366759667}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -14,12 +15,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Src\Camera\EditorCamera.cs" />
     <Compile Include="Src\Map\MapTile.cs" />
+    <Compile Include="Src\Map\MapFileManager.cs" />
+    <Compile Include="Src\Map\MapManager.cs" />
     <Compile Include="Src\Map\Map.cs" />
     <Compile Include="Src\Object\testUnit.cs" />
-    <Compile Include="Src\Object\Unit.cs" />
   </ItemGroup>
 </Project>
