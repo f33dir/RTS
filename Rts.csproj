@@ -20,5 +20,6 @@
     <Compile Include="Src\Map\MapTile.cs" />
     <Compile Include="Src\Map\Map.cs" />
     <Compile Include="Src\Object\testUnit.cs" />
+    <Compile Include="Src\Object\Unit.cs" />
   </ItemGroup>
 </Project>
