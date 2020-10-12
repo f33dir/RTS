@@ -10,6 +10,7 @@ namespace Map{
     | . . . .
     Y
     */
+    class MapStaticObject : 
     class Map 
     {
         String MapName;

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Godot.NET.Sdk/3.2.3">
   <PropertyGroup>
     <ProjectGuid>{4C444AA6-851F-43F0-AA08-70B366759667}</ProjectGuid>
@@ -25,5 +25,7 @@
     <Compile Include="Src\Map\MapManager.cs" />
     <Compile Include="Src\Map\Map.cs" />
     <Compile Include="Src\Object\testUnit.cs" />
+    <Compile Include="Src\Object\Building.cs" />
+    <Compile Include="Src\Object\Unit.cs" />
   </ItemGroup>
 </Project>
