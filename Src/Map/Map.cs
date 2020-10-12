@@ -10,12 +10,17 @@ namespace Map{
     | . . . .
     Y
     */
-    class MapStaticObject : 
+    class MapStaticObject{
+        public string _name;
+        Vector3 _position;
+        Transform _transform;
+    } 
     class Map 
     {
         String MapName;
         private int SizeX;
         private int SizeY;
+        public List<MapStaticObject>  _staticObjects;
         public MapTile[,] Matrix{get;set;}
         //methods
         public void SetTile(MapTile inputTile,int x,int y)

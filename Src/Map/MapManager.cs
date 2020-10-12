@@ -1,12 +1,14 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace Map{
     class MapManager : Spatial
     {
-        private Map LoadedMap;
-        private GridMap gridmap;
-        MapFileManager mapfilemanager;
+        private Map _LoadedMap;
+        private GridMap _gridmap;
+        MapFileManager _mapfilemanager;
+        List<PackedScene> _loadedStaticObjects;
         public override void _Process(float delta)
         {
             if(Input.IsActionJustPressed("debug")){
@@ -16,13 +18,13 @@ namespace Map{
         }
         public void BuildLoadedMap()
         {
-            BuildCurrentMap(LoadedMap);
+            BuildCurrentMap(_LoadedMap);
         }
 
         public void BuildCurrentMap(Map InputMap)
         {
-            gridmap.Clear();
-            MeshLibrary tileset = (MeshLibrary)ResourceLoader.Load(mapfilemanager.CurrentMapPath+"tileset.meshlib");
+            _gridmap.Clear();
+            MeshLibrary tileset = (MeshLibrary)ResourceLoader.Load(_mapfilemanager.CurrentMapPath+"tileset.meshlib");
             for(int i = 0;i<InputMap.GetSizeX();++i)
             {
                 for(int j = 0;j<InputMap.GetSizeY();++j)
@@ -30,22 +32,22 @@ namespace Map{
                     MapTile current = InputMap.Matrix[i,j];
                     if(current!=null)
                     {
-                        gridmap.SetCellItem(i,current.Height,j,(int)current.Type);
+                        _gridmap.SetCellItem(i,current.Height,j,(int)current.Type);
                     }
                 }
             }
-            gridmap.MakeBakedMeshes();
+            _gridmap.MakeBakedMeshes();
         }
 
         public void LoadMap()
         {
-            LoadedMap = GetMap();
+            _LoadedMap = GetMap();
         }
 
         public Map GetMap()
         {
-            mapfilemanager = (MapFileManager)GetNode("/root/MapFileManager");
-            return GetMap(mapfilemanager.CurrentMapPath);
+            _mapfilemanager = (MapFileManager)GetNode("/root/MapFileManager");
+            return GetMap(_mapfilemanager.CurrentMapPath);
         }
 
         public Map GetMap(String path)
@@ -62,7 +64,7 @@ namespace Map{
 
         public MapTile[,] getMatrix()
         {
-            return LoadedMap.Matrix;
+            return _LoadedMap.Matrix;
         }
 
         public void setTestMap()
@@ -74,19 +76,27 @@ namespace Map{
             output.SetTile(tile, 1, 1);
             output.SetTile(tile, 1, 0);
             output.SetTile(tile, 0, 1);
-            LoadedMap = output;
+            _LoadedMap = output;
             String str;
             str = Newtonsoft.Json.JsonConvert.SerializeObject(output);
             GD.Print("beep");
-            String testMapPath = (mapfilemanager.MapPath+"mapfile");
+            String testMapPath = (_mapfilemanager.MapPath+"mapfile");
             // System.IO.File.Create(testMapPath);
             System.IO.File.WriteAllText(testMapPath,str);
         }
         public override void _Ready()
         {
-            mapfilemanager = (MapFileManager)GetNode("/root/MapFileManager");
-            gridmap = GetNode("Map")as GridMap;
+            _mapfilemanager = (MapFileManager)GetNode("/root/MapFileManager");
+            _gridmap = GetNode("Map")as GridMap;
         }
+        public void PlaceStaticObject(MapStaticObject mapStaticObject,Vector3 place,int index)
+        {
+            
+        }
+        public void LoadStaticObjects(){
+            
+        }
+
     }
 }
  
