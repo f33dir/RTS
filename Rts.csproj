@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Godot.NET.Sdk/3.2.3">
   <PropertyGroup>
@@ -28,4 +29,35 @@
     <Compile Include="Src\Object\Building.cs" />
     <Compile Include="Src\Object\Unit.cs" />
   </ItemGroup>
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Godot.NET.Sdk/3.2.3">
+  <PropertyGroup>
+    <ProjectGuid>{4C444AA6-851F-43F0-AA08-70B366759667}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Rts</RootNamespace>
+    <AssemblyName>Rts</AssemblyName>
+    <GodotProjectGeneratorVersion>1.0.0.0</GodotProjectGeneratorVersion>
+    <TargetFramework>net472</TargetFramework>
+    <!--The following properties were overriden during migration to prevent errors.
+    Enabling them may require other manual changes to the project and its files.-->
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Deterministic>false</Deterministic>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Src\Camera\CameraBase.cs" />
+    <Compile Include="Src\Camera\SelectionBox.cs" />
+    <Compile Include="Src\Map\MapTile.cs" />
+    <Compile Include="Src\Map\MapFileManager.cs" />
+    <Compile Include="Src\Map\MapManager.cs" />
+    <Compile Include="Src\Map\Map.cs" />
+    <Compile Include="Src\Object\testUnit.cs" />
+  </ItemGroup>
+>>>>>>> Object
 </Project>

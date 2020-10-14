@@ -1,29 +1,33 @@
 using Godot;
 using System;
 
-namespace Unit // прототип для теста фич aka выделение, pathfinding, атака и тд...
+public class testUnit : KinematicBody
 {
-    public class testUnit : KinematicBody
-    {
-        Vector3 velocity = Vector3.Zero;
-        Vector3 gravity = Vector3.Down*10;
-        int speed = 5;
+     private const float MOVE_SPEED = 10;
 
-        public override void _PhysicsProcess(float delta)
-        {   GD.Print(GlobalTransform.origin);
-            getInput(delta);
-            MoveAndSlideWithSnap(velocity,Vector3.Zero,Vector3.Up,true);
-        }
-        public void getInput(float delta)
-        {
-            if(Input.IsActionPressed("MoveUp"))
-                velocity.z += -speed*delta;
-            if(Input.IsActionPressed("MoveDown"))
-                velocity.z += speed*delta;
-            if(Input.IsActionPressed("MoveLeft"))
-                velocity.x += -speed*delta;
-            if(Input.IsActionPressed("MoveRight"))
-                velocity.x += speed*delta;
-        }
+    private Spatial nav;
+    private Vector3[] Path;
+    private int PathIndex = 0;
+    // private int team = 0;
+    // private Godot.Collections.Array<Resource> teamColors;
+
+    // public override void _Ready()
+    // {
+    //     teamColors.Add(ResourceLoader.Load("res://TempRes/FriendColor.tres"));
+    //     teamColors.Add(ResourceLoader.Load("res://TempRes/EnemyColor.tres"));
+    // }
+    private void MoveTo(Vector3 endPos)
+    {
+        nav.GetParent();
+        Path = (Vector3[])nav.Call("find_path",GlobalTransform.origin,endPos);
+        PathIndex = 0;
+    }
+    public override void _PhysicsProcess(float delta)
+    {
+        // Vector3 moveVec = Path[PathIndex] - GlobalTransform.origin;
+        // if(moveVec.Length() < 0.1)
+        //     PathIndex += 1;
+        // else
+        //     MoveAndSlide(moveVec.Normalized()*MOVE_SPEED, Vector3.Up);
     }
 }
