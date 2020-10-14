@@ -12,8 +12,7 @@ namespace Map{
     */
     class MapStaticObject{
         public string _name;
-        Vector3 _position;
-        Transform _transform;
+        public Transform _transform;
     } 
     class Map 
     {

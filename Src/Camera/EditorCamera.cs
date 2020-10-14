@@ -25,7 +25,6 @@ namespace Camera
                 }
                 else
                 {
-                    
                     _XSpeed=0;
                 }
                 if(mousePos.y<_mouseMargin)
@@ -40,7 +39,7 @@ namespace Camera
                 {
                     _YSpeed =0;
                 }
-            
+                
                 // if(_XSpeed > 0){_XSpeed-=_acceleration;}
                 // else if (_XSpeed< 0){_XSpeed+=_acceleration;};
 

@@ -89,30 +89,40 @@ namespace Map{
             _mapfilemanager = (MapFileManager)GetNode("/root/MapFileManager");
             _gridmap = GetNode("Map")as GridMap;
         }
-        public void PlaceStaticObject(MapStaticObject mapStaticObject,Vector3 place,int index)
+        public void PlaceStaticObject(Vector3 position,Vector3 direction,string name)
+        {
+            MapStaticObject newObject = new MapStaticObject();
+            Transform tr = new Transform();
+            tr.origin = position;
+            tr.SetLookAt(new Vector3(0,0,1),direction,new Vector3(0,1,0));
+            newObject._transform = tr;
+            newObject._name = name;
+            _LoadedMap._staticObjects.Add(newObject);
+        }
+        // public void LoadStaticObjectsCache()
+        // {
+        //     foreach(var item in _LoadedMap._staticObjects)
+        //     {
+        //         PackedScene next = ResourceLoader.Load<PackedScene>("res://Resources/MapStaticObjects"+item._name);
+        //         if(next == null)
+        //         {
+        //             next = ResourceLoader.Load<PackedScene>(_mapfilemanager.CurrentMapPath+item._name);
+        //             _loadedStaticObjects.Add(next);
+        //         }
+        //         if(next != null)
+        //         {
+        //             _loadedStaticObjects.Add(next);
+        //         }
+        //     }
+        //     if(_loadedStaticObjects.Count!=_LoadedMap._staticObjects.Count)
+        //     {
+        //         GD.Print("Map Static resources not found");
+        //     }
+        // }
+        public void LoadStaticObjects()
         {
             
         }
-        public void LoadStaticObjects()
-        {
-            foreach(var item in _LoadedMap._staticObjects)
-            {
-                PackedScene next = ResourceLoader.Load<PackedScene>("res://Resources/MapStaticObjects"+item._name);
-                if(next == null)
-                {
-                    next = ResourceLoader.Load<PackedScene>(_mapfilemanager.CurrentMapPath+item._name);
-                }
-                if(next != null)
-                {
-                    _loadedStaticObjects.Add(next);
-                }
-            }
-            if(_loadedStaticObjects.Count!=_LoadedMap._staticObjects.Count)
-            {
-                GD.Print("Map Static resources not found");
-            }
-        }
-
     }
 }
  
