@@ -66,7 +66,24 @@ namespace Map{
         {
             return _LoadedMap.Matrix;
         }
-
+        public void createMap(int Wight,int Height)
+        {
+            Map output = new Map(Wight,Height);
+            MapTile tile = new MapTile();
+            tile.Type = TileType.Basement;
+            for(int i = 0;i< Wight;i++)
+            {
+                for(int j = 0;j<Height;j++)
+                {
+                    _gridmap.SetCellItem(i,-1,j,(int)tile.Type,0);
+                }
+            }
+            _LoadedMap = output;
+        }
+        public void SaveMap()
+        {
+            
+        }
         public void setTestMap()
         {
             Map output = new Map(10,10);
@@ -81,7 +98,6 @@ namespace Map{
             str = Newtonsoft.Json.JsonConvert.SerializeObject(output);
             GD.Print("beep");
             String testMapPath = (_mapfilemanager.MapPath+"mapfile");
-            // System.IO.File.Create(testMapPath);
             System.IO.File.WriteAllText(testMapPath,str);
         }
         public override void _Ready()

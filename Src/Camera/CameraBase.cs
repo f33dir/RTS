@@ -52,7 +52,7 @@ public class CameraBase : Spatial
         var result = RaycastFromMousePosition(mousePos,1);
         GD.Print(result["position"]);
         if(result != null)
-            GetTree().CallGroup("Objects","MoveTo",result["position"]);
+            GetParent().GetTree().CallGroup("Objects","MoveTo",result["position"]);
     }
     public Godot.Collections.Dictionary RaycastFromMousePosition(Vector2 mousePos, uint CollisionMask) // определение положения курсора на карте
     {

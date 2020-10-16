@@ -3,31 +3,35 @@ using System;
 
 public class testUnit : KinematicBody
 {
-     private const float MOVE_SPEED = 10;
+     private const float MOVE_SPEED = 5;
 
     private Spatial nav;
     private Vector3[] Path;
+    private Godot.Collections.Dictionary DetourPath;
     private int PathIndex = 0;
-    // private int team = 0;
-    // private Godot.Collections.Array<Resource> teamColors;
-
-    // public override void _Ready()
-    // {
-    //     teamColors.Add(ResourceLoader.Load("res://TempRes/FriendColor.tres"));
-    //     teamColors.Add(ResourceLoader.Load("res://TempRes/EnemyColor.tres"));
-    // }
+    
     private void MoveTo(Vector3 endPos)
     {
-        nav.GetParent();
-        Path = (Vector3[])nav.Call("find_path",GlobalTransform.origin,endPos);
+        nav = (Spatial)this.GetParent().GetNode<Spatial>("DetourNavigation").GetNode<Spatial>("DetourNavigationMesh");
+        DetourPath = (Godot.Collections.Dictionary)(nav.Call("find_path",GlobalTransform.origin,endPos));
+        Path = (Vector3[])DetourPath["points"];
+
         PathIndex = 0;
+    }
+    public override void _Ready()
+    {
+        
     }
     public override void _PhysicsProcess(float delta)
     {
-        // Vector3 moveVec = Path[PathIndex] - GlobalTransform.origin;
-        // if(moveVec.Length() < 0.1)
-        //     PathIndex += 1;
-        // else
-        //     MoveAndSlide(moveVec.Normalized()*MOVE_SPEED, Vector3.Up);
+        if(Path != null)
+            if(PathIndex < Path.Length)
+            {
+                var MoveVec = ((Vector3)Path[PathIndex] - GlobalTransform.origin);
+                if(MoveVec.Length() < 0.1)
+                    PathIndex += 1;
+                else
+                    MoveAndSlide(MoveVec.Normalized()*MOVE_SPEED,Vector3.Up);
+            }
     }
 }

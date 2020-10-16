@@ -1,21 +1,45 @@
 using Godot;
 using System;
-
-public class MapEditor : Node
+namespace Map
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
+    class MapEditor : Node
     {
-        
-    }
+        private Camera _EditorCam;
+        public override void _Ready()
+        {
+            _EditorCam = (Camera)GetParent();
+        }
+        private Vector3 PointToGrid()
+        {
+            Vector3 gridPosition = new Vector3();
+            return gridPosition;
+        }
+        public void PlaceTile(Vector3 position,MapTile tile)
+        {
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+        }
+        public void RotateTile(){
+            
+        }
+        public void DeleteTile()
+        {
+            
+        }
+        public void PlaceStaticObject()
+        {
+
+        }
+        public void DeleteStaticObject()
+        {
+
+        }
+        public void ChooseTile()
+        {
+
+        }
+        public void ChooseStaticObject()
+        {
+
+        }
+    }
 }
