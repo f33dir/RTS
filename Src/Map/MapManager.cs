@@ -25,6 +25,7 @@ namespace Map{
         {
             _gridmap.Clear();
             MeshLibrary tileset = (MeshLibrary)ResourceLoader.Load(_mapfilemanager.CurrentMapPath+"tileset.meshlib");
+            _gridmap.MeshLibrary = tileset;
             for(int i = 0;i<InputMap.GetSizeX();++i)
             {
                 for(int j = 0;j<InputMap.GetSizeY();++j)
@@ -104,6 +105,10 @@ namespace Map{
         {
             _mapfilemanager = (MapFileManager)GetNode("/root/MapFileManager");
             _gridmap = GetNode("Map")as GridMap;
+            //debug
+            LoadMap();
+            BuildLoadedMap();
+            GetParent().Call("bake_navmesh");
         }
         public void PlaceStaticObject(Vector3 position,Vector3 direction,string name)
         {

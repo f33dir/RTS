@@ -22,7 +22,7 @@ public class CameraBase : Spatial
     {
         Cam = GetNode<Godot.Camera>("Camera");
         SelectionBox = GetNode<Control>("SelectionBox");
-        Input.SetMouseMode(Input.MouseMode.Confined);
+        Input.SetMouseMode(Input.MouseMode.Visible);
     }
     public void CalculateMove(Vector2 mousePos, float delta) // перемещение камеры
     {
@@ -50,7 +50,7 @@ public class CameraBase : Spatial
     public void MoveAllUnits(Vector2 mousePos)
     {
         var result = RaycastFromMousePosition(mousePos,1);
-        GD.Print(result["position"]);
+        // GD.Print(result["position"]);
         if(result != null)
             GetParent().GetTree().CallGroup("Objects","MoveTo",result["position"]);
     }

@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Rts"
-run/main_scene="res://Scenes/TestEnvironment.tscn"
+run/main_scene="res://Scenes/GridMapTestEnviroment.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -51,8 +51,6 @@ debug={
 
 [mono]
 
-profiler/enabled=true
-debugger_agent/wait_for_debugger=true
 debugger_agent/wait_timeout=10000
 export/include_scripts_content=true
 
