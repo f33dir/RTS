@@ -56,6 +56,7 @@ namespace Map{
             SizeX = Sizex;
             SizeY = Sizey;
             Matrix = new MapTile[SizeX,SizeY];
+            //fill basement 
         }
     }
 }

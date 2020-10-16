@@ -94,34 +94,35 @@ namespace Map{
             MapStaticObject newObject = new MapStaticObject();
             Transform tr = new Transform();
             tr.origin = position;
+            direction.y = position.y;
             tr.SetLookAt(new Vector3(0,0,1),direction,new Vector3(0,1,0));
             newObject._transform = tr;
             newObject._name = name;
             _LoadedMap._staticObjects.Add(newObject);
         }
-        // public void LoadStaticObjectsCache()
-        // {
-        //     foreach(var item in _LoadedMap._staticObjects)
-        //     {
-        //         PackedScene next = ResourceLoader.Load<PackedScene>("res://Resources/MapStaticObjects"+item._name);
-        //         if(next == null)
-        //         {
-        //             next = ResourceLoader.Load<PackedScene>(_mapfilemanager.CurrentMapPath+item._name);
-        //             _loadedStaticObjects.Add(next);
-        //         }
-        //         if(next != null)
-        //         {
-        //             _loadedStaticObjects.Add(next);
-        //         }
-        //     }
-        //     if(_loadedStaticObjects.Count!=_LoadedMap._staticObjects.Count)
-        //     {
-        //         GD.Print("Map Static resources not found");
-        //     }
-        // }
+        public PackedScene LoadStaticObjectScene(string name)
+        {
+            PackedScene output = ResourceLoader.Load<PackedScene>("res://Resources/MapStaticObjects"+name);
+            if(output == null)
+            {
+                output = ResourceLoader.Load<PackedScene>(_mapfilemanager.CurrentMapPath+name);
+                return output;
+            }
+            if(output != null)
+            {
+                return output;
+            }
+            return null;
+        }
         public void LoadStaticObjects()
         {
-            
+            foreach(var currentObject in _LoadedMap._staticObjects)
+            {
+                PackedScene scene = LoadStaticObjectScene(currentObject._name);
+                Spatial spatial = scene.Instance() as Spatial;
+                spatial.Transform = currentObject._transform;
+                this.AddChild(spatial);
+            }
         }
     }
 }

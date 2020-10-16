@@ -16,12 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Rts"
-<<<<<<< HEAD
 run/main_scene="res://Scenes/Test.tscn"
-=======
-run/main_scene="res://Scenes/TestEnvironment.tscn"
->>>>>>> Object
 config/icon="res://icon.png"
+
+[autoload]
+
+MapFileManager="*res://Src/Map/MapFileManager.cs"
 
 [display]
 
