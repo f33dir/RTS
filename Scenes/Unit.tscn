@@ -31,7 +31,7 @@ transform = Transform( 0.613, 0, 0, 0, 1.076, 0, 0, 0, 0.533, 0, 1.11081, 0 )
 shape = SubResource( 1 )
 
 [node name="Body" type="MeshInstance" parent="."]
-transform = Transform( 0.613, 0, 0, 0, 1.076, 0, 0, 0, 0.533, 0, 1.11081, 0 )
+transform = Transform( -0.613, 0, -1.73673e-07, 0, 1.076, 0, 1.99741e-07, 0, -0.533, 0, 1.11081, 0 )
 mesh = SubResource( 2 )
 material/0 = null
 

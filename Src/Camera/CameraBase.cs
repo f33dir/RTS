@@ -50,8 +50,8 @@ public class CameraBase : Spatial
     public void MoveAllUnits(Vector2 mousePos)
     {
         var result = RaycastFromMousePosition(mousePos,1);
-        GD.Print(result["position"]);
-        if(result != null)
+        //GD.Print(result["position"]);
+        if(result != null && result.Count != 0)
             GetParent().GetTree().CallGroup("Objects","MoveTo",result["position"]);
     }
     public Godot.Collections.Dictionary RaycastFromMousePosition(Vector2 mousePos, uint CollisionMask) // определение положения курсора на карте

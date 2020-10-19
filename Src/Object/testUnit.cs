@@ -31,7 +31,10 @@ public class testUnit : KinematicBody
                 if(MoveVec.Length() < 0.1)
                     PathIndex += 1;
                 else
+                {
+                    LookAt(MoveVec.Normalized(),Vector3.Up);
                     MoveAndSlide(MoveVec.Normalized()*MOVE_SPEED,Vector3.Up);
+                }
             }
     }
 }
