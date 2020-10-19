@@ -10,11 +10,16 @@ namespace Map{
     | . . . .
     Y
     */
+    class MapStaticObject{
+        public string _name;
+        public Transform _transform;
+    } 
     class Map 
     {
         String MapName;
         private int SizeX;
         private int SizeY;
+        public List<MapStaticObject>  _staticObjects;
         public MapTile[,] Matrix{get;set;}
         //methods
         public void SetTile(MapTile inputTile,int x,int y)
@@ -51,6 +56,7 @@ namespace Map{
             SizeX = Sizex;
             SizeY = Sizey;
             Matrix = new MapTile[SizeX,SizeY];
+            //fill basement 
         }
     }
 }
