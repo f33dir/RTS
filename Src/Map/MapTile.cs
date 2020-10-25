@@ -2,10 +2,11 @@ using Godot;
 using System;
 using System.Collections.Generic;
 namespace Map{
-    enum TileType
+    public enum TileType
     {
         Empty = -1,
-        Plain = 0,
+        Basement = 0,
+        Plain = 1,
         Slope,
         LeftSlope,
         RightSlope,
@@ -17,7 +18,7 @@ namespace Map{
         PitEdgeCorner,
         PitEdgeInsideCorner,
     }
-    class MapTile
+    public class MapTile
     {
         public TileType Type{get;set;}
         public double Rotation;// 0-3 I suppose 
