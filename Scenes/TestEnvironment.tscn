@@ -304,14 +304,14 @@ material/0 = ExtResource( 4 )
 [node name="CollisionShape" type="CollisionShape" parent="DetourNavigation/DetourNavigationMesh/Pillar4/StaticBody"]
 shape = SubResource( 19 )
 
-[node name="Unit" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.488062, 1.09405 )
+[node name="Unit" parent="DetourNavigation" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.230799, 1.09405 )
 
-[node name="Unit2" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.488062, -2.78456 )
+[node name="Unit2" parent="DetourNavigation" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.293509, -2.78456 )
 
-[node name="Unit3" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.93614, 0.488062, -2.78456 )
+[node name="Unit3" parent="DetourNavigation" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.93614, 0.0600694, -2.78456 )
 
-[node name="Unit4" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50295, 0.488062, -2.78456 )
+[node name="Unit4" parent="DetourNavigation" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50295, -0.0422766, -2.78456 )

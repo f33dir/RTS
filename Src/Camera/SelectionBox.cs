@@ -1,27 +1,43 @@
 using Godot;
 using System;
+using CameraBase;
 
-public class SelectionBox : Control
-{
-    // private bool isVisible = false;
-    // private Vector2 mousePos = new Vector2();
-    // private Vector2 startSelPos = new Vector2();
-    
-    // private Godot.Color selBoxCol = Color.Color8(0,1,0);
-    // private float selBoxLineWidth = 2;
+namespace CameraBase
+{    
+    public class SelectionBox : Control
+    {
+        private bool _isVisible = false;
+        private Vector2 _mousePos = new Vector2();
+        private Vector2 _startSelPos = new Vector2();
+        
+        private Godot.Color selBoxCol = Color.Color8(0,1,0);
+        private float selBoxLineWidth = 2;
 
-    // public override void _Draw()
-    // {
-    //     if(isVisible && startSelPos != mousePos)
-    //     {
-    //         DrawLine(startSelPos,new Vector2(mousePos.x,startSelPos.y),selBoxCol,selBoxLineWidth);
-    //         DrawLine(startSelPos,new Vector2(startSelPos.x,mousePos.y),selBoxCol,selBoxLineWidth);
-    //         DrawLine(mousePos,new Vector2(mousePos.x,startSelPos.y),selBoxCol,selBoxLineWidth);
-    //         DrawLine(mousePos,new Vector2(startSelPos.x,mousePos.y),selBoxCol,selBoxLineWidth);
-    //     }
-    // }
-    // public override void _Process(float delta)
-    // {
-    //     Update();
-    // }
+        public override void _Draw()
+        {
+            if(_isVisible && _startSelPos != _mousePos)
+            {
+                DrawLine(_startSelPos,new Vector2(_mousePos.x,_startSelPos.y),selBoxCol,selBoxLineWidth);
+                DrawLine(_startSelPos,new Vector2(_startSelPos.x,_mousePos.y),selBoxCol,selBoxLineWidth);
+                DrawLine(_mousePos,new Vector2(_mousePos.x,_startSelPos.y),selBoxCol,selBoxLineWidth);
+                DrawLine(_mousePos,new Vector2(_startSelPos.x,_mousePos.y),selBoxCol,selBoxLineWidth);
+            }
+        }
+        public override void _Process(float delta)
+        {
+            Update();
+        }
+        public void SetStartSelPos(Vector2 SelPos)
+        {
+            this._startSelPos = SelPos;
+        }
+        public void SetMousePos(Vector2 MousePos)
+        {
+            this._mousePos = MousePos;
+        }
+        public void SetVisibility(bool isVisible)
+        {
+            this._isVisible = isVisible;
+        }
+    }
 }
