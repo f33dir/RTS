@@ -14,8 +14,8 @@ public class testUnit : KinematicBody
     {
         nav = (Spatial)this.GetParent().GetNode<Spatial>("DetourNavigation").GetNode<Spatial>("DetourNavigationMesh");
         DetourPath = (Godot.Collections.Dictionary)(nav.Call("find_path",GlobalTransform.origin,endPos));
-        Path = (Vector3[])DetourPath["points"];
-    
+        Path = DetourPath["points"] as Godot.Vector3[];
+
         PathIndex = 0;
     }
     public override void _Ready()

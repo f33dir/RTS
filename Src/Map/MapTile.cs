@@ -8,15 +8,7 @@ namespace Map{
         Basement = 0,
         Plain = 1,
         Slope,
-        LeftSlope,
-        RightSlope,
         Pit,
-        Edge,
-        EdgeCorner,
-        EdgeInsideCorner,
-        PitEdge,
-        PitEdgeCorner,
-        PitEdgeInsideCorner,
     }
     public class MapTile
     {

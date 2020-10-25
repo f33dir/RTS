@@ -6,9 +6,13 @@ namespace Map{
     class MapManager : Spatial
     {
         private Map _LoadedMap;
+        private ColliderBuilder colliderBuilder;
         private GridMap _gridmap;
         MapFileManager _mapfilemanager;
         List<PackedScene> _loadedStaticObjects;
+        public Map GetLoadedMap(){
+            return _LoadedMap;
+        }
         public override void _Process(float delta)
         {
             if(Input.IsActionJustPressed("debug")){
@@ -37,7 +41,7 @@ namespace Map{
                     }
                 }
             }
-            _gridmap.MakeBakedMeshes();
+            _gridmap.MakeBakedMeshes(); 
         }
 
         public void LoadMap()
@@ -87,7 +91,7 @@ namespace Map{
         }
         public void setTestMap()
         {
-            Map output = new Map(10,10);
+            Map output = new Map(2,2);
             MapTile tile = new MapTile();
             tile.Height = 20;
             output.SetTile(tile, 0, 0);
@@ -108,6 +112,9 @@ namespace Map{
             //debug
             LoadMap();
             BuildLoadedMap();
+            colliderBuilder = (ColliderBuilder)GetNode("ColliderBuilder");
+            colliderBuilder.SlowFill();
+            GetParent().Call("clear_navmesh");
             GetParent().Call("bake_navmesh");
         }
         public void PlaceStaticObject(Vector3 position,Vector3 direction,string name)

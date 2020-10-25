@@ -1,43 +1,21 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://TempRes/Cube001.mesh" type="ArrayMesh" id=1]
 [ext_resource path="res://TempRes/Cube.mesh" type="ArrayMesh" id=2]
 
-[sub_resource type="CubeMesh" id=8]
-
-[sub_resource type="ConcavePolygonShape" id=7]
-data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
-
-[sub_resource type="ConcavePolygonShape" id=5]
-data = PoolVector3Array( 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, 1, 1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, -1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, 1, 1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, -1 )
-
-[sub_resource type="ConcavePolygonShape" id=2]
-data = PoolVector3Array( 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, 1, 1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, -1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, 1, 1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, -1 )
-
-[sub_resource type="ConcavePolygonShape" id=3]
-data = PoolVector3Array( -1, -1, -1, 1, -1, -1, 1, 0.9885, -1, 1, -1, 1, 1, 0.9885, -1, 1, -1, -1, 1, 0.9885, -1, 1, 1, 1, 1, 1, -1, 1, 0.9885, -1, 1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, 1, 1, 0.9885, -1, -1, -1, 1, -1, -1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, -1, -1, 1, 1, 0.9885, -1, 1, 1, -1 )
-
 [node name="Spatial" type="Spatial"]
 
 [node name="Basement" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4735, 0, -5.93265 )
-mesh = SubResource( 8 )
-material/0 = null
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.44192, 0.990603, -5.92858 )
 
 [node name="StaticBody" type="StaticBody" parent="Basement"]
 
-[node name="CollisionShape" type="CollisionShape" parent="Basement/StaticBody"]
-shape = SubResource( 7 )
-
 [node name="Cube" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4647, 0.90796, -4.7416 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.00301, 0.90796, 0.0686393 )
 mesh = ExtResource( 2 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Cube"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Cube/StaticBody"]
-shape = SubResource( 5 )
 
 [node name="Cube2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00395989, 1.22219, -7.24944 )
@@ -46,15 +24,9 @@ material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Cube2"]
 
-[node name="CollisionShape" type="CollisionShape" parent="Cube2/StaticBody"]
-shape = SubResource( 2 )
-
 [node name="Cube001" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2039, 1.91617, 0.921001 )
 mesh = ExtResource( 1 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Cube001"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Cube001/StaticBody"]
-shape = SubResource( 3 )

@@ -23,6 +23,11 @@ config/icon="res://icon.png"
 
 MapFileManager="*res://Src/Map/MapFileManager.cs"
 
+[debug]
+
+settings/stdout/print_fps=true
+shapes/navigation/geometry_color=Color( 0, 1, 0.666667, 1 )
+
 [display]
 
 window/vsync/use_vsync=false

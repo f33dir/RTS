@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/CameraBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Src/Map/MapEditor.cs" type="Script" id=2]
+[ext_resource path="res://Scenes/Map.tscn" type="PackedScene" id=3]
+
+[node name="Editor" type="Spatial"]
+
+[node name="MapManager" parent="." instance=ExtResource( 3 )]
+
+[node name="CameraBase" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.00714, 6.67845 )
+
+[node name="Spatial" type="Spatial" parent="."]
+script = ExtResource( 2 )
