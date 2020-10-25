@@ -23,15 +23,15 @@ namespace CameraBase
                 MoveSelectedUnits(mousePos);
             if(Input.IsActionJustPressed("alt_command"))
             {
-                SelectionBox.SetStartSelPos(mousePos);
+                SelectionBox._startSelPos = mousePos;
                 StartSelPos = mousePos;
             }
             if(Input.IsActionPressed("alt_command"))
             {
-                SelectionBox.SetMousePos(mousePos);
-                SelectionBox.SetVisibility(true);
+                SelectionBox._mousePos = mousePos;
+                SelectionBox._isVisible = true;
             }
-            else SelectionBox.SetVisibility(false);
+            else SelectionBox._isVisible = false;
             if(Input.IsActionJustReleased("alt_command"))
                 SelectUnits(mousePos);
             if(Input.IsActionJustPressed("exit"))

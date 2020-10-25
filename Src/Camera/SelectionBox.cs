@@ -6,9 +6,9 @@ namespace CameraBase
 {    
     public class SelectionBox : Control
     {
-        private bool _isVisible = false;
-        private Vector2 _mousePos = new Vector2();
-        private Vector2 _startSelPos = new Vector2();
+        public bool _isVisible = false;
+        public Vector2 _mousePos;
+        public Vector2 _startSelPos;
         
         private Godot.Color selBoxCol = Color.Color8(0,1,0);
         private float selBoxLineWidth = 2;
@@ -27,17 +27,17 @@ namespace CameraBase
         {
             Update();
         }
-        public void SetStartSelPos(Vector2 SelPos)
-        {
-            this._startSelPos = SelPos;
-        }
-        public void SetMousePos(Vector2 MousePos)
-        {
-            this._mousePos = MousePos;
-        }
-        public void SetVisibility(bool isVisible)
-        {
-            this._isVisible = isVisible;
-        }
+        // public void SetStartSelPos(Vector2 SelPos)
+        // {
+        //     this._startSelPos = SelPos;
+        // }
+        // public void SetMousePos(Vector2 MousePos)
+        // {
+        //     this._mousePos = MousePos;
+        // }
+        // public void SetVisibility(bool isVisible)
+        // {
+        //     this._isVisible = isVisible;
+        // }
     }
 }
