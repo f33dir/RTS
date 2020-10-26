@@ -9,11 +9,13 @@ namespace Map
         private MapTile _selectedMapTile;
         public override void _Ready()
         {
+            
             _selectedMapTile = new MapTile();
             //debug
             _selectedMapTile.Type = TileType.Pit;
             _editorCam = GetParent().GetNode("CameraBase")as CameraBase.CameraBase;
             _mapManager = GetParent().GetNode("MapManager")as MapManager;
+
         }
         private Vector3 PointToGrid()
         {
@@ -62,6 +64,10 @@ namespace Map
         {
 
         }
+        public void NewMap()
+        {
+            _mapManager.NewEmptyMap(40,40);
+        }
         public override void _Process(float delta)
         {
             if(Input.IsActionJustPressed("editor_placetile"))
@@ -72,12 +78,19 @@ namespace Map
             {
                 DeleteTile(PointToGrid());
             }
-            if(Input.IsActionJustPressed("editor_rotate")){
+            if(Input.IsActionJustPressed("editor_rotate"))
+            {
                 RotateTile(PointToGrid());
             }
-            if(Input.IsActionJustPressed("editor_save")){
+            if(Input.IsActionJustPressed("editor_save"))
+            {
                 _mapManager.SaveMap();
             };
+            if(Input.IsActionJustPressed("editor_new"))
+            {
+                NewMap();
+            }
         }
     }
+
 }

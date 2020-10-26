@@ -8,7 +8,6 @@ public class MapFileManager : Node
         private List<DirectoryInfo> _maps;
         public  string MapPath{get; set;}
         public string CurrentMapPath{get;set;}
-
         public int ParseMaps()
         {
             if(System.IO.Directory.Exists(MapPath)){

@@ -172,5 +172,10 @@ namespace Map{
                 }
             }
         }
+        public void NewEmptyMap(int x,int y)
+        {
+            _loadedMap = new Map(x,y,TileType.Basement);
+            BuildLoadedMap();
+        }
     }
 }

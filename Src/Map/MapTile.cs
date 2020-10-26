@@ -36,5 +36,9 @@ namespace Map{
         {
             Type = TileType.Plain;
         }
+        public MapTile(TileType type)
+        {
+            Type = type;
+        }
     }
 }

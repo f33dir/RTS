@@ -57,5 +57,19 @@ namespace Map{
             _sizeY = sizey;
             Matrix = new MapTile[_sizeX,_sizeY];
         }
+        public Map(int sizex,int sizey,TileType tileType)
+        {
+            _sizeX = sizex;
+            _sizeY = sizey;
+            MapTile tile = new MapTile(TileType.Basement);
+            Matrix = new MapTile[_sizeX,_sizeY];
+            for(int i = 0;i<_sizeX;i++)
+            {
+                for(int j = 0;j<_sizeY;j++)
+                {
+                    Matrix[i,j] = tile;
+                }
+            }
+        }
     }
 }
