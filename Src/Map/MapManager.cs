@@ -6,9 +6,10 @@ namespace Map{
     class MapManager : Spatial
     {
         private Map _loadedMap;
-        private ColliderBuilder _colliderBuilder;
+        public ColliderBuilder _colliderBuilder;
         public GridMap Gridmap{get;set;}
         MapFileManager _mapfilemanager;
+        MeshLibrary _tileset;
         List<PackedScene> _loadedStaticObjects;
         public Map GetLoadedMap(){
             return _loadedMap;
@@ -24,12 +25,15 @@ namespace Map{
         {
             BuildCurrentMap(_loadedMap);
         }
-
         private void BuildCurrentMap(Map inputMap)
         {
             Gridmap.Clear();
-            MeshLibrary tileset = (MeshLibrary)ResourceLoader.Load(_mapfilemanager.CurrentMapPath+"tileset.meshlib");
-            Gridmap.MeshLibrary = tileset;
+            _tileset =ResourceLoader.Load(_mapfilemanager.CurrentMapPath+"tileset.meshlib")as MeshLibrary;
+            if(_tileset==null)
+            {
+                _tileset = ResourceLoader.Load("res://Resources/tilesets/defaulttileset.meshlib")as MeshLibrary;
+            }
+            Gridmap.MeshLibrary = _tileset;
             for(int i = 0;i<inputMap.GetSizeX();++i)
             {
                 for(int j = 0;j<inputMap.GetSizeY();++j)
@@ -45,30 +49,25 @@ namespace Map{
             _colliderBuilder.Clear();
             _colliderBuilder.SlowFill();
         }
-
         public void LoadMap()
         {
             _loadedMap = GetMap();
         }
-
         public Map GetMap()
         {
             _mapfilemanager = (MapFileManager)GetNode("/root/MapFileManager");
             return GetMap(_mapfilemanager.CurrentMapPath);
         }
-
         public Map GetMap(String path)
         {
             Map output  = Newtonsoft.Json.JsonConvert.DeserializeObject<Map>(System.IO.File.ReadAllText(path+ "mapfile"));
             return output;
         }
-
         public void BuildMap(string mapPath)
         {
             Map currentMap = GetMap(mapPath);
             BuildCurrentMap(currentMap);
         }
-
         public MapTile[,] GetMatrix()
         {
             return _loadedMap.Matrix;
@@ -89,7 +88,28 @@ namespace Map{
         }
         public void SaveMap()
         {
-            
+            for(int i = 0;i<_loadedMap.GetSizeX();i++)
+            {
+                for(int j = 0;j<_loadedMap.GetSizeY();j++)
+                {
+                    int Height = 20;
+                    while(Gridmap.GetCellItem(i,Height,j) == -1)
+                    {
+                        Height--;
+                    }
+                    var tile = new MapTile(Gridmap.GetCellItem(i,Height,j),Gridmap.GetCellItemOrientation(i,Height,j),Height,1);
+                    _loadedMap.Matrix[i,j] = tile;
+                }
+            }
+            var map = Newtonsoft.Json.JsonConvert.SerializeObject(_loadedMap);
+            System.IO.File.WriteAllText(_mapfilemanager.CurrentMapPath+"mapfile",map);
+            if(!System.IO.File.Exists(_mapfilemanager.CurrentMapPath+"tileset.meshlib"))
+            {
+                var meshlib = new Godot.File();
+                meshlib.Open("res://Resources/tilesets/defaulttileset.meshlib",File.ModeFlags.Read);
+                string transfer = meshlib.GetPascalString();
+                System.IO.File.WriteAllText(_mapfilemanager.CurrentMapPath+"tileset.meshlib",transfer);
+            }
         }
         public void SetTestMap()
         {
@@ -111,10 +131,9 @@ namespace Map{
         {
             _mapfilemanager = (MapFileManager)GetNode("/root/MapFileManager");
             Gridmap = GetNode("Map")as GridMap;
-            //debug
+            _colliderBuilder = (ColliderBuilder)GetNode("ColliderBuilder");
             LoadMap();
             BuildLoadedMap();
-            _colliderBuilder = (ColliderBuilder)GetNode("ColliderBuilder");
             _colliderBuilder.SlowFill();
             GetParent().Call("clear_navmesh");
             GetParent().Call("bake_navmesh");
@@ -130,7 +149,6 @@ namespace Map{
             newObject.Name = name;
             _loadedMap._staticObjects.Add(newObject);
         }
-
         private PackedScene LoadStaticObjectScene(string name)
         {
             PackedScene output = ResourceLoader.Load<PackedScene>("res://Resources/MapStaticObjects"+name);
@@ -138,7 +156,7 @@ namespace Map{
                 return output;
             output = ResourceLoader.Load<PackedScene>(_mapfilemanager.CurrentMapPath+name);
             return output;
-            
+
         }
         public void LoadStaticObjects()
         {

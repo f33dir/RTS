@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Src/Map/MapManager.cs" type="Script" id=1]
-[ext_resource path="res://tileset.meshlib" type="MeshLibrary" id=2]
+[ext_resource path="res://Resources/tilesets/defaulttileset.meshlib" type="MeshLibrary" id=2]
 [ext_resource path="res://Src/Map/ColliderBuilder.cs" type="Script" id=3]
 
 [node name="MapManager" type="Spatial"]

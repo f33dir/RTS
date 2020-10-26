@@ -8,12 +8,12 @@ namespace Map
         private MapManager _mapManager;
         private MapTile[,] _mapMatrix;
         private float _scaleHorizontal = 1;
-        private float _scaleVertical = 1;
+        private float _scaleVertical = 0.5f;
         public override void _Ready()
         {
             _mapManager = GetParent<MapManager>();
         }
-        private void PlaceColliderBox(int x,int y,Vector3 position)
+        public void PlaceColliderBox(int x,int y,Vector3 position)
         {
             //setup mesh
             MeshInstance mesh = new MeshInstance();

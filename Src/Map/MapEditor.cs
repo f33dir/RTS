@@ -9,29 +9,42 @@ namespace Map
         private MapTile _selectedMapTile;
         public override void _Ready()
         {
+            _selectedMapTile = new MapTile();
+            //debug
+            _selectedMapTile.Type = TileType.Pit;
             _editorCam = GetParent().GetNode("CameraBase")as CameraBase.CameraBase;
             _mapManager = GetParent().GetNode("MapManager")as MapManager;
         }
         private Vector3 PointToGrid()
         {
             var gridPosition = new Vector3();
-            var point = ((StaticBody)_editorCam.RaycastFromMousePosition(GetViewport().GetMousePosition(),1)["collider"]);
-            if (point == null) return new Vector3();
-            gridPosition = _mapManager.Gridmap.WorldToMap(point.Transform.origin);
+            var point = _editorCam.RaycastFromMousePosition(GetViewport().GetMousePosition(),1);
+            gridPosition = _mapManager.Gridmap.WorldToMap(((StaticBody)point["collider"]).GlobalTransform.origin);
             return gridPosition;
         }
         public void PlaceTile(Vector3 position,MapTile tile)
         {
+            position.y += 1;
             _mapManager.GetMap().SetTile(tile,(int)position.x,(int)position.z);
-            _mapManager.BuildLoadedMap();
+            _mapManager.Gridmap.SetCellItem((int)position.x,(int)position.y,(int)position.z,(int)tile.Type);
+            _mapManager.Gridmap.MakeBakedMeshes();
+            _mapManager._colliderBuilder.PlaceColliderBox(1,1,position);
         }
         public void RotateTile(Vector3 position)
         {
-            
+            var orient = _mapManager.Gridmap.GetCellItemOrientation((int)position.x,(int)position.y,(int)position.z);
+            orient = (orient+1);
+            var item = _mapManager.Gridmap.GetCellItem((int)position.x,(int)position.y,(int)position.z);
+            _mapManager.Gridmap.SetCellItem((int)position.x,(int)position.y,(int)position.z,item,orient);
         }
         public void DeleteTile(Vector3 position)
         {
-            
+            _mapManager.Gridmap.SetCellItem((int)position.x,(int)position.y,(int)position.z,-1);
+            var point = _editorCam.RaycastFromMousePosition(GetViewport().GetMousePosition(),1);
+            var obj =  point["collider"] as StaticBody;
+            if(obj !=null){
+                obj.QueueFree();
+            }
         }
         public void PlaceStaticObject()
         {
@@ -49,13 +62,22 @@ namespace Map
         {
 
         }
-
         public override void _Process(float delta)
         {
-            if(Input.IsActionJustPressed("editor_test"))
+            if(Input.IsActionJustPressed("editor_placetile"))
             {
-                PointToGrid();
+                PlaceTile(PointToGrid(),_selectedMapTile);
             }
+            if(Input.IsActionJustPressed("editor_deletetile"))
+            {
+                DeleteTile(PointToGrid());
+            }
+            if(Input.IsActionJustPressed("editor_rotate")){
+                RotateTile(PointToGrid());
+            }
+            if(Input.IsActionJustPressed("editor_save")){
+                _mapManager.SaveMap();
+            };
         }
     }
 }
