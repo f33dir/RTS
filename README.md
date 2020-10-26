@@ -2,7 +2,7 @@
 This is a simple rts project. In this game we will control units to destroy enemy base to win the game. Just another take on classic genre. We 
 are creating this project using Godot game engine with C#, so it requires dotnetcli and the engine itself to compile.
 
-##Features
+## Features
 Those are the things were going to make
 * Up to 2 playable fractions
 * Local multiplayer
