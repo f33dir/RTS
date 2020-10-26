@@ -1,11 +1,12 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Scenes/CameraBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/godot-navigation-lite/bin/navigation.gdnlib" type="GDNativeLibrary" id=2]
 [ext_resource path="res://addons/godot-navigation-lite/bin/detour_navigation.gdns" type="Script" id=3]
 [ext_resource path="res://TempRes/TestFloor.tres" type="Material" id=4]
 [ext_resource path="res://addons/godot-navigation-lite/bin/navmesh_parameters.gdns" type="Script" id=5]
-[ext_resource path="res://Scenes/Unit.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/testUnit.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=7]
 
 [sub_resource type="NativeScript" id=1]
 class_name = "DetourNavigationMesh"
@@ -304,14 +305,16 @@ material/0 = ExtResource( 4 )
 [node name="CollisionShape" type="CollisionShape" parent="DetourNavigation/DetourNavigationMesh/Pillar4/StaticBody"]
 shape = SubResource( 19 )
 
-[node name="Unit" parent="DetourNavigation" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.488062, 1.09405 )
+[node name="testUnit" parent="DetourNavigation" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.151741, 0.271187, 0 )
 
-[node name="Unit2" parent="DetourNavigation" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.488062, -2.78456 )
+[node name="testUnit2" parent="DetourNavigation" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.26283, 0.271187, 0 )
 
-[node name="Unit3" parent="DetourNavigation" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.93614, 0.488062, -2.78456 )
+[node name="testUnit3" parent="DetourNavigation" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.13238, 0.271187, -2.64911 )
 
-[node name="Unit4" parent="DetourNavigation" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50295, 0.488062, -2.78456 )
+[node name="testUnit4" parent="DetourNavigation" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0716324, 0.271187, -2.64911 )
+
+[node name="Player" parent="." instance=ExtResource( 7 )]

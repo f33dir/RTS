@@ -19,8 +19,13 @@ namespace CameraBase
         {
             Vector2 mousePos = GetViewport().GetMousePosition();
             CalculateMove(mousePos,delta);
-            if(Input.IsActionJustPressed("action_command"))
-                MoveSelectedUnits(mousePos);
+            // if(Input.IsActionJustPressed("action_command"))
+            // {
+            //     var SelectedUnit = GetUnitUnderMouse(mousePos);
+            //     if(SelectedUnit != null && SelectedUnits == null)
+            //         SelectedUnits.Add((testUnit)SelectedUnit);
+            //     // MoveSelectedUnits(mousePos);
+            // }
             if(Input.IsActionJustPressed("alt_command"))
             {
                 SelectionBox._startSelPos = mousePos;
@@ -32,16 +37,16 @@ namespace CameraBase
                 SelectionBox._isVisible = true;
             }
             else SelectionBox._isVisible = false;
-            if(Input.IsActionJustReleased("alt_command"))
-                SelectUnits(mousePos);
-            if(Input.IsActionJustPressed("exit"))
-                GetTree().Quit(); // тупо для дебага
+            // if(Input.IsActionJustReleased("alt_command"))
+            //     SelectUnits(mousePos);
+            // if(Input.IsActionJustPressed("exit"))
+            //     GetTree().Quit(); // тупо для дебага
         }
         public override void _Ready() // получение указателей на нужные ноды
         {
             Cam = GetNode<Godot.Camera>("Camera");
             SelectionBox = GetNode<SelectionBox>("SelectionBox");
-            Input.SetMouseMode(Input.MouseMode.Confined);
+            // Input.SetMouseMode(Input.MouseMode.Confined);
             StartSelPos = new Vector2();
             SelectedUnits = new Godot.Collections.Array<testUnit>();
         }
@@ -65,11 +70,11 @@ namespace CameraBase
         public object GetUnitUnderMouse(Vector2 mousePos)
         {
             var result = RaycastFromMousePosition(mousePos,2);
-            if(result != null && result.Count != 0 &&result["collider"] != null)
+            if(result != null && result.Count != 0 && result["collider"] != null)
                 return result["collider"];
             return null;
         }
-        public void SelectUnits(Vector2 mousePos)
+        public Godot.Collections.Array<testUnit> SelectUnits(Vector2 mousePos)
         {
             Godot.Collections.Array<testUnit> NewSelectedUnits = new Godot.Collections.Array<testUnit>();
             if(mousePos.DistanceSquaredTo(StartSelPos) < 16)
@@ -94,8 +99,9 @@ namespace CameraBase
                         var clone = (Unit.testUnit)unit;
                         clone.Select();
                     }
-                    SelectedUnits = NewSelectedUnits;
+                    return NewSelectedUnits;
                 }
+            return NewSelectedUnits;
         }
         public Godot.Collections.Array<testUnit> GetUnitsInBox(Vector2 TopLeft, Vector2 BottomRight)
         {
@@ -121,15 +127,15 @@ namespace CameraBase
             }
             return BoxSelectedUnits;
         }
-        public void MoveSelectedUnits(Vector2 mousePos)
-        {
-            var result = RaycastFromMousePosition(mousePos,1);
-            //GD.Print(result["position"]);
-            if(result != null && result.Count != 0)
-                foreach (var unit in SelectedUnits)
-                    unit.MoveTo((Vector3)result["position"]);
-                // GetParent().GetTree().CallGroup("Objects","MoveTo",result["position"]);
-        }
+        // public void MoveSelectedUnits(Vector2 mousePos)
+        // {
+        //     var result = RaycastFromMousePosition(mousePos,1);
+        //     //GD.Print(result["position"]);
+        //     if(result != null && result.Count != 0)
+        //         foreach (var unit in SelectedUnits)
+        //             unit.MoveTo((Vector3)result["position"]);
+        //         // GetParent().GetTree().CallGroup("Objects","MoveTo",result["position"]);
+        // }
         public Godot.Collections.Dictionary RaycastFromMousePosition(Vector2 mousePos, uint CollisionMask) // определение положения курсора на карте
         {
             Vector3 RayStart = Cam.ProjectRayOrigin(mousePos);

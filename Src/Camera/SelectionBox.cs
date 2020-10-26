@@ -27,17 +27,5 @@ namespace CameraBase
         {
             Update();
         }
-        // public void SetStartSelPos(Vector2 SelPos)
-        // {
-        //     this._startSelPos = SelPos;
-        // }
-        // public void SetMousePos(Vector2 MousePos)
-        // {
-        //     this._mousePos = MousePos;
-        // }
-        // public void SetVisibility(bool isVisible)
-        // {
-        //     this._isVisible = isVisible;
-        // }
     }
 }

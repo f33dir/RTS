@@ -1,35 +1,28 @@
-using Godot;
 using System;
-using CameraBase;
+using Godot;
+using System.Collections.Generic;
 
 namespace Unit
 {
-    public class testUnit : KinematicBody
+    public class DynamicUnit: Unit
     {
-        private const float MOVE_SPEED = 5;
+        protected const float MIN_ATTACK_RANGE = 1f;
+        protected const float MAX_ATTACK_RANGE = 50f;
 
-        private Spatial nav;
-        private Vector3[] Path;
-        private int PathIndex = 0;
-        // private CameraBase.CameraBase camera;
-        private MeshInstance SelectionRing;
+        protected bool _IsRanged = true;
+        protected int _MainResource;
+        protected bool _IsInvisible = false;
 
-        public void MoveTo(Vector3 endPos)
+        public override void MoveTo(Vector3 Target)
         {
             nav = (Spatial)this.GetParent().GetNode<Spatial>("DetourNavigationMesh");
             var DetourPath = (Godot.Collections.Dictionary)(nav.Call("find_path",GlobalTransform.origin,endPos));
             Path = (Vector3[])DetourPath["points"];
             PathIndex = 0;
-
-            // var LookAtPos = endPos;
-            // Vector3 ObjectPos = GlobalTransform.origin;
-            // LookAtPos = ObjectPos - LookAtPos;
-            // var angle = new Vector2(LookAtPos.x,LookAtPos.z).AngleTo(new Vector2(ObjectPos.x,ObjectPos.z));
-            // this.Rotate(Vector3.Up,angle);
         }
+        public void InteractWith(){}
         public override void _Ready()
         {
-            // camera = GetParent().GetNode<CameraBase.CameraBase>("CameraBase");
             SelectionRing = GetNode<MeshInstance>("Body/SelectionRing");
         }
         public override void _PhysicsProcess(float delta)
@@ -37,13 +30,11 @@ namespace Unit
             if(Path != null)
                 if(PathIndex < Path.Length)
                 {
-                    var MoveVec = (Path[PathIndex] - GlobalTransform.origin); //(Vector3)
+                    Vector3 MoveVec = (Path[PathIndex] - GlobalTransform.origin);
                     if(MoveVec.Length() < 0.1)
                         PathIndex += 1;
                     else
                     {
-                        // var lookatvec = new Vector3(MoveVec);
-                        // LookAt(MoveVec.Normalized()*delta,Vector3.Up);
                         MoveAndSlide(MoveVec.Normalized()*MOVE_SPEED,Vector3.Up);
                     }
                 }
