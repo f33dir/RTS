@@ -138,7 +138,7 @@ namespace Map{
                 return output;
             output = ResourceLoader.Load<PackedScene>(_mapfilemanager.CurrentMapPath+name);
             return output;
-            return null;
+            
         }
         public void LoadStaticObjects()
         {

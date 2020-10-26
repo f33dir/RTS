@@ -9,5 +9,6 @@ export_presets.cfg
 .mono/
 data_*/
 /.vscode
+/.idea
 *.mlpd
 *.blob
