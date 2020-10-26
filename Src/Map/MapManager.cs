@@ -5,13 +5,13 @@ using Godot;
 namespace Map{
     class MapManager : Spatial
     {
-        private Map _LoadedMap;
-        private ColliderBuilder colliderBuilder;
-        private GridMap _gridmap;
+        private Map _loadedMap;
+        private ColliderBuilder _colliderBuilder;
+        public GridMap Gridmap{get;set;}
         MapFileManager _mapfilemanager;
         List<PackedScene> _loadedStaticObjects;
         public Map GetLoadedMap(){
-            return _LoadedMap;
+            return _loadedMap;
         }
         public override void _Process(float delta)
         {
@@ -22,31 +22,33 @@ namespace Map{
         }
         public void BuildLoadedMap()
         {
-            BuildCurrentMap(_LoadedMap);
+            BuildCurrentMap(_loadedMap);
         }
 
-        public void BuildCurrentMap(Map InputMap)
+        private void BuildCurrentMap(Map inputMap)
         {
-            _gridmap.Clear();
+            Gridmap.Clear();
             MeshLibrary tileset = (MeshLibrary)ResourceLoader.Load(_mapfilemanager.CurrentMapPath+"tileset.meshlib");
-            _gridmap.MeshLibrary = tileset;
-            for(int i = 0;i<InputMap.GetSizeX();++i)
+            Gridmap.MeshLibrary = tileset;
+            for(int i = 0;i<inputMap.GetSizeX();++i)
             {
-                for(int j = 0;j<InputMap.GetSizeY();++j)
+                for(int j = 0;j<inputMap.GetSizeY();++j)
                 {
-                    MapTile current = InputMap.Matrix[i,j];
+                    MapTile current = inputMap.Matrix[i,j];
                     if(current!=null)
                     {
-                        _gridmap.SetCellItem(i,current.Height,j,(int)current.Type);
+                        Gridmap.SetCellItem(i,current.Height,j,(int)current.Type);
                     }
                 }
             }
-            _gridmap.MakeBakedMeshes(); 
+            Gridmap.MakeBakedMeshes(); 
+            _colliderBuilder.Clear();
+            _colliderBuilder.SlowFill();
         }
 
         public void LoadMap()
         {
-            _LoadedMap = GetMap();
+            _loadedMap = GetMap();
         }
 
         public Map GetMap()
@@ -61,35 +63,35 @@ namespace Map{
             return output;
         }
 
-        public void BuildMap(string MapPath)
+        public void BuildMap(string mapPath)
         {
-            Map CurrentMap = GetMap(MapPath);
-            BuildCurrentMap(CurrentMap);
+            Map currentMap = GetMap(mapPath);
+            BuildCurrentMap(currentMap);
         }
 
-        public MapTile[,] getMatrix()
+        public MapTile[,] GetMatrix()
         {
-            return _LoadedMap.Matrix;
+            return _loadedMap.Matrix;
         }
-        public void createMap(int Wight,int Height)
+        public void CreateMap(int wight,int height)
         {
-            Map output = new Map(Wight,Height);
+            Map output = new Map(wight,height);
             MapTile tile = new MapTile();
             tile.Type = TileType.Basement;
-            for(int i = 0;i< Wight;i++)
+            for(int i = 0;i< wight;i++)
             {
-                for(int j = 0;j<Height;j++)
+                for(int j = 0;j<height;j++)
                 {
-                    _gridmap.SetCellItem(i,-1,j,(int)tile.Type,0);
+                    Gridmap.SetCellItem(i,-1,j,(int)tile.Type,0);
                 }
             }
-            _LoadedMap = output;
+            _loadedMap = output;
         }
         public void SaveMap()
         {
             
         }
-        public void setTestMap()
+        public void SetTestMap()
         {
             Map output = new Map(2,2);
             MapTile tile = new MapTile();
@@ -98,7 +100,7 @@ namespace Map{
             output.SetTile(tile, 1, 1);
             output.SetTile(tile, 1, 0);
             output.SetTile(tile, 0, 1);
-            _LoadedMap = output;
+            _loadedMap = output;
             String str;
             str = Newtonsoft.Json.JsonConvert.SerializeObject(output);
             GD.Print("beep");
@@ -108,12 +110,12 @@ namespace Map{
         public override void _Ready()
         {
             _mapfilemanager = (MapFileManager)GetNode("/root/MapFileManager");
-            _gridmap = GetNode("Map")as GridMap;
+            Gridmap = GetNode("Map")as GridMap;
             //debug
             LoadMap();
             BuildLoadedMap();
-            colliderBuilder = (ColliderBuilder)GetNode("ColliderBuilder");
-            colliderBuilder.SlowFill();
+            _colliderBuilder = (ColliderBuilder)GetNode("ColliderBuilder");
+            _colliderBuilder.SlowFill();
             GetParent().Call("clear_navmesh");
             GetParent().Call("bake_navmesh");
         }
@@ -124,32 +126,32 @@ namespace Map{
             tr.origin = position;
             direction.y = position.y;
             tr.SetLookAt(new Vector3(0,0,1),direction,new Vector3(0,1,0));
-            newObject._transform = tr;
-            newObject._name = name;
-            _LoadedMap._staticObjects.Add(newObject);
+            newObject.Transform = tr;
+            newObject.Name = name;
+            _loadedMap._staticObjects.Add(newObject);
         }
-        public PackedScene LoadStaticObjectScene(string name)
+
+        private PackedScene LoadStaticObjectScene(string name)
         {
             PackedScene output = ResourceLoader.Load<PackedScene>("res://Resources/MapStaticObjects"+name);
-            if(output == null)
-            {
-                output = ResourceLoader.Load<PackedScene>(_mapfilemanager.CurrentMapPath+name);
+            if (output != null) 
                 return output;
-            }
-            if(output != null)
-            {
-                return output;
-            }
+            output = ResourceLoader.Load<PackedScene>(_mapfilemanager.CurrentMapPath+name);
+            return output;
             return null;
         }
         public void LoadStaticObjects()
         {
-            foreach(var currentObject in _LoadedMap._staticObjects)
+            foreach(var currentObject in _loadedMap._staticObjects)
             {
-                PackedScene scene = LoadStaticObjectScene(currentObject._name);
-                Spatial spatial = scene.Instance() as Spatial;
-                spatial.Transform = currentObject._transform;
-                this.AddChild(spatial);
+                PackedScene scene = LoadStaticObjectScene(currentObject.Name);
+                if (scene != null)
+                {
+                    Spatial spatial = scene.Instance() as Spatial;
+                    if (spatial == null) continue;
+                    spatial.Transform = currentObject.Transform;
+                    this.AddChild(spatial);
+                }
             }
         }
     }

@@ -35,11 +35,11 @@ max_layers = 8
 [node name="CameraBase" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.78927, 9.60557 )
 
-[node name="Unit" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29755, 1.67708, 0.610821 )
-
 [node name="DetourNavigation" type="Spatial" parent="."]
 script = ExtResource( 3 )
+
+[node name="Unit" parent="DetourNavigation" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29755, 1.67708, 0.610821 )
 
 [node name="DetourNavigationMesh" type="Spatial" parent="DetourNavigation"]
 script = SubResource( 1 )

@@ -32,11 +32,13 @@ shape = SubResource( 1 )
 
 [node name="Body" type="MeshInstance" parent="."]
 transform = Transform( -0.613, 0, -1.73673e-07, 0, 1.076, 0, 1.99741e-07, 0, -0.533, 0, 1, 0 )
+layers = 3
 mesh = SubResource( 2 )
 material/0 = null
 
 [node name="Eye" type="MeshInstance" parent="Body"]
 transform = Transform( 0.679, 0, 0, 0, 0.276, 0, 0, 0, 0.301, 0.0381548, 0.523195, 1.09859 )
+layers = 3
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -53,5 +55,6 @@ shape = SubResource( 5 )
 [node name="SelectionRing" type="MeshInstance" parent="Body"]
 transform = Transform( 1.5, 0, 0, 0, -0.057, 0, 0, 0, -1.5, 0, -0.916832, -0.0217862 )
 visible = false
+layers = 3
 mesh = SubResource( 6 )
 material/0 = ExtResource( 3 )

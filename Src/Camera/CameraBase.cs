@@ -41,7 +41,7 @@ namespace CameraBase
         {
             Cam = GetNode<Godot.Camera>("Camera");
             SelectionBox = GetNode<SelectionBox>("SelectionBox");
-            Input.SetMouseMode(Input.MouseMode.Confined);
+            // Input.SetMouseMode(Input.MouseMode.Confined);
             StartSelPos = new Vector2();
             SelectedUnits = new Godot.Collections.Array<testUnit>();
         }

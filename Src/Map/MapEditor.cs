@@ -4,20 +4,26 @@ namespace Map
 {
     class MapEditor : Spatial
     {
-        private CameraBase _EditorCam;
+        private CameraBase.CameraBase _editorCam;
+        private MapManager _mapManager;
+        private MapTile _selectedMapTile;
         public override void _Ready()
         {
-            _EditorCam = GetParent().GetNode("CameraBase")as CameraBase;
+            _editorCam = GetParent().GetNode("CameraBase")as CameraBase.CameraBase;
+            _mapManager = GetParent().GetNode("MapManager")as MapManager;
         }
         private Vector3 PointToGrid()
         {
-            Vector3 gridPosition = new Vector3();
-            var point = _EditorCam.RaycastFromMousePosition(GetViewport().GetMousePosition(),1)["position"];
+            var gridPosition = new Vector3();
+            var point = ((StaticBody)_editorCam.RaycastFromMousePosition(GetViewport().GetMousePosition(),1)["collider"]);
+            if (point == null) return new Vector3();
+            gridPosition = _mapManager.Gridmap.WorldToMap(point.Transform.origin);
             return gridPosition;
         }
         public void PlaceTile(Vector3 position,MapTile tile)
         {
-
+            _mapManager.GetMap().SetTile(tile,(int)position.x,(int)position.z);
+            _mapManager.BuildLoadedMap();
         }
         public void RotateTile(Vector3 position)
         {
@@ -42,6 +48,14 @@ namespace Map
         public void ChooseStaticObject()
         {
 
+        }
+
+        public override void _Process(float delta)
+        {
+            if(Input.IsActionJustPressed("editor_test"))
+            {
+                PointToGrid();
+            }
         }
     }
 }
