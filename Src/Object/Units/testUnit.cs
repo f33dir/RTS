@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using CameraBase;
 
 namespace Unit
 {

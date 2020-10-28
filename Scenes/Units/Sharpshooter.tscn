@@ -1,0 +1,71 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Src/Object/Units/Sharpshooter.cs" type="Script" id=1]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1, 1.83766, 1.22991 )
+
+[sub_resource type="SphereMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.0470588, 0.854902, 0.701961, 1 )
+
+[sub_resource type="PrismMesh" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.976471, 0.0980392, 0.00784314, 1 )
+
+[sub_resource type="CylinderMesh" id=6]
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 0.282353, 0.027451, 0.027451, 1 )
+
+[sub_resource type="CubeMesh" id=8]
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 0.0431373, 0.552941, 0.027451, 1 )
+
+[sub_resource type="CylinderMesh" id=10]
+
+[sub_resource type="SpatialMaterial" id=11]
+albedo_color = Color( 0.0588235, 1, 0.00392157, 1 )
+
+[node name="Sharpshooter" type="KinematicBody" groups=[
+"Units",
+]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69673, 0.318 )
+shape = SubResource( 1 )
+
+[node name="Body" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[node name="Head" type="MeshInstance" parent="Body"]
+transform = Transform( 0.632, 0, 0, 0, 0.838, 0, 0, 0, 0.684, -0.0067687, 1.45253, 0.00333738 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="Hat" type="MeshInstance" parent="Body/Head"]
+transform = Transform( 1.795, 0, 0, 0, 0.358, 0, 0, 0, 0.947, 0, 0.865072, 0 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="Torso" type="MeshInstance" parent="Body"]
+transform = Transform( 0.879, 0, 0, 0, 1.088, 0, 0, 0, 0.856, -0.0067687, 2.38419e-07, 0.00333738 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 7 )
+
+[node name="Gun" type="MeshInstance" parent="Body"]
+transform = Transform( 0.057, 0, 0, 0, 0.219, 0, 0, 0, 0.835, -0.815659, 0.582327, 0.807126 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
+
+[node name="SelectionRing" type="MeshInstance" parent="."]
+transform = Transform( -1.2, 0, 1.04907e-07, 0, -0.025, 0, -1.04907e-07, 0, -1.2, 0, -0.100941, 0 )
+visible = false
+mesh = SubResource( 10 )
+material/0 = SubResource( 11 )

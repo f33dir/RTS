@@ -26,7 +26,12 @@
     <Compile Include="Src\Map\MapFileManager.cs" />
     <Compile Include="Src\Map\MapManager.cs" />
     <Compile Include="Src\Map\Map.cs" />
-    <Compile Include="Src\Object\testUnit.cs" />
+    <Compile Include="Src\Object\Units\Bruhmmy.cs" />
+    <Compile Include="Src\Object\Units\testUnit.cs" />
+    <Compile Include="Src\Object\Units\Unit.cs" />
+    <Compile Include="Src\Object\Buildings\BuildingUnit.cs" />
+    <Compile Include="Src\Object\Units\DynamicUnit.cs" />
+    <Compile Include="Src\Object\Units\Sharpshooter.cs" />
     <Compile Include="Src\Player.cs" />
   </ItemGroup>
 </Project>

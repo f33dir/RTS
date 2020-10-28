@@ -13,7 +13,7 @@ namespace CameraBase
         private Godot.Camera Cam;
         private Vector2 StartSelPos;
         private SelectionBox SelectionBox;
-        private Godot.Collections.Array<Unit.testUnit> SelectedUnits;
+        // private Godot.Collections.Array<Unit.Unit> SelectedUnits;
 
         public override void _Process(float delta)
         {
@@ -48,7 +48,6 @@ namespace CameraBase
             SelectionBox = GetNode<SelectionBox>("SelectionBox");
             // Input.SetMouseMode(Input.MouseMode.Confined);
             StartSelPos = new Vector2();
-            SelectedUnits = new Godot.Collections.Array<testUnit>();
         }
         public void CalculateMove(Vector2 mousePos, float delta) // перемещение камеры
         {
@@ -67,43 +66,43 @@ namespace CameraBase
             moveVec = moveVec.Rotated(Vector3.Up,RotationDegrees.y);
             GlobalTranslate(moveVec*delta*MOVE_SPEED);
         }
-        public object GetUnitUnderMouse(Vector2 mousePos)
+        public Unit.Unit GetUnitUnderMouse(Vector2 mousePos)
         {
             var result = RaycastFromMousePosition(mousePos,2);
             if(result != null && result.Count != 0 && result["collider"] != null)
-                return result["collider"];
+                return (Unit.Unit)result["collider"];
             return null;
         }
-        public Godot.Collections.Array<testUnit> SelectUnits(Vector2 mousePos)
+        public Godot.Collections.Array<Unit.Unit> SelectUnits(Vector2 mousePos, Godot.Collections.Array<Unit.Unit> Units)
         {
-            Godot.Collections.Array<testUnit> NewSelectedUnits = new Godot.Collections.Array<testUnit>();
+            Godot.Collections.Array<Unit.Unit> NewSelectedUnits = new Godot.Collections.Array<Unit.Unit>();
             if(mousePos.DistanceSquaredTo(StartSelPos) < 16)
             {
                 var unit = GetUnitUnderMouse(mousePos);
                 if(unit != null)
                 {
                     var debug_clone = unit;
-                    NewSelectedUnits.Add((testUnit)unit);
+                    NewSelectedUnits.Add((Unit.Unit)unit);
                 }
             }
             else NewSelectedUnits = GetUnitsInBox(StartSelPos,mousePos);
             if(NewSelectedUnits.Count != 0)
                 {
-                    foreach (var unit in SelectedUnits)
+                    foreach (var unit in Units)
                     {
-                        var clone = (Unit.testUnit)unit;
-                        clone.Deselect();
+                        // var clone = (Unit.Unit)unit;
+                        unit.Deselect();
                     }
                     foreach (var unit in NewSelectedUnits)
                     {
-                        var clone = (Unit.testUnit)unit;
-                        clone.Select();
+                        // var clone = (Unit.Unit)unit;
+                        unit.Select();
                     }
                     return NewSelectedUnits;
                 }
             return NewSelectedUnits;
         }
-        public Godot.Collections.Array<testUnit> GetUnitsInBox(Vector2 TopLeft, Vector2 BottomRight)
+        public Godot.Collections.Array<Unit.Unit> GetUnitsInBox(Vector2 TopLeft, Vector2 BottomRight)
         {
             if( TopLeft.x > BottomRight.x)
             {
@@ -118,12 +117,12 @@ namespace CameraBase
                 BottomRight.y = temp;
             }
             var Box = new Rect2(TopLeft, BottomRight - TopLeft);
-            Godot.Collections.Array<Unit.testUnit> BoxSelectedUnits = new Godot.Collections.Array<testUnit>();
-            foreach (var unit in GetTree().GetNodesInGroup("Objects"))
+            Godot.Collections.Array<Unit.Unit> BoxSelectedUnits = new Godot.Collections.Array<Unit.Unit>();
+            foreach (var unit in GetTree().GetNodesInGroup("Units"))
             {
-                Unit.testUnit clone = (Unit.testUnit)unit;
+                Unit.Unit clone = (Unit.Unit)unit;
                 if(Box.HasPoint(Cam.UnprojectPosition(clone.GlobalTransform.origin)))
-                    BoxSelectedUnits.Add((testUnit)unit);
+                    BoxSelectedUnits.Add((Unit.Unit)unit);
             }
             return BoxSelectedUnits;
         }

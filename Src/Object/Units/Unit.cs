@@ -28,7 +28,7 @@ namespace Unit
         Seek,
     }
     
-    abstract class Unit : KinematicBody
+    public abstract class Unit : KinematicBody
     {
         protected const float MIN_MOVE_SPEED = 1f;
         protected const float MAX_MOVE_SPEED = 50f;
@@ -46,13 +46,12 @@ namespace Unit
         protected Vector3[] _PathTo;
         protected int _PathIndex = 0;
         protected MeshInstance _SelectionRing;
-        protected CameraBase.CameraBase _Camera;
+        // protected CameraBase.CameraBase _Camera;
 
         public override void _Ready()
         {
-            _Camera = GetParent().GetNode<CameraBase.CameraBase>("CameraBase");
-            _Navigation = (Spatial)GetParent().GetNode<Spatial>("DetourNavigationMesh");
-            _SelectionRing = GetNode<MeshInstance>("Body/SelectionRing");
+            _Navigation = GetParent().GetNode<Spatial>("DetourNavigationMesh");
+            _SelectionRing = GetNode<MeshInstance>("SelectionRing");
         }
         public void Select()
         {
@@ -62,6 +61,6 @@ namespace Unit
         {
             _SelectionRing.Hide();
         }
-        public void MoveTo(){}
+        virtual public void MoveTo(Vector3 target){}
     }
 }
