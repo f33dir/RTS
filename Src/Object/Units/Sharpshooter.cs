@@ -19,6 +19,12 @@ namespace Unit
             _HP = 100;
             _Protection = 10;
             _MainResource = 0;
+            _Team = Team.Player;
+        }
+        public override void UnitEnteredTheArea(Node Unit)
+        {
+            
+            GD.Print("Unit entered: " + Unit.Name);
         }
     }
 }

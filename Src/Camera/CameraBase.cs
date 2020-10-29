@@ -81,8 +81,9 @@ namespace CameraBase
                 var unit = GetUnitUnderMouse(mousePos);
                 if(unit != null)
                 {
-                    var debug_clone = unit;
-                    NewSelectedUnits.Add((Unit.Unit)unit);
+                    // var debug_clone = unit;
+                    if(unit._Team == Team.Player)
+                        NewSelectedUnits.Add((Unit.Unit)unit);
                 }
             }
             else NewSelectedUnits = GetUnitsInBox(StartSelPos,mousePos);
@@ -120,8 +121,9 @@ namespace CameraBase
             Godot.Collections.Array<Unit.Unit> BoxSelectedUnits = new Godot.Collections.Array<Unit.Unit>();
             foreach (var unit in GetTree().GetNodesInGroup("Units"))
             {
-                Unit.Unit clone = (Unit.Unit)unit;
-                if(Box.HasPoint(Cam.UnprojectPosition(clone.GlobalTransform.origin)))
+                // Unit.Unit clone = (Unit.Unit)unit;
+
+                if(Box.HasPoint(Cam.UnprojectPosition((unit as Unit.Unit).GlobalTransform.origin)) && (unit as Unit.Unit)._Team == Team.Player)
                     BoxSelectedUnits.Add((Unit.Unit)unit);
             }
             return BoxSelectedUnits;

@@ -38,7 +38,7 @@ namespace Unit
         protected int _Protection;
         protected bool _IsDestructable = true;
         protected bool _IsSelectable = true;
-        protected Team _Team;
+        public Team _Team;
         // protected BasicBehavior _Behavior;
         protected Queue<BasicBehavior> _CommandOrder;
 
@@ -52,6 +52,7 @@ namespace Unit
         {
             _Navigation = GetParent().GetNode<Spatial>("DetourNavigationMesh");
             _SelectionRing = GetNode<MeshInstance>("SelectionRing");
+            this.StatSetup();
         }
         public void Select()
         {
@@ -61,6 +62,12 @@ namespace Unit
         {
             _SelectionRing.Hide();
         }
+        virtual public void StatSetup(){}
         virtual public void MoveTo(Vector3 target){}
+        virtual public void UnitEnteredTheArea(Node Unit){}
+        // public Team GetTeam()
+        // {
+        //     return this._Team;
+        // }
     }
 }

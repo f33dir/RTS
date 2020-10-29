@@ -21,11 +21,11 @@ namespace Unit
         public override void MoveTo(Vector3 Target)
         {
             // _Navigation = (Spatial)this.GetParent().GetNode<Spatial>("DetourNavigationMesh");
-            var DetourPath = (Godot.Collections.Dictionary)(_Navigation.Call("find_path",GlobalTransform.origin,Target));
-            _PathTo = (Vector3[])DetourPath["points"];
+            var DetourPath = _Navigation.Call("find_path",GlobalTransform.origin,Target) as Godot.Collections.Dictionary;
+            _PathTo = DetourPath["points"] as Vector3[];
             _PathIndex = 0;
         }
-        virtual public void StatSetup(){}
+        // virtual public void StatSetup(){}
         virtual public void InteractWith(){}
         // public override void _Ready()
         // {

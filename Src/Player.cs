@@ -21,12 +21,14 @@ public class Player : Spatial
         if(Input.IsActionJustPressed("action_command"))
         {
             var unit = _Camera.GetUnitUnderMouse(GetViewport().GetMousePosition());
-            if(_SelectedUnits.Count == 0 && unit != null)
-            {
-                unit.Select();
-                _SelectedUnits.Add(unit);
-            }
-            else MoveSelectedUnits(GetViewport().GetMousePosition());
+            if(unit != null && unit._Team == Team.Player)
+                if(_SelectedUnits.Count == 0 && unit != null)
+                {
+                    unit.Select();
+                    _SelectedUnits.Add(unit);
+                }
+
+            MoveSelectedUnits(GetViewport().GetMousePosition());
         }
         if(Input.IsActionJustPressed("exit"))
             GetTree().Quit();
