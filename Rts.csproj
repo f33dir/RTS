@@ -34,5 +34,6 @@
     <Compile Include="Src\Object\Units\DynamicUnit.cs" />
     <Compile Include="Src\Object\Units\Sharpshooter.cs" />
     <Compile Include="Src\Player.cs" />
+    <Content Include="Scenes\Units\testUnit.tscn" />
   </ItemGroup>
 </Project>

@@ -29,7 +29,7 @@ namespace Map
             shape.Shape = col;
             //transpose collider to position
             mesh.Translate(position*2);
-            mesh.Translate(new Vector3(1,0.5f,1));
+            mesh.Translate(new Vector3(1,1,1));
             this.AddChild(mesh);
             mesh.AddChild(body);
             body.AddChild(shape);
@@ -45,7 +45,7 @@ namespace Map
                         matrix[i,j] = input[i,j].Height;
                     }
                     else{
-                        matrix[i,j] = input[i,j].Height-1;
+                        matrix[i,j] = -1;
                     }
                 }
             }
@@ -58,7 +58,7 @@ namespace Map
             {
                 for(int j = 0;j<matrix.GetLength(1);j++)
                 {
-                    PlaceColliderBox(1,1,new Vector3(i,_mapManager.GetMatrix()[i,j].Height,j));
+                    PlaceColliderBox(1,1,new Vector3(i,matrix[i,j],j));
                 }
             }
             _mapMatrix = _mapManager.GetMatrix();
@@ -78,7 +78,6 @@ namespace Map
         }
         private void PlaceRamps(MapTile[,] input)
         {
-            var ramp = ResourceLoader.Load<PackedScene>("res://Scenes/SlopeCollider.tscn");
             for(var i = 0;i<_mapManager.GetLoadedMap().GetSizeX();i++){
                 for(var j = 0;j<_mapManager.GetLoadedMap().GetSizeY();j++){
                     if(input[i,j].Type == TileType.Slope){
@@ -91,7 +90,7 @@ namespace Map
         {
             var ramp = ResourceLoader.Load<PackedScene>("res://Scenes/SlopeCollider.tscn");
             var collision =  ramp.Instance()as Spatial;
-            var  h = tile.Height-1;
+            float  h = tile.Height/2f;
             Vector3 position = new Vector3(x,h,y);
             collision.Translate(position*2);
             collision.Translate(new Vector3(1,0.5f,1));

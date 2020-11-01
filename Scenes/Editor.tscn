@@ -9,7 +9,7 @@
 [node name="MapManager" parent="." instance=ExtResource( 3 )]
 
 [node name="CameraBase" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 0.888313, 0.459239, 0, -0.459239, 0.888313, 0, 26.7494, 9.54781 )
+transform = Transform( 1, 0, 0, 0, 0.888313, 0.459239, 0, -0.459239, 0.888313, 0, 8.61941, 9.54781 )
 
 [node name="Editor" type="Spatial" parent="."]
 script = ExtResource( 2 )

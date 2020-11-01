@@ -21,7 +21,10 @@ namespace Map
         {
             var gridPosition = new Vector3();
             var point = _editorCam.RaycastFromMousePosition(GetViewport().GetMousePosition(),1);
-            gridPosition = _mapManager.Gridmap.WorldToMap(((StaticBody)point["collider"]).GlobalTransform.origin);
+            if(point.Contains("collider"))
+            {
+                gridPosition = _mapManager.Gridmap.WorldToMap(((StaticBody)point["collider"]).GlobalTransform.origin);
+            }
             return gridPosition;
         }
         public void PlaceTile(Vector3 position,MapTile tile)
@@ -35,7 +38,7 @@ namespace Map
         public void RotateTile(Vector3 position)
         {
             var orient = _mapManager.Gridmap.GetCellItemOrientation((int)position.x,(int)position.y,(int)position.z);
-            orient = (orient+1);
+            orient = (orient+10);
             var item = _mapManager.Gridmap.GetCellItem((int)position.x,(int)position.y,(int)position.z);
             _mapManager.Gridmap.SetCellItem((int)position.x,(int)position.y,(int)position.z,item,orient);
         }
@@ -43,8 +46,8 @@ namespace Map
         {
             _mapManager.Gridmap.SetCellItem((int)position.x,(int)position.y,(int)position.z,-1);
             var point = _editorCam.RaycastFromMousePosition(GetViewport().GetMousePosition(),1);
+            if(point.Contains("collider")){
             var obj =  point["collider"] as StaticBody;
-            if(obj !=null){
                 obj.QueueFree();
             }
         }

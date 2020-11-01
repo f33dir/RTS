@@ -45,7 +45,7 @@ namespace Map{
                     }
                 }
             }
-            Gridmap.MakeBakedMeshes(); 
+            // Gridmap.MakeBakedMeshes(); 
             _colliderBuilder.Clear();
             _colliderBuilder.SlowFill();
         }
@@ -96,7 +96,7 @@ namespace Map{
                 for(int j = 0;j<_loadedMap.GetSizeY();j++)
                 {
                     int Height = 20;
-                    while(Gridmap.GetCellItem(i,Height,j) == -1)
+                    while((Gridmap.GetCellItem(i,Height,j) == -1)&&(Height>-5))
                     {
                         Height--;
                     }
