@@ -22,7 +22,7 @@ namespace Unit
         {
             _nav = (Spatial)this.GetParent().GetNode<Spatial>("DetourNavigationMesh");
             _detourPath = (Godot.Collections.Dictionary)(_nav.Call("find_path",GlobalTransform.origin,endPos));
-            _path = (Vector3[])_detourPath["points"];
+            _path = _detourPath["points"]as Vector3[];
             _pathIndex = 0;
 
             var lookAtPos = endPos;

@@ -91,7 +91,7 @@ namespace Map
         {
             var ramp = ResourceLoader.Load<PackedScene>("res://Scenes/SlopeCollider.tscn");
             var collision =  ramp.Instance()as Spatial;
-            var  h = tile.Height;
+            var  h = tile.Height-1;
             Vector3 position = new Vector3(x,h,y);
             collision.Translate(position*2);
             collision.Translate(new Vector3(1,0.5f,1));

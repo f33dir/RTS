@@ -56,9 +56,11 @@ namespace Map
         {
 
         }
-        public void ChooseTile()
+        public void ChangeTile()
         {
-
+            int currentType = (int)_selectedMapTile.Type;
+            currentType = (currentType+1)%_mapManager._tileset.GetItemList().GetLength(0);
+            _selectedMapTile.Type = (TileType)currentType;
         }
         public void ChooseStaticObject()
         {
@@ -89,6 +91,10 @@ namespace Map
             if(Input.IsActionJustPressed("editor_new"))
             {
                 NewMap();
+            }
+            if(Input.IsActionJustPressed("editor_changetile"))
+            {
+                ChangeTile();
             }
         }
     }

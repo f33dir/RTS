@@ -17,8 +17,8 @@ namespace Map{
     public class Map 
     {
         private String _mapName;
-        private int _sizeX;
-        private int _sizeY;
+        public int _sizeX;
+        public int _sizeY;
         public List<MapStaticObject>  _staticObjects;
         public MapTile[,] Matrix{get;set;}
         //methods
@@ -61,7 +61,7 @@ namespace Map{
         {
             _sizeX = sizex;
             _sizeY = sizey;
-            MapTile tile = new MapTile(TileType.Basement);
+            MapTile tile = new MapTile(TileType.Plain);
             Matrix = new MapTile[_sizeX,_sizeY];
             for(int i = 0;i<_sizeX;i++)
             {

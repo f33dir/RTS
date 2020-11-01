@@ -9,7 +9,7 @@ namespace Map{
         public ColliderBuilder _colliderBuilder;
         public GridMap Gridmap{get;set;}
         MapFileManager _mapfilemanager;
-        MeshLibrary _tileset;
+        public MeshLibrary _tileset;
         List<PackedScene> _loadedStaticObjects;
         public Map GetLoadedMap(){
             return _loadedMap;
@@ -55,12 +55,15 @@ namespace Map{
         }
         public Map GetMap()
         {
-            _mapfilemanager = (MapFileManager)GetNode("/root/MapFileManager");
             return GetMap(_mapfilemanager.CurrentMapPath);
         }
         public Map GetMap(String path)
         {
-            Map output  = Newtonsoft.Json.JsonConvert.DeserializeObject<Map>(System.IO.File.ReadAllText(path+ "mapfile"));
+            Map output = new Map(40,40,TileType.Basement);
+            if(System.IO.File.Exists(path+"/mapfile"))
+            {
+                output  = Newtonsoft.Json.JsonConvert.DeserializeObject<Map>(System.IO.File.ReadAllText(path+ "mapfile"));
+            }
             return output;
         }
         public void BuildMap(string mapPath)
@@ -102,6 +105,10 @@ namespace Map{
                 }
             }
             var map = Newtonsoft.Json.JsonConvert.SerializeObject(_loadedMap);
+            if(!System.IO.Directory.Exists(_mapfilemanager.CurrentMapPath))
+            {
+                System.IO.Directory.CreateDirectory(_mapfilemanager.CurrentMapPath);
+            }
             System.IO.File.WriteAllText(_mapfilemanager.CurrentMapPath+"mapfile",map);
             if(!System.IO.File.Exists(_mapfilemanager.CurrentMapPath+"tileset.meshlib"))
             {

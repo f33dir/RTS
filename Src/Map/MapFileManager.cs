@@ -40,8 +40,8 @@ public class MapFileManager : Node
         public override void _Ready()
         {
             //debug 
-            MapPath = "/home/f33dir/Temp/";
-            CurrentMapPath = "/home/f33dir/Temp/testMap/";
+            MapPath = "/home/f33dir/Temp";
+            CurrentMapPath = "/home/f33dir/Temp/";
         }
     }
 }
