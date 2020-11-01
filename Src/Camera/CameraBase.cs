@@ -13,7 +13,6 @@ namespace CameraBase
         private Godot.Camera Cam;
         private Vector2 StartSelPos;
         private SelectionBox SelectionBox;
-        // private Godot.Collections.Array<Unit.Unit> SelectedUnits;
 
         public override void _Process(float delta)
         {
@@ -128,15 +127,6 @@ namespace CameraBase
             }
             return BoxSelectedUnits;
         }
-        // public void MoveSelectedUnits(Vector2 mousePos)
-        // {
-        //     var result = RaycastFromMousePosition(mousePos,1);
-        //     //GD.Print(result["position"]);
-        //     if(result != null && result.Count != 0)
-        //         foreach (var unit in SelectedUnits)
-        //             unit.MoveTo((Vector3)result["position"]);
-        //         // GetParent().GetTree().CallGroup("Objects","MoveTo",result["position"]);
-        // }
         public Godot.Collections.Dictionary RaycastFromMousePosition(Vector2 mousePos, uint CollisionMask) // определение положения курсора на карте
         {
             Vector3 RayStart = Cam.ProjectRayOrigin(mousePos);

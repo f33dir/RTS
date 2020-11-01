@@ -5,13 +5,6 @@ namespace Unit
 {
     public class Sharpshooter : DynamicUnit
     {
-        // public override void StatSetup()
-        // {
-        //     _AttackPower = 20;
-        //     _HP = 100;
-        //     _MainResource = 0;
-        //     _AttackRange = 10f;
-        // }
         public override void StatSetup()
         {
             _AttackPower = 100;
@@ -21,10 +14,14 @@ namespace Unit
             _MainResource = 0;
             _Team = Team.Player;
         }
-        public override void UnitEnteredTheArea(Node Unit)
+        public override void UnitEnteredTheArea(Node unit)
         {
-            
-            GD.Print("Unit entered: " + Unit.Name);
+            var UnitInArea = unit as Unit;
+            if(UnitInArea._Team == Team.Enemy)
+            {
+                GD.Print("Unit entered: " + unit.Name);
+                LookAt(UnitInArea.GlobalTransform.origin, Vector3.Up);
+            }
         }
     }
 }

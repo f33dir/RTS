@@ -39,6 +39,7 @@ public class Player : Spatial
         if(result != null && result.Count != 0)
             foreach (var unit in _SelectedUnits)
             {
+                unit.LookAt((Vector3)result["position"],Vector3.Up);
                 unit.MoveTo((Vector3)result["position"]);
             }
     }

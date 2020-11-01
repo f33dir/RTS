@@ -39,8 +39,7 @@ namespace Unit
         protected bool _IsDestructable = true;
         protected bool _IsSelectable = true;
         public Team _Team;
-        // protected BasicBehavior _Behavior;
-        protected Queue<BasicBehavior> _CommandOrder;
+        //protected Queue<BasicBehavior> _CommandOrder;
 
         protected Spatial _Navigation;
         protected Vector3[] _PathTo;
@@ -65,9 +64,5 @@ namespace Unit
         virtual public void StatSetup(){}
         virtual public void MoveTo(Vector3 target){}
         virtual public void UnitEnteredTheArea(Node Unit){}
-        // public Team GetTeam()
-        // {
-        //     return this._Team;
-        // }
     }
 }
