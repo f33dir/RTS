@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Src/Object/Units/Unit.cs" type="Script" id=1]
+
+[node name="Unit" type="KinematicBody"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+
+[node name="Body" type="MeshInstance" parent="."]
+
+[node name="SelectionRing" type="MeshInstance" parent="Body"]

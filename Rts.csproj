@@ -20,7 +20,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Src\Camera\CameraBase.cs" />
-    <Compile Include="Src\Camera\Cursor.cs" />
     <Compile Include="Src\Camera\SelectionBox.cs" />
     <Compile Include="Src\Map\ColliderBuilder.cs" />
     <Compile Include="Src\Map\MapEditor.cs" />
@@ -28,6 +27,12 @@
     <Compile Include="Src\Map\MapFileManager.cs" />
     <Compile Include="Src\Map\MapManager.cs" />
     <Compile Include="Src\Map\Map.cs" />
-    <Compile Include="Src\Object\testUnit.cs" />
+    <Compile Include="Src\Object\Units\Bruhmmy.cs" />
+    <Compile Include="Src\Object\Units\testUnit.cs" />
+    <Compile Include="Src\Object\Units\Unit.cs" />
+    <Compile Include="Src\Object\Buildings\BuildingUnit.cs" />
+    <Compile Include="Src\Object\Units\DynamicUnit.cs" />
+    <Compile Include="Src\Object\Units\Sharpshooter.cs" />
+    <Compile Include="Src\Player.cs" />
   </ItemGroup>
 </Project>

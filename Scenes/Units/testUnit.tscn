@@ -1,15 +1,13 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Src/Object/testUnit.cs" type="Script" id=1]
-[ext_resource path="res://Resources/Materials/FriendColor.tres" type="Material" id=2]
-[ext_resource path="res://Resources/Materials/SelectedUnit.tres" type="Material" id=3]
-
-
+[ext_resource path="res://TempRes/FriendColor.tres" type="Material" id=1]
+[ext_resource path="res://TempRes/SelectedUnit.tres" type="Material" id=2]
+[ext_resource path="res://Src/Object/Units/testUnit.cs" type="Script" id=3]
 
 [sub_resource type="BoxShape" id=1]
 
 [sub_resource type="CubeMesh" id=2]
-material = ExtResource( 2 )
+material = ExtResource( 1 )
 
 [sub_resource type="CubeMesh" id=3]
 
@@ -21,12 +19,12 @@ data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1
 
 [sub_resource type="CylinderMesh" id=6]
 
-[node name="Unit" type="KinematicBody" groups=[
+[node name="testUnit" type="KinematicBody" groups=[
 "Objects",
 ]]
 collision_layer = 2
 collision_mask = 2
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.613, 0, 0, 0, 1.076, 0, 0, 0, 0.533, 0, 1, 0 )
@@ -59,4 +57,4 @@ transform = Transform( 1.5, 0, 0, 0, -0.057, 0, 0, 0, -1.5, 0, -0.916832, -0.021
 visible = false
 layers = 3
 mesh = SubResource( 6 )
-material/0 = ExtResource( 3 )
+material/0 = ExtResource( 2 )
