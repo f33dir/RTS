@@ -95,6 +95,23 @@ namespace Map
             collision.Translate(position*2);
             collision.Translate(new Vector3(1,0.5f,1));
             AddChild(collision);
+            switch(tile.Rotation)
+            {
+                case 10:
+                    collision.RotateY((float)-Math.PI/2);
+                    break;
+                case 16:
+                    collision.RotateY((float)Math.PI);
+                    break;
+                case 22:
+                    break;   
+                case 0:
+                    collision.RotateY((float)Math.PI/2);
+                    break;
+                default:
+                    collision.QueueFree();
+                    break;
+            }
         }
             
     }

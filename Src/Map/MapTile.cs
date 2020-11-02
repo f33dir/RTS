@@ -13,7 +13,7 @@ namespace Map{
     public class MapTile
     {
         public TileType Type{get;set;}
-        public double Rotation;// 0-3 I suppose 
+        public int Rotation;// 0-3 I suppose 
         public int Height;
         public int Color;
         public MapTile(int type, int rotation, int height, int color)

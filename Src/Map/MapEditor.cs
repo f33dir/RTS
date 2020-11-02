@@ -38,7 +38,7 @@ namespace Map
         public void RotateTile(Vector3 position)
         {
             var orient = _mapManager.Gridmap.GetCellItemOrientation((int)position.x,(int)position.y,(int)position.z);
-            orient = (orient+10);
+            orient = (orient+1);
             var item = _mapManager.Gridmap.GetCellItem((int)position.x,(int)position.y,(int)position.z);
             _mapManager.Gridmap.SetCellItem((int)position.x,(int)position.y,(int)position.z,item,orient);
         }

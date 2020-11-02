@@ -41,7 +41,7 @@ namespace Map{
                     MapTile current = inputMap.Matrix[i,j];
                     if(current!=null)
                     {
-                        Gridmap.SetCellItem(i,current.Height,j,(int)current.Type);
+                        Gridmap.SetCellItem(i,current.Height,j,(int)current.Type,current.Rotation);
                     }
                 }
             }
@@ -141,7 +141,6 @@ namespace Map{
             _colliderBuilder = (ColliderBuilder)GetNode("ColliderBuilder");
             LoadMap();
             BuildLoadedMap();
-            _colliderBuilder.SlowFill();
             GetParent().Call("clear_navmesh");
             GetParent().Call("bake_navmesh");
         }
