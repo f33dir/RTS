@@ -8,6 +8,7 @@ namespace Unit
         public override void StatSetup()
         {
             _Team = Team.Enemy;
+            _HP = 100;
         }
     }
 }

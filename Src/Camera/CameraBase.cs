@@ -18,13 +18,6 @@ namespace CameraBase
         {
             Vector2 mousePos = GetViewport().GetMousePosition();
             CalculateMove(mousePos,delta);
-            // if(Input.IsActionJustPressed("action_command"))
-            // {
-            //     var SelectedUnit = GetUnitUnderMouse(mousePos);
-            //     if(SelectedUnit != null && SelectedUnits == null)
-            //         SelectedUnits.Add((testUnit)SelectedUnit);
-            //     // MoveSelectedUnits(mousePos);
-            // }
             if(Input.IsActionJustPressed("alt_command"))
             {
                 SelectionBox._startSelPos = mousePos;
@@ -81,7 +74,7 @@ namespace CameraBase
                 if(unit != null)
                 {
                     // var debug_clone = unit;
-                    if(unit._Team == Team.Player)
+                    if(unit.Team == Team.Player)
                         NewSelectedUnits.Add((Unit.Unit)unit);
                 }
             }
@@ -122,7 +115,7 @@ namespace CameraBase
             {
                 // Unit.Unit clone = (Unit.Unit)unit;
 
-                if(Box.HasPoint(Cam.UnprojectPosition((unit as Unit.Unit).GlobalTransform.origin)) && (unit as Unit.Unit)._Team == Team.Player)
+                if(Box.HasPoint(Cam.UnprojectPosition((unit as Unit.Unit).GlobalTransform.origin)) && (unit as Unit.Unit).Team == Team.Player)
                     BoxSelectedUnits.Add((Unit.Unit)unit);
             }
             return BoxSelectedUnits;

@@ -21,14 +21,28 @@ public class Player : Spatial
         if(Input.IsActionJustPressed("action_command"))
         {
             var unit = _Camera.GetUnitUnderMouse(GetViewport().GetMousePosition());
-            if(unit != null && unit._Team == Team.Player)
+            if(unit != null && unit.Team == Team.Player)
                 if(_SelectedUnits.Count == 0 && unit != null)
                 {
                     unit.Select();
                     _SelectedUnits.Add(unit);
                 }
-
-            MoveSelectedUnits(GetViewport().GetMousePosition());
+            if(unit != null && unit.Team == Team.Enemy)
+            {
+                foreach (var SelectedUnit in _SelectedUnits)
+                {
+                    SelectedUnit.Target = unit;
+                    SelectedUnit.TargetCheck();
+                }
+            }
+            else
+            {
+                foreach (var Unit in _SelectedUnits)
+                {
+                    Unit.Target = Unit;
+                }
+                MoveSelectedUnits(GetViewport().GetMousePosition());
+            }
         }
         if(Input.IsActionJustPressed("exit"))
             GetTree().Quit();
@@ -39,6 +53,7 @@ public class Player : Spatial
         if(result != null && result.Count != 0)
             foreach (var unit in _SelectedUnits)
             {
+                unit.State = State.GoingTo;
                 unit.LookAt((Vector3)result["position"],Vector3.Up);
                 unit.MoveTo((Vector3)result["position"]);
             }

@@ -83,4 +83,8 @@ collision_mask = 2
 [node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58722, 0.263675 )
 shape = SubResource( 12 )
+
+[node name="AttackTimer" type="Timer" parent="."]
 [connection signal="body_entered" from="InteractionArea" to="." method="UnitEnteredTheArea"]
+[connection signal="body_exited" from="InteractionArea" to="." method="UnitExitedTheArea"]
+[connection signal="timeout" from="AttackTimer" to="." method="OnTimeoutComplete"]
