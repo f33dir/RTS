@@ -26,6 +26,8 @@
     <Compile Include="Src\Map\MapFileManager.cs" />
     <Compile Include="Src\Map\MapManager.cs" />
     <Compile Include="Src\Map\Map.cs" />
+    <Compile Include="Src\Object\HealthBar.cs" />
+    <Compile Include="Src\Object\HealthBar2D.cs" />
     <Compile Include="Src\Object\Units\Bruhmmy.cs" />
     <Compile Include="Src\Object\Units\testUnit.cs" />
     <Compile Include="Src\Object\Units\Unit.cs" />

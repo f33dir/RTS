@@ -29,8 +29,18 @@ namespace CameraBase
                 SelectionBox._isVisible = true;
             }
             else SelectionBox._isVisible = false;
-            // if(Input.IsActionJustReleased("alt_command"))
-            //     SelectUnits(mousePos);
+            if(Input.IsActionJustPressed("zoom_in"))
+            {
+                Vector3 moveVec = GlobalTransform.origin;
+                moveVec.y -= MOVE_SPEED;
+                GlobalTranslate(moveVec*delta);
+            }
+            if(Input.IsActionJustPressed("zoom_out"))
+            {
+                Vector3 moveVec = GlobalTransform.origin;
+                moveVec.y += MOVE_SPEED;
+                GlobalTranslate(moveVec*delta);
+            }
             // if(Input.IsActionJustPressed("exit"))
             //     GetTree().Quit(); // тупо для дебага
         }
@@ -38,7 +48,7 @@ namespace CameraBase
         {
             Cam = GetNode<Godot.Camera>("Camera");
             SelectionBox = GetNode<SelectionBox>("SelectionBox");
-            // Input.SetMouseMode(Input.MouseMode.Confined);
+            // Input.SetMouseMode(Input.MouseMode.Confined); // это зло
             StartSelPos = new Vector2();
         }
         public void CalculateMove(Vector2 mousePos, float delta) // перемещение камеры

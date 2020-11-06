@@ -63,6 +63,7 @@ namespace Unit
                         break;
                     case Team.Player:
                         this._State = State.GoingTo;
+                        // this.State = State.Attacking;
                         break;
                     default:
                         break;
@@ -78,7 +79,7 @@ namespace Unit
         public override void UnitEnteredTheArea(Node unit)
         {
             var UnitInArea = unit as Unit;
-            if(UnitInArea.Team == Team.Enemy)
+            if(UnitInArea.Team == Team.Enemy /*|| UnitInArea.Team == Team.Player*/)
             {
                 GD.Print("Unit entered: " + unit.Name);
                 _IsEnemyInRange = true;
@@ -96,7 +97,7 @@ namespace Unit
         }
         public override void InteractWith(Unit unit)
         {
-            if(unit.Team == Team.Enemy || unit.Team == Team.Enemy1)
+            if(unit.Team == Team.Enemy || unit.Team == Team.Enemy1 || unit.Team == Team.Player)
             {
                     if(_IsEnemyInRange && _CanAttackNow)
                     {
@@ -107,6 +108,12 @@ namespace Unit
                             PhysicalAttack(unit);
                             _Timer.Start();
                         }
+                        if(unit == null)
+                        {
+                            this.State = State.Rest;
+                            _PathTo = null;
+                            _PathIndex = 0;
+                        }
                     }
             }
         }
@@ -115,7 +122,6 @@ namespace Unit
                 unit.HP = unit.HP - this.AttackPower;
                 GD.Print(this.Name + " attack speed is: " + _AttackSpeed);
                 GD.Print(unit.Name +  " HP is: " + unit.HP);
-
         }
     }
 }

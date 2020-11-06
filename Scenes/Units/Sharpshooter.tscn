@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Src/Object/Units/Sharpshooter.cs" type="Script" id=1]
+[ext_resource path="res://Scenes/Units/HealthBar.tscn" type="PackedScene" id=2]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 1.83766, 1.22991 )
@@ -85,6 +86,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58722, 0.263675 )
 shape = SubResource( 12 )
 
 [node name="AttackTimer" type="Timer" parent="."]
+
+[node name="HealthBar" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.83996, 0 )
 [connection signal="body_entered" from="InteractionArea" to="." method="UnitEnteredTheArea"]
 [connection signal="body_exited" from="InteractionArea" to="." method="UnitExitedTheArea"]
 [connection signal="timeout" from="AttackTimer" to="." method="OnTimeoutComplete"]

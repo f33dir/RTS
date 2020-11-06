@@ -27,7 +27,7 @@ public class Player : Spatial
                     unit.Select();
                     _SelectedUnits.Add(unit);
                 }
-            if(unit != null && unit.Team == Team.Enemy)
+            if(unit != null && (unit.Team == Team.Enemy || unit.Team == Team.Player) )
             {
                 foreach (var SelectedUnit in _SelectedUnits)
                 {
