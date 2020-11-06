@@ -20,3 +20,6 @@ so
 * profit
 
 Everything should be fine since used solutions are enough platform independent
+
+
+https://trello.com/b/bIL9tSDQ/rts
