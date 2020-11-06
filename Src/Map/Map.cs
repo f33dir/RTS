@@ -2,7 +2,6 @@ using Godot;
 using System;
 using System.Collections.Generic;
 namespace Map{
-
     /*
     .--------X
     | . . . . 
@@ -10,15 +9,16 @@ namespace Map{
     | . . . .
     Y
     */
-    class MapStaticObject{
-        public string _name;
-        public Transform _transform;
-    } 
-    class Map 
+    public class MapStaticObject{
+        public string Name;
+        public Transform Transform;
+    }
+
+    public class Map 
     {
-        String MapName;
-        private int SizeX;
-        private int SizeY;
+        private String _mapName;
+        public int _sizeX;
+        public int _sizeY;
         public List<MapStaticObject>  _staticObjects;
         public MapTile[,] Matrix{get;set;}
         //methods
@@ -28,17 +28,17 @@ namespace Map{
         }
 
         public int GetSizeX(){
-            return SizeX;
+            return _sizeX;
         }
 
         public int GetSizeY(){
-            return SizeY;
+            return _sizeY;
         }
 
         public void PrintMap()
         {
-            for(int i = 0;i<SizeY;i++){
-                for(int j = 0;j<SizeX;j++){
+            for(int i = 0;i<_sizeY;i++){
+                for(int j = 0;j<_sizeX;j++){
                     GD.Print(Matrix.ToString());
                 }
             }
@@ -46,17 +46,30 @@ namespace Map{
 
         public Map()
         {
-            SizeX = 2;
-            SizeY = 2;
-            Matrix = new MapTile[SizeX,SizeY];
+            _sizeX = 2;
+            _sizeY = 2;
+            Matrix = new MapTile[_sizeX,_sizeY];
         }
 
-        public Map(int Sizex,int Sizey)
+        public Map(int sizex,int sizey)
         {
-            SizeX = Sizex;
-            SizeY = Sizey;
-            Matrix = new MapTile[SizeX,SizeY];
-            //fill basement 
+            _sizeX = sizex;
+            _sizeY = sizey;
+            Matrix = new MapTile[_sizeX,_sizeY];
+        }
+        public Map(int sizex,int sizey,TileType tileType)
+        {
+            _sizeX = sizex;
+            _sizeY = sizey;
+            MapTile tile = new MapTile(TileType.Plain);
+            Matrix = new MapTile[_sizeX,_sizeY];
+            for(int i = 0;i<_sizeX;i++)
+            {
+                for(int j = 0;j<_sizeY;j++)
+                {
+                    Matrix[i,j] = tile;
+                }
+            }
         }
     }
 }

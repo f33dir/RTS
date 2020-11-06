@@ -5,20 +5,19 @@ using System.Collections.Generic;
 namespace Map{
 public class MapFileManager : Node
     {
-        private List<DirectoryInfo> Maps;
+        private List<DirectoryInfo> _maps;
         public  string MapPath{get; set;}
         public string CurrentMapPath{get;set;}
-
         public int ParseMaps()
         {
             if(System.IO.Directory.Exists(MapPath)){
-                Maps.Clear();
-                string[]paths = System.IO.Directory.GetFiles(MapPath,"mapinfo",SearchOption.AllDirectories);
+                _maps.Clear();
+                var paths = System.IO.Directory.GetFiles(MapPath,"mapinfo",SearchOption.AllDirectories);
                 foreach(var pth in paths)
                 {
                     DirectoryInfo dir = new DirectoryInfo(pth);
                     dir = dir.Parent;
-                    Maps.Add(dir);
+                    _maps.Add(dir);
                 }
                 return 0;
             }
@@ -27,9 +26,9 @@ public class MapFileManager : Node
 
         public int ChooseMap(int index)
         {
-            if(Maps.Count>index)
+            if(_maps.Count>index)
             {
-                CurrentMapPath = Maps[index].ToString();
+                CurrentMapPath = _maps[index].ToString();
                 return 0;   
             }
             else
@@ -41,8 +40,8 @@ public class MapFileManager : Node
         public override void _Ready()
         {
             //debug 
-            MapPath = "/home/f33dir/Temp/";
-            CurrentMapPath = "/home/f33dir/Temp/testMap/";
+            MapPath = "/home/f33dir/Temp";
+            CurrentMapPath = "/home/f33dir/Temp/";
         }
     }
 }

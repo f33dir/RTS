@@ -5,10 +5,15 @@ using Godot;
 namespace Map{
     class MapManager : Spatial
     {
-        private Map _LoadedMap;
-        private GridMap _gridmap;
+        private Map _loadedMap;
+        public ColliderBuilder _colliderBuilder;
+        public GridMap Gridmap{get;set;}
         MapFileManager _mapfilemanager;
+        public MeshLibrary _tileset;
         List<PackedScene> _loadedStaticObjects;
+        public Map GetLoadedMap(){
+            return _loadedMap;
+        }
         public override void _Process(float delta)
         {
             if(Input.IsActionJustPressed("debug")){
@@ -18,82 +23,111 @@ namespace Map{
         }
         public void BuildLoadedMap()
         {
-            BuildCurrentMap(_LoadedMap);
+            BuildCurrentMap(_loadedMap);
         }
-
-        public void BuildCurrentMap(Map InputMap)
+        private void BuildCurrentMap(Map inputMap)
         {
-            _gridmap.Clear();
-            MeshLibrary tileset = (MeshLibrary)ResourceLoader.Load(_mapfilemanager.CurrentMapPath+"tileset.meshlib");
-            for(int i = 0;i<InputMap.GetSizeX();++i)
+            Gridmap.Clear();
+            _tileset =ResourceLoader.Load(_mapfilemanager.CurrentMapPath+"tileset.meshlib")as MeshLibrary;
+            if(_tileset==null)
             {
-                for(int j = 0;j<InputMap.GetSizeY();++j)
+                _tileset = ResourceLoader.Load("res://Resources/tilesets/defaulttileset.meshlib")as MeshLibrary;
+            }
+            Gridmap.MeshLibrary = _tileset;
+            for(int i = 0;i<inputMap.GetSizeX();++i)
+            {
+                for(int j = 0;j<inputMap.GetSizeY();++j)
                 {
-                    MapTile current = InputMap.Matrix[i,j];
+                    MapTile current = inputMap.Matrix[i,j];
                     if(current!=null)
                     {
-                        _gridmap.SetCellItem(i,current.Height,j,(int)current.Type);
+                        Gridmap.SetCellItem(i,current.Height,j,(int)current.Type,current.Rotation);
                     }
                 }
             }
-            _gridmap.MakeBakedMeshes();
+            // Gridmap.MakeBakedMeshes(); 
+            _colliderBuilder.Clear();
+            _colliderBuilder.SlowFill();
         }
-
         public void LoadMap()
         {
-            _LoadedMap = GetMap();
+            _loadedMap = GetMap();
         }
-
         public Map GetMap()
         {
-            _mapfilemanager = (MapFileManager)GetNode("/root/MapFileManager");
             return GetMap(_mapfilemanager.CurrentMapPath);
         }
-
         public Map GetMap(String path)
         {
-            Map output  = Newtonsoft.Json.JsonConvert.DeserializeObject<Map>(System.IO.File.ReadAllText(path+ "mapfile"));
+            Map output = new Map(40,40,TileType.Basement);
+            if(System.IO.File.Exists(path+"/mapfile"))
+            {
+                output  = Newtonsoft.Json.JsonConvert.DeserializeObject<Map>(System.IO.File.ReadAllText(path+ "mapfile"));
+            }
             return output;
         }
-
-        public void BuildMap(string MapPath)
+        public void BuildMap(string mapPath)
         {
-            Map CurrentMap = GetMap(MapPath);
-            BuildCurrentMap(CurrentMap);
+            Map currentMap = GetMap(mapPath);
+            BuildCurrentMap(currentMap);
         }
-
-        public MapTile[,] getMatrix()
+        public MapTile[,] GetMatrix()
         {
-            return _LoadedMap.Matrix;
+            return _loadedMap.Matrix;
         }
-        public void createMap(int Wight,int Height)
+        public void CreateMap(int wight,int height)
         {
-            Map output = new Map(Wight,Height);
+            Map output = new Map(wight,height);
             MapTile tile = new MapTile();
             tile.Type = TileType.Basement;
-            for(int i = 0;i< Wight;i++)
+            for(int i = 0;i< wight;i++)
             {
-                for(int j = 0;j<Height;j++)
+                for(int j = 0;j<height;j++)
                 {
-                    _gridmap.SetCellItem(i,-1,j,(int)tile.Type,0);
+                    Gridmap.SetCellItem(i,-1,j,(int)tile.Type,0);
                 }
             }
-            _LoadedMap = output;
+            _loadedMap = output;
         }
         public void SaveMap()
         {
-            
+            for(int i = 0;i<_loadedMap.GetSizeX();i++)
+            {
+                for(int j = 0;j<_loadedMap.GetSizeY();j++)
+                {
+                    int Height = 20;
+                    while((Gridmap.GetCellItem(i,Height,j) == -1)&&(Height>-5))
+                    {
+                        Height--;
+                    }
+                    var tile = new MapTile(Gridmap.GetCellItem(i,Height,j),Gridmap.GetCellItemOrientation(i,Height,j),Height,1);
+                    _loadedMap.Matrix[i,j] = tile;
+                }
+            }
+            var map = Newtonsoft.Json.JsonConvert.SerializeObject(_loadedMap);
+            if(!System.IO.Directory.Exists(_mapfilemanager.CurrentMapPath))
+            {
+                System.IO.Directory.CreateDirectory(_mapfilemanager.CurrentMapPath);
+            }
+            System.IO.File.WriteAllText(_mapfilemanager.CurrentMapPath+"mapfile",map);
+            if(!System.IO.File.Exists(_mapfilemanager.CurrentMapPath+"tileset.meshlib"))
+            {
+                var meshlib = new Godot.File();
+                meshlib.Open("res://Resources/tilesets/defaulttileset.meshlib",File.ModeFlags.Read);
+                string transfer = meshlib.GetPascalString();
+                System.IO.File.WriteAllText(_mapfilemanager.CurrentMapPath+"tileset.meshlib",transfer);
+            }
         }
-        public void setTestMap()
+        public void SetTestMap()
         {
-            Map output = new Map(10,10);
+            Map output = new Map(2,2);
             MapTile tile = new MapTile();
             tile.Height = 20;
             output.SetTile(tile, 0, 0);
             output.SetTile(tile, 1, 1);
             output.SetTile(tile, 1, 0);
             output.SetTile(tile, 0, 1);
-            _LoadedMap = output;
+            _loadedMap = output;
             String str;
             str = Newtonsoft.Json.JsonConvert.SerializeObject(output);
             GD.Print("beep");
@@ -103,7 +137,12 @@ namespace Map{
         public override void _Ready()
         {
             _mapfilemanager = (MapFileManager)GetNode("/root/MapFileManager");
-            _gridmap = GetNode("Map")as GridMap;
+            Gridmap = GetNode("Map")as GridMap;
+            _colliderBuilder = (ColliderBuilder)GetNode("ColliderBuilder");
+            LoadMap();
+            BuildLoadedMap();
+            GetParent().Call("clear_navmesh");
+            GetParent().Call("bake_navmesh");
         }
         public void PlaceStaticObject(Vector3 position,Vector3 direction,string name)
         {
@@ -112,33 +151,37 @@ namespace Map{
             tr.origin = position;
             direction.y = position.y;
             tr.SetLookAt(new Vector3(0,0,1),direction,new Vector3(0,1,0));
-            newObject._transform = tr;
-            newObject._name = name;
-            _LoadedMap._staticObjects.Add(newObject);
+            newObject.Transform = tr;
+            newObject.Name = name;
+            _loadedMap._staticObjects.Add(newObject);
         }
-        public PackedScene LoadStaticObjectScene(string name)
+        private PackedScene LoadStaticObjectScene(string name)
         {
             PackedScene output = ResourceLoader.Load<PackedScene>("res://Resources/MapStaticObjects"+name);
-            if(output == null)
-            {
-                output = ResourceLoader.Load<PackedScene>(_mapfilemanager.CurrentMapPath+name);
+            if (output != null) 
                 return output;
-            }
-            if(output != null)
-            {
-                return output;
-            }
-            return null;
+            output = ResourceLoader.Load<PackedScene>(_mapfilemanager.CurrentMapPath+name);
+            return output;
+
         }
         public void LoadStaticObjects()
         {
-            foreach(var currentObject in _LoadedMap._staticObjects)
+            foreach(var currentObject in _loadedMap._staticObjects)
             {
-                PackedScene scene = LoadStaticObjectScene(currentObject._name);
-                Spatial spatial = scene.Instance() as Spatial;
-                spatial.Transform = currentObject._transform;
-                this.AddChild(spatial);
+                PackedScene scene = LoadStaticObjectScene(currentObject.Name);
+                if (scene != null)
+                {
+                    Spatial spatial = scene.Instance() as Spatial;
+                    if (spatial == null) continue;
+                    spatial.Transform = currentObject.Transform;
+                    this.AddChild(spatial);
+                }
             }
+        }
+        public void NewEmptyMap(int x,int y)
+        {
+            _loadedMap = new Map(x,y,TileType.Basement);
+            BuildLoadedMap();
         }
     }
 }

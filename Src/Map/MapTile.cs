@@ -8,20 +8,12 @@ namespace Map{
         Basement = 0,
         Plain = 1,
         Slope,
-        LeftSlope,
-        RightSlope,
         Pit,
-        Edge,
-        EdgeCorner,
-        EdgeInsideCorner,
-        PitEdge,
-        PitEdgeCorner,
-        PitEdgeInsideCorner,
     }
     public class MapTile
     {
         public TileType Type{get;set;}
-        public double Rotation;// 0-3 I suppose 
+        public int Rotation;// 0-3 I suppose 
         public int Height;
         public int Color;
         public MapTile(int type, int rotation, int height, int color)
@@ -43,6 +35,10 @@ namespace Map{
         public MapTile()
         {
             Type = TileType.Plain;
+        }
+        public MapTile(TileType type)
+        {
+            Type = type;
         }
     }
 }
