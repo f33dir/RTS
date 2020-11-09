@@ -4,18 +4,19 @@ using System.Collections.Generic;
 
 namespace Unit
 {
-    public enum Team
+    public enum Team // Team tag
     {
         Empty = -1,
         Player = 0,
         Enemy,
         Enemy1,
     }
-    public enum State
+    public enum State // What unit doing at the moment
     {
         Rest = 0,
         GoingTo = 1,
         Attacking,
+        Under_Attack,
         Casting,
         Building,
     }
@@ -27,7 +28,7 @@ namespace Unit
     //     Attack,
     //     MoveTo,
     // }
-    public enum ComplexState
+    public enum ComplexState // State that contain multiple different states
     {
         Patrol,
         Follow,
@@ -43,25 +44,25 @@ namespace Unit
         protected const int MAX_ATTACK_RANGE = 50;
         protected const int MAX_ATTACK_POWER = 1000;
         protected const int MIN_ATTACK_POWER = 1;
-
+        // Unit specific parameters
         protected int _Cost;
         protected int _HP;
         protected int _Protection;
         protected int _AttackPower;
         protected int _MoveSpeed;
         protected float _AttackSpeed = 1;
+        protected Team _Team;
+        protected Unit _Target = null;
+        protected State _State = State.Rest;
+        // General flags
         protected bool _CanAttackNow = true;
         protected bool _AbleToAttack = true;
         protected bool _IsInvulnerable = false;
         protected bool _IsSelectable = true;
         protected bool _IsEnemyInRange = false;
         protected bool _IsDead = false;
-        protected Team _Team;
-        protected State _State = State.Rest;
-        protected Unit _Target = null;
-        //protected Queue<BasicBehavior> _SimpleCommandOrder;
         //protected Queue<ComplexBehavior> _ComplexCommandOrder;
-
+        // Godot nodes and it's dependencies that Unit MUST have
         protected Spatial _Navigation;
         protected Vector3[] _PathTo;
         protected int _PathIndex = 0;

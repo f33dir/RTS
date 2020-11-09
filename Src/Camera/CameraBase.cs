@@ -6,9 +6,13 @@ namespace CameraBase
 {
     public class CameraBase : Spatial
     {
+        // Data is in units (godot measure)
         private const float MOVE_MARGIN = 30;
         private const float MOVE_SPEED = 30;
         private const float RAY_LENGTH = 10000;
+        private const float ZOOM_SPEED = 25;
+        private const float MAX_ZOOM_IN = 3;   // basically just y limitations
+        private const float MAX_ZOOM_OUT = 15;
 
         private Godot.Camera Cam;
         private Vector2 StartSelPos;
@@ -29,20 +33,24 @@ namespace CameraBase
                 SelectionBox._isVisible = true;
             }
             else SelectionBox._isVisible = false;
-            if(Input.IsActionJustPressed("zoom_in"))
+            if(Input.IsActionJustReleased("zoom_in"))
             {
-                Vector3 moveVec = GlobalTransform.origin;
-                moveVec.y -= MOVE_SPEED;
-                GlobalTranslate(moveVec*delta);
+                Vector3 moveVec = GlobalTransform.origin.Normalized();
+                moveVec.y -= ZOOM_SPEED;
+                moveVec.z -= MOVE_SPEED;
+                moveVec = moveVec.Rotated(Vector3.Up,RotationDegrees.y);
+                GlobalTranslate(moveVec.Normalized());
+                GD.Print(GlobalTransform.origin);
             }
-            if(Input.IsActionJustPressed("zoom_out"))
+            if(Input.IsActionJustReleased("zoom_out"))
             {
-                Vector3 moveVec = GlobalTransform.origin;
-                moveVec.y += MOVE_SPEED;
-                GlobalTranslate(moveVec*delta);
+                Vector3 moveVec = GlobalTransform.origin.Normalized();
+                moveVec.y += ZOOM_SPEED;
+                moveVec.z += MOVE_SPEED;
+                moveVec = moveVec.Rotated(Vector3.Up,RotationDegrees.y);
+                GlobalTranslate(moveVec.Normalized());
+                GD.Print(GlobalTransform.origin);
             }
-            // if(Input.IsActionJustPressed("exit"))
-            //     GetTree().Quit(); // тупо для дебага
         }
         public override void _Ready() // получение указателей на нужные ноды
         {
@@ -78,7 +86,7 @@ namespace CameraBase
         public Godot.Collections.Array<Unit.Unit> SelectUnits(Vector2 mousePos, Godot.Collections.Array<Unit.Unit> Units)
         {
             Godot.Collections.Array<Unit.Unit> NewSelectedUnits = new Godot.Collections.Array<Unit.Unit>();
-            if(mousePos.DistanceSquaredTo(StartSelPos) < 16)
+            if(mousePos.DistanceSquaredTo(StartSelPos) < 9)
             {
                 var unit = GetUnitUnderMouse(mousePos);
                 if(unit != null)
@@ -90,19 +98,13 @@ namespace CameraBase
             }
             else NewSelectedUnits = GetUnitsInBox(StartSelPos,mousePos);
             if(NewSelectedUnits.Count != 0)
-                {
-                    foreach (var unit in Units)
-                    {
-                        // var clone = (Unit.Unit)unit;
-                        unit.Deselect();
-                    }
-                    foreach (var unit in NewSelectedUnits)
-                    {
-                        // var clone = (Unit.Unit)unit;
-                        unit.Select();
-                    }
-                    return NewSelectedUnits;
-                }
+            {
+                foreach (var unit in Units)
+                    unit.Deselect();
+                foreach (var unit in NewSelectedUnits)
+                    unit.Select();
+                return NewSelectedUnits;
+            }
             return NewSelectedUnits;
         }
         public Godot.Collections.Array<Unit.Unit> GetUnitsInBox(Vector2 TopLeft, Vector2 BottomRight)

@@ -191,7 +191,7 @@ data = PoolVector3Array( 0, 1, 1, 0.098, 1, 0.9952, 0, 0.6, 1, 0.098, 1, 0.9952,
 [node name="Environment" type="Spatial"]
 
 [node name="CameraBase" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.78927, 9.60557 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.262, 9.971 )
 
 [node name="DetourNavigation" type="Spatial" parent="."]
 script = ExtResource( 3 )

@@ -1,12 +1,10 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/CameraBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/godot-navigation-lite/bin/navigation.gdnlib" type="GDNativeLibrary" id=2]
 [ext_resource path="res://addons/godot-navigation-lite/bin/detour_navigation.gdns" type="Script" id=3]
 [ext_resource path="res://Scenes/Map.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/godot-navigation-lite/bin/navmesh_parameters.gdns" type="Script" id=5]
-[ext_resource path="res://Scenes/Units/Unit.tscn" type="PackedScene" id=6]
-
 
 [sub_resource type="NativeScript" id=1]
 class_name = "DetourNavigationMesh"
@@ -173,22 +171,6 @@ surfaces/0 = {
 }
 
 [node name="Environment" type="Spatial"]
-
-[node name="Unit" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37688, 0 )
-collision_mask = 2
-
-[node name="Unit2" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.19716, 1.37664, 0 )
-collision_mask = 2
-
-[node name="Unit3" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.76825, 1.37664, 0 )
-collision_mask = 2
-
-[node name="Unit4" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0657425, 1.37664, -2.53209 )
-collision_mask = 2
 
 [node name="CameraBase" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.78927, 9.60557 )

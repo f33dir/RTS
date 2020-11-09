@@ -97,24 +97,24 @@ namespace Unit
         }
         public override void InteractWith(Unit unit)
         {
-            if(unit.Team == Team.Enemy || unit.Team == Team.Enemy1 || unit.Team == Team.Player)
+            if(unit.Team == Team.Enemy || unit.Team == Team.Enemy1)
             {
-                    if(_IsEnemyInRange && _CanAttackNow)
+                if(_IsEnemyInRange && _CanAttackNow)
+                {
+                    while(_CanAttackNow)
                     {
-                        while(_CanAttackNow)
-                        {
-                            _CanAttackNow = false;
-                            LookAt(unit.GlobalTransform.origin,Vector3.Up);
-                            PhysicalAttack(unit);
-                            _Timer.Start();
-                        }
-                        if(unit == null)
-                        {
-                            this.State = State.Rest;
-                            _PathTo = null;
-                            _PathIndex = 0;
-                        }
+                        _CanAttackNow = false;
+                        LookAt(unit.GlobalTransform.origin,Vector3.Up);
+                        PhysicalAttack(unit);
+                        _Timer.Start();
                     }
+                    if(unit == null)
+                    {
+                        this.State = State.Rest;
+                        _PathTo = null;
+                        _PathIndex = 0;
+                    }
+                }
             }
         }
         virtual public void PhysicalAttack(Unit unit)
