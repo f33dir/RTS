@@ -52,7 +52,6 @@ namespace Unit
         protected int _MoveSpeed;
         protected float _AttackSpeed = 1;
         protected Team _Team;
-        protected Unit _Target = null;
         protected State _State = State.Rest;
         // General flags
         protected bool _CanAttackNow = true;
@@ -68,6 +67,8 @@ namespace Unit
         protected int _PathIndex = 0;
         protected MeshInstance _SelectionRing;
         protected Godot.Timer _Timer;
+        protected HealthBar _HPBar;
+        protected Unit _Target = null;
 
         public override void _Ready()
         {
@@ -75,6 +76,7 @@ namespace Unit
             _SelectionRing = GetNode<MeshInstance>("SelectionRing");
             _Timer = GetNode<Timer>("AttackTimer");
             this.StatSetup();
+            _HPBar = GetNode<HealthBar>("HPBar");
             _Timer.OneShot = false;
             _Timer.WaitTime = _AttackSpeed;
         }
@@ -83,13 +85,18 @@ namespace Unit
             get { return _HP; }
             set
             {
+                if(value > _HPBar.MaxValue)
+                    _HPBar.MaxValue = value;
                 if(value <= 0 && _HP > 0 && !_IsInvulnerable)
                 {
+                    _HP = value;
+                    _HPBar.UpdateBar(_HP);
                     _IsDead = true;
                     this.QueueFree();
                     return;
                 }
                 _HP = value;
+                _HPBar.UpdateBar(_HP);
             }
         }
         public Unit Target

@@ -15,10 +15,20 @@ namespace Unit
             _HealthBar2D = GetNode<HealthBar2D>("Viewport/HealthBar");
             _HealthBar3D = GetNode<Sprite3D>("HP");
             _HealthBar3D.Texture = _Viewport.GetTexture();
+            _HealthBar3D.Show();
         }
-        public void Update(int CurrentHealth, int FullHealth)
+        public double MaxValue
         {
-            _HealthBar2D.UpdateBar(CurrentHealth, FullHealth);
+            get{ return _HealthBar2D.MaxValue;}
+            set
+            {
+                if(value > _HealthBar2D.MaxValue)
+                    _HealthBar2D.MaxValue = value;
+            }
+        }
+        public void UpdateBar(int CurrentHealth)
+        {
+            _HealthBar2D.UpdateBar(CurrentHealth);
         }
     }
 }
