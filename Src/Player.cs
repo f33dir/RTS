@@ -15,7 +15,9 @@ namespace Player
     {
         private Godot.Collections.Array<Unit.Unit> _SelectedUnits;
         private uint _Resource;
+        private Team _Team = Team.Player;
         private CameraBase.CameraBase _Camera;
+        
 
         public override void _Ready()
         {
@@ -25,7 +27,15 @@ namespace Player
         public override void _Process(float delta)
         {
             if(Input.IsActionJustReleased("alt_command"))
-                _SelectedUnits = _Camera.SelectUnits(GetViewport().GetMousePosition(),_SelectedUnits);
+            {
+                if(_Camera.SelectUnits(GetViewport().GetMousePosition(),_SelectedUnits).Count != 0)
+                    _SelectedUnits = _Camera.SelectUnits(GetViewport().GetMousePosition(),_SelectedUnits);
+                GD.Print("Selected units:");
+                foreach (var unit in _SelectedUnits)
+                {
+                    GD.Print("-> " + unit.Name);
+                }
+            }
             if(Input.IsActionJustPressed("action_command"))
             {
                 var unit = _Camera.GetUnitUnderMouse(GetViewport().GetMousePosition());
@@ -62,8 +72,8 @@ namespace Player
                 foreach (var unit in _SelectedUnits)
                 {
                     unit.State = State.GoingTo;
-                    unit.LookAt((Vector3)result["position"],Vector3.Up);
                     unit.MoveTo((Vector3)result["position"]);
+                    GD.Print(unit.State);
                 }
         }
     }

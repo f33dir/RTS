@@ -45,6 +45,7 @@ namespace Unit
         protected const int MAX_ATTACK_POWER = 1000;
         protected const int MIN_ATTACK_POWER = 1;
         // Unit specific parameters
+        protected int _ID;
         protected int _Cost;
         protected int _HP;
         protected int _Protection;
@@ -79,6 +80,10 @@ namespace Unit
             _HPBar = GetNode<HealthBar>("HPBar");
             _Timer.OneShot = false;
             _Timer.WaitTime = _AttackSpeed;
+        }
+        public int ID
+        {
+            get { return _ID; }
         }
         public int HP
         {

@@ -4,6 +4,18 @@ using System.Collections.Generic;
 
 namespace Unit
 {
+    public enum RangedUnitID
+    {
+        Sharpshooter,
+        Sniper,
+        Tank,
+    }
+    public enum MeleeUnitID
+    {
+        Brawler,
+        Samurai,
+        Builder,
+    }
     public class DynamicUnit: Unit
     {
         protected bool _IsRanged = true;
@@ -41,7 +53,7 @@ namespace Unit
                 case State.Attacking:
                     if(!_AbleToAttack)
                         break;
-                    else if(_CanAttackNow)
+                    if(_CanAttackNow)
                     {
                         InteractWith(_Target);
                     }
@@ -71,6 +83,9 @@ namespace Unit
         }
         public override void MoveTo(Vector3 Target)
         {
+            this.LookAt(Target,Vector3.Up);
+            if(this.RotationDegrees.x != 0)
+                this.RotationDegrees = new Vector3(0,this.RotationDegrees.y,this.RotationDegrees.z);
             var DetourPath = _Navigation.Call("find_path",GlobalTransform.origin,Target) as Godot.Collections.Dictionary;
             _PathTo = DetourPath["points"] as Vector3[];
             _PathIndex = 0;
@@ -83,6 +98,11 @@ namespace Unit
             {
                 GD.Print("Unit entered: " + unit.Name);
                 _IsEnemyInRange = true;
+                if(UnitInArea == this._Target && this.State == State.GoingTo)
+                {
+                    this.State = State.Attacking;
+                    _CanAttackNow = true;
+                }
                 // LookAt(UnitInArea.GlobalTransform.origin, Vector3.Up);
             }
         }
@@ -105,6 +125,9 @@ namespace Unit
                     {
                         _CanAttackNow = false;
                         LookAt(unit.GlobalTransform.origin,Vector3.Up);
+                        if(this.RotationDegrees.x != 0)
+                            this.RotationDegrees = new Vector3(0,this.RotationDegrees.y,this.RotationDegrees.z);
+                        GD.Print(this.State);
                         PhysicalAttack(unit);
                         _Timer.Start();
                     }
@@ -114,6 +137,11 @@ namespace Unit
                         _PathTo = null;
                         _PathIndex = 0;
                     }
+                }
+                else
+                {
+                    this.State = State.GoingTo;
+                    MoveTo(unit.GlobalTransform.origin);
                 }
             }
         }
