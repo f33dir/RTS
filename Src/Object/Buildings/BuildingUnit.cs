@@ -6,8 +6,9 @@ namespace Unit
     public class BuildingUnit : Unit
     {
         protected bool _IsMovable = false; // для юнитов вроде Ancient'ов из Warcraft III (night elves)
-        protected uint _GridSize;
-
+        public uint _GridSizeX{get;set;}
+        public uint _GridSizeY{get;set;}
+        
         public void Build(){}
         public void Upgrade(){}
     }

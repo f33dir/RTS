@@ -1,13 +1,14 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Scenes/CameraBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Camera/CameraBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/godot-navigation-lite/bin/navigation.gdnlib" type="GDNativeLibrary" id=2]
 [ext_resource path="res://addons/godot-navigation-lite/bin/detour_navigation.gdns" type="Script" id=3]
-[ext_resource path="res://Scenes/Map.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Map/Map.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/godot-navigation-lite/bin/navmesh_parameters.gdns" type="Script" id=5]
 [ext_resource path="res://Scenes/Units/Bruhmmy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Units/Sharpshooter.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Src/BuilderManager.cs" type="Script" id=9]
 
 [sub_resource type="NativeScript" id=1]
 class_name = "DetourNavigationMesh"
@@ -58,3 +59,6 @@ mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
+
+[node name="BuilderManager" type="Spatial" parent="."]
+script = ExtResource( 9 )
