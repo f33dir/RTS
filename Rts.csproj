@@ -29,6 +29,7 @@
     <Compile Include="Src\Object\HealthBar.cs" />
     <Compile Include="Src\Object\HealthBar2D.cs" />
     <Compile Include="Src\Object\Units\Bruhmmy.cs" />
+    <Compile Include="Src\Object\Units\Tank.cs" />
     <Compile Include="Src\Object\Units\testUnit.cs" />
     <Compile Include="Src\Object\Units\Unit.cs" />
     <Compile Include="Src\Object\Buildings\BuildingUnit.cs" />

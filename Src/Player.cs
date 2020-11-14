@@ -5,6 +5,7 @@ using Unit;
 
 namespace Player
 {
+    //Collision mask of game objects like building, units etc.
     public enum CollisionMask
     {
         Nothing,
@@ -17,13 +18,13 @@ namespace Player
         private uint _Resource;
         private Team _Team = Team.Player;
         private CameraBase.CameraBase _Camera;
-        
-
+        //Setup
         public override void _Ready()
         {
             _Camera = GetParent().GetNode<CameraBase.CameraBase>("CameraBase");
             _SelectedUnits = new Godot.Collections.Array<Unit.Unit>();
         }
+        //Player interactions
         public override void _Process(float delta)
         {
             if(Input.IsActionJustReleased("alt_command"))
@@ -65,6 +66,7 @@ namespace Player
             if(Input.IsActionJustPressed("exit"))
                 GetTree().Quit();
         }
+        //Self-explanatory
         public void MoveSelectedUnits(Vector2 MousePos)
         {
             var result = _Camera.RaycastFromMousePosition(MousePos,(uint)CollisionMask.Environment);

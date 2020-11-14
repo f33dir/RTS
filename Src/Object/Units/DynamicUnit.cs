@@ -18,14 +18,14 @@ namespace Unit
     }
     public class DynamicUnit: Unit
     {
+        //Unit group-specific parameters
         protected bool _IsRanged = true;
         protected bool _IsSemiRanged = false;
         protected bool _IsInvisible = false;
         protected bool _HasTrueSight = false;
-        
         protected int _MainResource;
         protected int _AttackRange = MIN_ATTACK_RANGE;
-
+        //Units state machine
         public override void _PhysicsProcess(float delta)
         {
             if(_IsDead)
@@ -46,7 +46,7 @@ namespace Unit
                                 _PathIndex += 1;
                             else
                             {
-                                MoveAndSlide(MoveVec.Normalized()*5,Vector3.Up);
+                                MoveAndSlideWithSnap(MoveVec.Normalized()*5,Vector3.Zero,Vector3.Up);
                             }
                         }
                     break;
@@ -103,7 +103,6 @@ namespace Unit
                     this.State = State.Attacking;
                     _CanAttackNow = true;
                 }
-                // LookAt(UnitInArea.GlobalTransform.origin, Vector3.Up);
             }
         }
         public override void UnitExitedTheArea(Node unit)

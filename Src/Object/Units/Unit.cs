@@ -70,7 +70,7 @@ namespace Unit
         protected Godot.Timer _Timer;
         protected HealthBar _HPBar;
         protected Unit _Target = null;
-
+        //Setup
         public override void _Ready()
         {
             _Navigation = GetParent().GetNode<Spatial>("DetourNavigationMesh");
@@ -81,6 +81,7 @@ namespace Unit
             _Timer.OneShot = false;
             _Timer.WaitTime = _AttackSpeed;
         }
+        //Getters & setters
         public int ID
         {
             get { return _ID; }
@@ -141,6 +142,7 @@ namespace Unit
             get{ return _State; }
             set{ _State = value; }
         }
+        //Godot functionality methods
         public void OnTimeoutComplete()
         {
             _CanAttackNow = true;
@@ -153,8 +155,9 @@ namespace Unit
         {
             _SelectionRing.Hide();
         }
-        virtual public void TargetCheck(){}
+        //Unit-specific methods (well, at least for similar units)
         virtual public void StatSetup(){}
+        virtual public void TargetCheck(){}
         virtual public void MoveTo(Vector3 target){}
         virtual public void UnitEnteredTheArea(Node Unit){}
         virtual public void UnitExitedTheArea(Node Unit){}

@@ -2,6 +2,7 @@
 
 [ext_resource path="res://Src/Object/Units/Sharpshooter.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Units/HPBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Units/InteractionArea.tscn" type="PackedScene" id=3]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 1.83766, 1.22991 )
@@ -30,9 +31,6 @@ albedo_color = Color( 0.0431373, 0.552941, 0.027451, 1 )
 
 [sub_resource type="SpatialMaterial" id=11]
 albedo_color = Color( 0.0588235, 1, 0.00392157, 1 )
-
-[sub_resource type="BoxShape" id=12]
-extents = Vector3( 6.99815, 1.9473, 6.79744 )
 
 [node name="Sharpshooter" type="KinematicBody" groups=[
 "Units",
@@ -75,15 +73,7 @@ visible = false
 mesh = SubResource( 10 )
 material/0 = SubResource( 11 )
 
-[node name="InteractionArea" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.052, 0, 0, 0, 1, 0, 0, 0 )
-input_ray_pickable = false
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58722, 0.263675 )
-shape = SubResource( 12 )
+[node name="InteractionArea" parent="." instance=ExtResource( 3 )]
 
 [node name="AttackTimer" type="Timer" parent="."]
 

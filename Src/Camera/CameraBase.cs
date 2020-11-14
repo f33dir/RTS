@@ -12,12 +12,12 @@ namespace CameraBase
         private const float RAY_LENGTH = 10000;
         private const float ZOOM_SPEED = 25;
         private const float MAX_ZOOM_IN = 3;   // basically just y limitations
-        private const float MAX_ZOOM_OUT = 15;
-
+        private const float MAX_ZOOM_OUT = 15; // currently doesn't work (saddly)
+        //Godot nodes
         private Godot.Camera Cam;
         private Vector2 StartSelPos;
         private SelectionBox SelectionBox;
-
+        //Camera movement & user input
         public override void _Process(float delta)
         {
             Vector2 mousePos = GetViewport().GetMousePosition();
@@ -52,14 +52,16 @@ namespace CameraBase
                 GD.Print(GlobalTransform.origin);
             }
         }
-        public override void _Ready() // получение указателей на нужные ноды
+        // Getting references to needed nodes & basic setup
+        public override void _Ready()
         {
             Cam = GetNode<Godot.Camera>("Camera");
             SelectionBox = GetNode<SelectionBox>("SelectionBox");
             // Input.SetMouseMode(Input.MouseMode.Confined); // это зло
             StartSelPos = new Vector2();
         }
-        public void CalculateMove(Vector2 mousePos, float delta) // перемещение камеры
+        // Calculate camera movement if cursor is at the window border
+        public void CalculateMove(Vector2 mousePos, float delta)
         {
             Vector2 vecSize = GetViewport().Size;
             Vector3 moveVec = Vector3.Zero;
@@ -76,6 +78,7 @@ namespace CameraBase
             moveVec = moveVec.Rotated(Vector3.Up,RotationDegrees.y);
             GlobalTranslate(moveVec*delta*MOVE_SPEED);
         }
+        //Get single unit right under mouse
         public Unit.Unit GetUnitUnderMouse(Vector2 mousePos)
         {
             var result = RaycastFromMousePosition(mousePos,2);
@@ -83,6 +86,7 @@ namespace CameraBase
                 return (Unit.Unit)result["collider"];
             return null;
         }
+        //Select "selected" units
         public Godot.Collections.Array<Unit.Unit> SelectUnits(Vector2 mousePos, Godot.Collections.Array<Unit.Unit> Units)
         {
             Godot.Collections.Array<Unit.Unit> NewSelectedUnits = new Godot.Collections.Array<Unit.Unit>();
@@ -91,7 +95,6 @@ namespace CameraBase
                 var unit = GetUnitUnderMouse(mousePos);
                 if(unit != null)
                 {
-                    // var debug_clone = unit;
                     if(unit.Team == Team.Player)
                         NewSelectedUnits.Add((Unit.Unit)unit);
                 }
@@ -107,6 +110,7 @@ namespace CameraBase
             }
             return NewSelectedUnits;
         }
+        //Get units in SelectionBox
         public Godot.Collections.Array<Unit.Unit> GetUnitsInBox(Vector2 TopLeft, Vector2 BottomRight)
         {
             if( TopLeft.x > BottomRight.x)
@@ -132,6 +136,7 @@ namespace CameraBase
             }
             return BoxSelectedUnits;
         }
+        //Project a RayCast form camera to cursor position check for collision with smth
         public Godot.Collections.Dictionary RaycastFromMousePosition(Vector2 mousePos, uint CollisionMask) // определение положения курсора на карте
         {
             Vector3 RayStart = Cam.ProjectRayOrigin(mousePos);
