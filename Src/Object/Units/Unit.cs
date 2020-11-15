@@ -57,6 +57,7 @@ namespace Unit
         // General flags
         protected bool _CanAttackNow = true;
         protected bool _AbleToAttack = true;
+        protected bool _AttackOnSight = false;
         protected bool _IsInvulnerable = false;
         protected bool _IsSelectable = true;
         protected bool _IsEnemyInRange = false;

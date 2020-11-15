@@ -25,7 +25,14 @@ namespace Unit
         protected bool _HasTrueSight = false;
         protected int _MainResource;
         protected int _AttackRange = MIN_ATTACK_RANGE;
+        //Godot nodes
+        protected AnimationPlayer _Animation;
         //Units state machine
+        public override void _Ready()
+        {
+            base._Ready();
+            _Animation = GetNode<AnimationPlayer>("AnimationPlayer");
+        }
         public override void _PhysicsProcess(float delta)
         {
             if(_IsDead)
@@ -38,6 +45,8 @@ namespace Unit
                 case State.Rest:
                     break;
                 case State.GoingTo:
+                if(_Animation != null)
+                    _Animation.Play("Walk");
                     if(_PathTo != null)
                         if(_PathIndex < _PathTo.Length)
                         {
@@ -49,12 +58,15 @@ namespace Unit
                                 MoveAndSlideWithSnap(MoveVec.Normalized()*5,Vector3.Zero,Vector3.Up);
                             }
                         }
+                        else State = State.Rest;
                     break;
                 case State.Attacking:
                     if(!_AbleToAttack)
                         break;
                     if(_CanAttackNow)
                     {
+                        // if(_Animation != null)
+                        //     _Animation.Play("attack");
                         InteractWith(_Target);
                     }
                     break;
@@ -123,6 +135,8 @@ namespace Unit
                     while(_CanAttackNow)
                     {
                         _CanAttackNow = false;
+                        if(_Animation != null)
+                            _Animation.Play("attack");  
                         LookAt(unit.GlobalTransform.origin,Vector3.Up);
                         if(this.RotationDegrees.x != 0)
                             this.RotationDegrees = new Vector3(0,this.RotationDegrees.y,this.RotationDegrees.z);
@@ -133,11 +147,12 @@ namespace Unit
                     if(unit == null)
                     {
                         this.State = State.Rest;
+                        _CanAttackNow = true;
                         _PathTo = null;
                         _PathIndex = 0;
                     }
                 }
-                else
+                else if(!_IsEnemyInRange && _CanAttackNow && unit != null)
                 {
                     this.State = State.GoingTo;
                     MoveTo(unit.GlobalTransform.origin);

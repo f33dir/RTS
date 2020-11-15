@@ -129,9 +129,9 @@ namespace CameraBase
             Godot.Collections.Array<Unit.Unit> BoxSelectedUnits = new Godot.Collections.Array<Unit.Unit>();
             foreach (var unit in GetTree().GetNodesInGroup("Units"))
             {
-                // Unit.Unit clone = (Unit.Unit)unit;
+                Unit.Unit clone = unit as Unit.Unit;
 
-                if(Box.HasPoint(Cam.UnprojectPosition((unit as Unit.Unit).GlobalTransform.origin)) && (unit as Unit.Unit).Team == Team.Player)
+                if(unit as Unit.Unit != null && Box.HasPoint(Cam.UnprojectPosition((unit as Unit.Unit).GlobalTransform.origin)) && (unit as Unit.Unit).Team == Team.Player)
                     BoxSelectedUnits.Add((Unit.Unit)unit);
             }
             return BoxSelectedUnits;
