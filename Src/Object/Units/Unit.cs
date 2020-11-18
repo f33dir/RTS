@@ -36,7 +36,7 @@ namespace Unit
         Hide,
         Seek,
     }
-    public abstract class Unit : KinematicBody
+    public abstract class   Unit : KinematicBody
     {
         protected const float MIN_MOVE_SPEED = 1f;
         protected const float MAX_MOVE_SPEED = 50f;
@@ -74,7 +74,6 @@ namespace Unit
         //Setup
         public override void _Ready()
         {
-            _Navigation = GetParent().GetNode<Spatial>("DetourNavigationMesh");
             _SelectionRing = GetNode<MeshInstance>("SelectionRing");
             _Timer = GetNode<Timer>("AttackTimer");
             this.StatSetup();

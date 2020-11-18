@@ -31,6 +31,7 @@ namespace Unit
         public override void _Ready()
         {
             base._Ready();
+            _Navigation = GetParent().GetNode<Spatial>("DetourNavigationMesh");
             _Animation = GetNode<AnimationPlayer>("AnimationPlayer");
         }
         public override void _PhysicsProcess(float delta)
@@ -152,7 +153,7 @@ namespace Unit
                         _PathIndex = 0;
                     }
                 }
-                else if(!_IsEnemyInRange && _CanAttackNow && unit != null)
+                else if(!_IsEnemyInRange && _CanAttackNow && unit.IsInsideTree())
                 {
                     this.State = State.GoingTo;
                     MoveTo(unit.GlobalTransform.origin);

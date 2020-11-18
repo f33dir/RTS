@@ -5,11 +5,11 @@ namespace BuildingManager
 {
     class PlayerBuildingManager
     {
-        public Player player;
+        public Player.Player player;
         public Unit.BuildingUnit _currentBuilding;
         public Vector2 _cursorPos;// grid position
         public bool _showSilhouette;
-        public PlayerBuildingManager(ref Player player)
+        public PlayerBuildingManager(ref Player.Player player)
         {
             this.player = player;
             _currentBuilding = null;

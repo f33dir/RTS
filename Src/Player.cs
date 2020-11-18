@@ -78,5 +78,9 @@ namespace Player
                     GD.Print(unit.State);
                 }
         }
+        public CameraBase.CameraBase GetCamera()
+        {
+            return _Camera;
+        }
     }
 }

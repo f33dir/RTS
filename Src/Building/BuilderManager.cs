@@ -8,42 +8,52 @@ namespace BuildingManager
         private Map.MapManager _mapmanager;
         private Map.Map _map;
         private Map.Map _otherworldmap;
-        private Dictionary<Player, PlayerBuildingManager> _playerBuilders;  
+        private Dictionary<Player.Player, PlayerBuildingManager> _playerBuilders;  
         public override void _Ready()
         {
-            _playerBuilders = new Dictionary<Player, PlayerBuildingManager>();
+            _playerBuilders = new Dictionary<Player.Player, PlayerBuildingManager>();
             _mapmanager = GetParent().GetNode<Map.MapManager>("MapManager");
             _map = _mapmanager.GetMap();
             //debug
-            var testplayer =  GetTree().Root.GetNode<Player>("Player");
+            var testplayer =  GetTree().CurrentScene.GetNode<Player.Player>("Player");
             AddPlayerBuildingManager(testplayer);
-            build(new Vector2(2,2),testplayer);
+            var res  = ResourceLoader.Load<PackedScene>("res://Scenes/Units/BuildingUnit.tscn");
+            Unit.BuildingUnit k = (Unit.BuildingUnit)res.Instance();
+            SetBuilding(ref testplayer, ref k);
+            build(new Vector2(0,0),testplayer);
         }
         public override void _PhysicsProcess(float delta)
         {
             foreach(var a in _playerBuilders.Values)
             {
-                var col =  a.player.GetCamera().RaycastFromMousePosition(a.player.GetViewport().GetMousePosition(),1)["collider"] as StaticBody;
-                a._cursorPos = PointToGrid(a.player,col.GlobalTransform.origin);
+                var dic =  a.player.GetCamera().RaycastFromMousePosition(a.player.GetViewport().GetMousePosition(),1);
+                if(dic.Contains("Collider"))
+                {
+                    var col = dic["Collider"] as StaticBody;
+                    a._cursorPos = PointToGrid(a.player,col.GlobalTransform.origin);
+                }
             }
         }
-        public void SetBuilding(ref Player player,Unit.BuildingUnit building)
+        public void SetBuilding(ref Player.Player player,ref Unit.BuildingUnit building)
         {
             _playerBuilders[player]._currentBuilding = building;
         }
-        public void ShowSilhouette(ref Player player)
+        public void ShowSilhouette(ref Player.Player player)
         {
             _playerBuilders[player]._showSilhouette = true;
         }
-        public void HideSilhouette(ref Player player)
+        public void HideSilhouette(ref Player.Player player)
         {   
             _playerBuilders[player]._showSilhouette = false;
         }
-        public void build(Vector2 GridPosition,Player player)
+        public void build(Vector2 GridPosition,Player.Player player)
         {
             var pos = getRealPosition(GridPosition);
+            var building = _playerBuilders[player]._currentBuilding;
+            AddChild(_playerBuilders[player]._currentBuilding);
+            building.Translate(pos);
         }
-        private Vector2 PointToGrid(Player player,Vector3 position)
+        private Vector2 PointToGrid(Player.Player player,Vector3 position)
         {
             var gridPosition3 = new Vector3();
             var gridPosition = new Vector2(-1000,-1000);
@@ -56,7 +66,7 @@ namespace BuildingManager
             }
             return gridPosition;
         }
-        public void AddPlayerBuildingManager(Player player)
+        public void AddPlayerBuildingManager(Player.Player player)
         {
             _playerBuilders.Add(player,new PlayerBuildingManager(ref player));
         }
