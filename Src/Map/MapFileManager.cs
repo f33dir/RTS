@@ -41,7 +41,7 @@ public class MapFileManager : Node
         {
             //debug 
             MapPath = "/home/f33dir/Temp";
-            CurrentMapPath = "/home/f33dir/Temp/";
+            CurrentMapPath = "/home/f33dir/Temp/testMap";
         }
     }
 }

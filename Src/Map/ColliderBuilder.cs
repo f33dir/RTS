@@ -88,7 +88,7 @@ namespace Map
         }
         public void PlaceRamp(int x, int y,MapTile tile)
         {
-            var ramp = ResourceLoader.Load<PackedScene>("res://Scenes/SlopeCollider.tscn");
+            var ramp = ResourceLoader.Load<PackedScene>("res://Scenes/Map/SlopeCollider.tscn");
             var collision =  ramp.Instance()as Spatial;
             float  h = tile.Height/2f;
             Vector3 position = new Vector3(x,h,y);

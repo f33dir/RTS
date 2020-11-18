@@ -11,7 +11,7 @@ public class Player : Spatial
 
     public override void _Ready()
     {
-        _Camera = GetParent().GetNode<CameraBase.CameraBase>("CameraBase");
+        _Camera = GetNode<CameraBase.CameraBase>("CameraBase");
         _SelectedUnits = new Godot.Collections.Array<Unit.Unit>();
     }
     public override void _Process(float delta)
@@ -57,5 +57,9 @@ public class Player : Spatial
                 unit.LookAt((Vector3)result["position"],Vector3.Up);
                 unit.MoveTo((Vector3)result["position"]);
             }
+    }
+    public CameraBase.CameraBase GetCamera()
+    {
+        return _Camera;
     }
 }
