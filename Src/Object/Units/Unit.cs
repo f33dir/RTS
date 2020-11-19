@@ -16,18 +16,11 @@ namespace Unit
         Rest = 0,
         GoingTo = 1,
         Attacking,
-        Under_Attack,
+        UnderAttack,
         Casting,
         Building,
+        AttackOnSight,
     }
-    // public enum BasicBehavior
-    // {
-    //     Waiting = 0,
-    //     Produce,
-    //     Build,
-    //     Attack,
-    //     MoveTo,
-    // }
     public enum ComplexState // State that contain multiple different states
     {
         Patrol,
@@ -64,6 +57,7 @@ namespace Unit
         protected bool _IsDead = false;
         //protected Queue<ComplexBehavior> _ComplexCommandOrder;
         // Godot nodes and it's dependencies that Unit MUST have
+        protected Spatial _Player;
         protected Spatial _Navigation;
         protected Vector3[] _PathTo;
         protected int _PathIndex = 0;
@@ -74,6 +68,7 @@ namespace Unit
         //Setup
         public override void _Ready()
         {
+            _Player = GetParent().GetNode<Spatial>("Player");
             _Navigation = GetParent().GetNode<Spatial>("DetourNavigationMesh");
             _SelectionRing = GetNode<MeshInstance>("SelectionRing");
             _Timer = GetNode<Timer>("AttackTimer");

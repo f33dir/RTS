@@ -12,9 +12,17 @@ namespace Player
         Environment,
         Units,
     }
+    public enum MouseModifier // пока пусть будет енум на всякий, 
+    {                         //шифт лучше вынести в отдельный триггер для ситуаций по типу shift+"модификатор"+ПКМ(ЛКМ)
+        None = 0,
+        Attack,               // "A" modifier
+    }
     public class Player : Spatial
     {
         private Godot.Collections.Array<Unit.Unit> _SelectedUnits;
+        private Unit.Unit _CurrentUnit;
+        private MouseModifier _Modifier;
+        private bool _ShiftModifier;
         private uint _Resource;
         private Team _Team = Team.Player;
         private CameraBase.CameraBase _Camera;
@@ -29,16 +37,32 @@ namespace Player
         {
             if(Input.IsActionJustReleased("alt_command"))
             {
-                if(_Camera.SelectUnits(GetViewport().GetMousePosition(),_SelectedUnits).Count != 0)
-                    _SelectedUnits = _Camera.SelectUnits(GetViewport().GetMousePosition(),_SelectedUnits);
-                GD.Print("Selected units:");
-                foreach (var unit in _SelectedUnits)
+                if(_Modifier == MouseModifier.Attack)
                 {
-                    GD.Print("-> " + unit.Name);
+                    if(_SelectedUnits.Count != 0)
+                    {
+                        foreach (var Unit in _SelectedUnits)
+                            Unit.State = State.AttackOnSight;
+                        MoveSelectedUnits(GetViewport().GetMousePosition());
+                    }
+                }
+                else if(_CurrentUnit != null)
+                    _CurrentUnit = null;
+                else
+                {
+                    if(_Camera.SelectUnits(GetViewport().GetMousePosition(),_SelectedUnits).Count != 0)
+                        _SelectedUnits = _Camera.SelectUnits(GetViewport().GetMousePosition(),_SelectedUnits);
+                    GD.Print("Selected units:");
+                    foreach (var unit in _SelectedUnits)
+                    {
+                        GD.Print("-> " + unit.Name);
+                    }
                 }
             }
             if(Input.IsActionJustPressed("action_command"))
             {
+                if(_Modifier == MouseModifier.Attack)
+                    _Modifier = MouseModifier.None;
                 var unit = _Camera.GetUnitUnderMouse(GetViewport().GetMousePosition());
                 if(unit != null && unit.Team == Team.Player)
                     if(_SelectedUnits.Count == 0 && unit != null)
@@ -63,8 +87,16 @@ namespace Player
                     MoveSelectedUnits(GetViewport().GetMousePosition());
                 }
             }
-            if(Input.IsActionJustPressed("exit"))
-                GetTree().Quit();
+            if(Input.IsActionJustPressed("Tab"))
+            {
+                if(_CurrentUnit != null && _SelectedUnits != null &&_SelectedUnits.Count != 0)
+                {
+                    _CurrentUnit = _SelectedUnits[(_SelectedUnits.IndexOf(_CurrentUnit)+1)%_SelectedUnits.Count];
+                }
+            }
+            if(Input.IsActionJustPressed("AttackModifier"))
+                _Modifier = MouseModifier.Attack;
+            // if(Input.IsActionJustPressed("exit"))
         }
         //Self-explanatory
         public void MoveSelectedUnits(Vector2 MousePos)
