@@ -13,7 +13,7 @@ namespace BuildingManager
         {
             this.player = player;
             _currentBuilding = null;
-            _cursorPos = new Vector2(0,0);
+            _cursorPos = new Vector2(3,4);
             _showSilhouette = false;
         }
         

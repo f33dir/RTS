@@ -20,7 +20,8 @@ namespace BuildingManager
             var res  = ResourceLoader.Load<PackedScene>("res://Scenes/Units/BuildingUnit.tscn");
             Unit.BuildingUnit k = (Unit.BuildingUnit)res.Instance();
             SetBuilding(ref testplayer, ref k);
-            build(new Vector2(0,0),testplayer);
+            if(IsBuildable(testplayer))
+                build(testplayer);
         }
         public override void _PhysicsProcess(float delta)
         {
@@ -46,10 +47,10 @@ namespace BuildingManager
         {   
             _playerBuilders[player]._showSilhouette = false;
         }
-        public void build(Vector2 GridPosition,Player.Player player)
+        public void build(Player.Player player)
         {
-            var pos = getRealPosition(GridPosition);
             var building = _playerBuilders[player]._currentBuilding;
+            var pos = getRealPosition(_playerBuilders[player]._cursorPos);
             AddChild(_playerBuilders[player]._currentBuilding);
             building.Translate(pos);
         }
@@ -86,7 +87,8 @@ namespace BuildingManager
             {
                 for(int j = 0;j<building._GridSizeY;j++)
                 {
-                    if((_map.Matrix[i,j].Height != cursortile.Height)||(_map.Matrix[i,j].Type != cursortile.Type))
+                    if((_map.Matrix[(int)pointer.x+i,(int)pointer.x+j].Height != cursortile.Height)
+                    ||(_map.Matrix[(int)pointer.x+i,(int)pointer.x+j].Type != Map.TileType.Plain))
                     {
                         Possible = false;
                     };
