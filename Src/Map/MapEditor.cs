@@ -15,6 +15,7 @@ namespace Map
             _selectedMapTile.Type = TileType.Pit;
             _editorCam = GetParent().GetNode("CameraBase")as CameraBase.CameraBase;
             _mapManager = GetParent().GetNode("MapManager")as MapManager;
+            _mapManager.EditorMode = true;
 
         }
         private Vector3 PointToGrid()

@@ -73,8 +73,26 @@ namespace BuildingManager
         private Vector3 getRealPosition(Vector2 GridPosition)
         {
             var height = _map.Matrix[(int)GridPosition.x,(int)GridPosition.y].Height;
-            Vector3 position = new Vector3(GridPosition.x,height,GridPosition.y);
+            Vector3 position = new Vector3(GridPosition.x*2+1f,height+1,GridPosition.y*2+1f);
             return position;
+        }
+        public bool IsBuildable(Player.Player player)
+        {
+            bool Possible = true;
+            var building = _playerBuilders[player]._currentBuilding;
+            var pointer = _playerBuilders[player]._cursorPos;
+            var cursortile = _map.GetTile(_playerBuilders[player]._cursorPos);
+            for(int i = 0;i<building._GridSizeX;i++)
+            {
+                for(int j = 0;j<building._GridSizeY;j++)
+                {
+                    if((_map.Matrix[i,j].Height != cursortile.Height)||(_map.Matrix[i,j].Type != cursortile.Type))
+                    {
+                        Possible = false;
+                    };
+                }
+            }
+            return Possible;
         }
     }
 }   

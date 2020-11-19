@@ -9,6 +9,7 @@ namespace Map
         private MapTile[,] _mapMatrix;
         private float _scaleHorizontal = 1;
         private float _scaleVertical = 0.5f;
+        public bool EditorMode = false;
         public override void _Ready()
         {
             _mapManager = GetParent<MapManager>();
@@ -58,6 +59,10 @@ namespace Map
             {
                 for(int j = 0;j<matrix.GetLength(1);j++)
                 {
+                    for(int k = -1;k<matrix[i,j];k++)
+                    {
+                        PlaceColliderBox(1,1,new Vector3(i,k,j));
+                    }
                     PlaceColliderBox(1,1,new Vector3(i,matrix[i,j],j));
                 }
             }
@@ -65,7 +70,7 @@ namespace Map
             PlaceRamps(_mapMatrix);
         }
         public void FastFill()
-        {  
+        {
             
         }
         public void Clear()

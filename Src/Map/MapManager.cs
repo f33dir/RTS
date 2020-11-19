@@ -11,6 +11,7 @@ namespace Map{
         MapFileManager _mapfilemanager;
         public MeshLibrary _tileset;
         List<PackedScene> _loadedStaticObjects;
+        public bool EditorMode = false; 
         public Map GetLoadedMap(){
             return _loadedMap;
         }
