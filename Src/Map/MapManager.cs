@@ -11,6 +11,7 @@ namespace Map{
         MapFileManager _mapfilemanager;
         public MeshLibrary _tileset;
         List<PackedScene> _loadedStaticObjects;
+        public bool EditorMode = false; 
         public Map GetLoadedMap(){
             return _loadedMap;
         }
@@ -41,6 +42,10 @@ namespace Map{
                     MapTile current = inputMap.Matrix[i,j];
                     if(current!=null)
                     {
+                        for(int k = -1;k<current.Height;k++)
+                        {
+                            Gridmap.SetCellItem(i,k,j,(int)TileType.Basement);
+                        }
                         Gridmap.SetCellItem(i,current.Height,j,(int)current.Type,current.Rotation);
                     }
                 }

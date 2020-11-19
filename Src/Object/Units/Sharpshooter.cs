@@ -8,9 +8,9 @@ namespace Unit
         public override void StatSetup()
         {
             _CanAttackNow = true;
-            _AttackPower = 10;
+            _AttackPower = 25;
             _AttackSpeed = 1.25f;
-            _AttackRange = 10;
+            _AttackRange = 15;
             _HP = 100;
             _Protection = 10;
             _MainResource = 0;

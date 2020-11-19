@@ -30,7 +30,10 @@ namespace Map{
         public int GetSizeX(){
             return _sizeX;
         }
-
+        public MapTile GetTile(Vector2 position)
+        {
+            return Matrix[(int)position.x,(int)position.y];
+        }
         public int GetSizeY(){
             return _sizeY;
         }
