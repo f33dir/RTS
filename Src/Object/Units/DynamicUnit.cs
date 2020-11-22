@@ -153,7 +153,7 @@ namespace Unit
                         _PathIndex = 0;
                     }
                 }
-                else if(!_IsEnemyInRange && _CanAttackNow && unit.IsInsideTree())
+                if(!_IsEnemyInRange && _CanAttackNow && unit.IsQueuedForDeletion())
                 {
                     this.State = State.GoingTo;
                     MoveTo(unit.GlobalTransform.origin);

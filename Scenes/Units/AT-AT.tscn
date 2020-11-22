@@ -6,7 +6,6 @@
 [ext_resource path="res://Scenes/Units/InteractionArea.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Src/Object/Units/AT_AT.cs" type="Script" id=5]
 
-
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Cube"
 surfaces/0 = {
@@ -340,7 +339,7 @@ bones/7/enabled = true
 bones/7/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Body/Skeleton"]
-transform = Transform( 0.999858, -0.0168301, -3.95669e-08, 0.0168301, 0.999858, -1.35024e-07, 4.18338e-08, 1.34339e-07, 1, -0.487665, 0.980126, -3.46057e-08 )
+transform = Transform( 0.999858, -0.0168301, -3.95669e-08, 0.0168301, 0.999858, -1.35024e-07, 4.18338e-08, 1.34339e-07, 1, -0.539551, 0.972186, -1.5604e-08 )
 bone_name = "bone_7"
 
 [node name="Cube" type="MeshInstance" parent="Body/Skeleton/BoneAttachment"]
@@ -349,7 +348,7 @@ mesh = SubResource( 1 )
 material/0 = null
 
 [node name="BoneAttachment 2" type="BoneAttachment" parent="Body/Skeleton"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.132938, 0.440704, 2.72766e-08 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0810515, 0.432764, 4.62783e-08 )
 bone_name = "bone"
 
 [node name="Cube001" type="MeshInstance" parent="Body/Skeleton/BoneAttachment 2"]

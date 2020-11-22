@@ -34,6 +34,7 @@
     <Compile Include="Src\Object\Units\Tank.cs" />
     <Compile Include="Src\Object\Units\testUnit.cs" />
     <Compile Include="Src\Object\Units\Unit.cs" />
+    <Compile Include="Src\Object\Units\BuilderUnit.cs" />
     <Compile Include="Src\Object\Buildings\BuildingUnit.cs" />
     <Compile Include="Src\Object\Units\DynamicUnit.cs" />
     <Compile Include="Src\Object\Units\Sharpshooter.cs" />
