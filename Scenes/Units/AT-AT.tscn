@@ -6,7 +6,6 @@
 [ext_resource path="res://Scenes/Units/InteractionArea.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Src/Object/Units/AT_AT.cs" type="Script" id=5]
 
-
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Cube"
 surfaces/0 = {
@@ -302,7 +301,7 @@ bones/0/name = "bone"
 bones/0/parent = -1
 bones/0/rest = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0810515, 0.432764, 4.62783e-08 )
 bones/0/enabled = true
-bones/0/bound_children = [  ]
+bones/0/bound_children = [ NodePath("BoneAttachment 2") ]
 bones/1/name = "bone_1"
 bones/1/parent = 0
 bones/1/rest = Transform( -0.40143, -0.851033, -0.338522, 0.635219, -0.524966, 0.566486, -0.659811, 0.0123692, 0.75133, -0.0620418, -0.0603638, 0.724235 )
@@ -337,10 +336,10 @@ bones/7/name = "bone_7"
 bones/7/parent = 0
 bones/7/rest = Transform( 0.999858, -0.0168301, -3.95669e-08, 0.0168301, 0.999858, -1.35024e-07, 4.18338e-08, 1.34339e-07, 1, -0.620603, 0.539422, -6.18823e-08 )
 bones/7/enabled = true
-bones/7/bound_children = [  ]
+bones/7/bound_children = [ NodePath("BoneAttachment") ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Body/Skeleton"]
-transform = Transform( 0.999858, -0.0168301, -3.95669e-08, 0.0168301, 0.999858, -1.35024e-07, 4.18338e-08, 1.34339e-07, 1, -0.487665, 0.980126, -3.46057e-08 )
+transform = Transform( 0.999858, -0.0168301, -3.95669e-08, 0.0168301, 0.999858, -1.35024e-07, 4.18338e-08, 1.34339e-07, 1, -0.539551, 0.972186, -1.5604e-08 )
 bone_name = "bone_7"
 
 [node name="Cube" type="MeshInstance" parent="Body/Skeleton/BoneAttachment"]
@@ -349,7 +348,7 @@ mesh = SubResource( 1 )
 material/0 = null
 
 [node name="BoneAttachment 2" type="BoneAttachment" parent="Body/Skeleton"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.132938, 0.440704, 2.72766e-08 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0810515, 0.432764, 4.62783e-08 )
 bone_name = "bone"
 
 [node name="Cube001" type="MeshInstance" parent="Body/Skeleton/BoneAttachment 2"]
@@ -378,7 +377,6 @@ anims/attack = SubResource( 10 )
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -0.113006, 1.13678, -0.168746 )
 shape = SubResource( 11 )
-disabled = true
 
 [node name="HPBar" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55556, 0 )
@@ -392,6 +390,9 @@ material/0 = ExtResource( 3 )
 [node name="AttackTimer" type="Timer" parent="."]
 
 [node name="InteractionArea" parent="." instance=ExtResource( 4 )]
+
+[node name="Position3D" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50799, 0 )
 [connection signal="timeout" from="AttackTimer" to="." method="OnTimeoutComplete"]
 [connection signal="body_entered" from="InteractionArea" to="." method="UnitEnteredTheArea"]
 [connection signal="body_exited" from="InteractionArea" to="." method="UnitExitedTheArea"]

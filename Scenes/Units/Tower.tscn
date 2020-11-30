@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Src/Object/Tower.cs" type="Script" id=2]
+
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="CubeMesh" id=4]
+size = Vector3( 0.7, 0.548, 1.664 )
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.905882, 0.584314, 0.0862745, 1 )
+
+[sub_resource type="SphereShape" id=3]
+
+[node name="Tower" type="KinematicBody" groups=[
+"Units",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18932, 0 )
+input_ray_pickable = false
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 0.4, 0 )
+shape = SubResource( 1 )
+
+[node name="Body" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 0.4, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="Gun" type="MeshInstance" parent="Body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.407083, -0.961128 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="Muzzle" type="Spatial" parent="Body/Gun"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.19714 )
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="InteractionArea" type="Area" parent="."]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+input_ray_pickable = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="Area" type="CollisionShape" parent="InteractionArea"]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
+shape = SubResource( 3 )
+[connection signal="timeout" from="AttackTimer" to="." method="OnTimeoutComplete"]
+[connection signal="body_entered" from="InteractionArea" to="." method="BodyEnteredTheArea"]
+[connection signal="body_exited" from="InteractionArea" to="." method="BodyExitedTheArea"]

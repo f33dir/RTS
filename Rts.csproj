@@ -27,8 +27,10 @@
     <Compile Include="Src\Map\MapManager.cs" />
     <Compile Include="Src\Map\Map.cs" />
     <Compile Include="Src\Map\ColliderBuilder.cs" />
+    <Compile Include="Src\Object\Bullet.cs" />
     <Compile Include="Src\Object\HealthBar.cs" />
     <Compile Include="Src\Object\HealthBar2D.cs" />
+    <Compile Include="Src\Object\Tower.cs" />
     <Compile Include="Src\Object\Units\AT_AT.cs" />
     <Compile Include="Src\Object\Units\Bruhmmy.cs" />
     <Compile Include="Src\Object\Units\Tank.cs" />

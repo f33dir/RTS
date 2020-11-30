@@ -95,7 +95,7 @@ namespace CameraBase
                 var unit = GetUnitUnderMouse(mousePos);
                 if(unit != null)
                 {
-                    if(unit.Team == Team.Player)
+                    // if(unit.Team == Team.Player)
                         NewSelectedUnits.Add((Unit.Unit)unit);
                 }
             }
@@ -103,9 +103,14 @@ namespace CameraBase
             if(NewSelectedUnits.Count != 0)
             {
                 foreach (var unit in Units)
-                    unit.Deselect();
+                {
+                    if(unit != null)
+                        unit.Deselect();
+                }
                 foreach (var unit in NewSelectedUnits)
+                {
                     unit.Select();
+                }
                 return NewSelectedUnits;
             }
             return NewSelectedUnits;
@@ -131,7 +136,7 @@ namespace CameraBase
             {
                 Unit.Unit clone = unit as Unit.Unit;
 
-                if(unit as Unit.Unit != null && Box.HasPoint(Cam.UnprojectPosition((unit as Unit.Unit).GlobalTransform.origin)) && (unit as Unit.Unit).Team == Team.Player)
+                if(unit as Unit.Unit != null && Box.HasPoint(Cam.UnprojectPosition((unit as Unit.Unit).GlobalTransform.origin)) && (unit as Unit.Unit).Team == Team.Enemy)
                     BoxSelectedUnits.Add((Unit.Unit)unit);
             }
             return BoxSelectedUnits;

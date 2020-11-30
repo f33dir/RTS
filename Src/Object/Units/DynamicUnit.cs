@@ -27,12 +27,15 @@ namespace Unit
         protected int _AttackRange = MIN_ATTACK_RANGE;
         //Godot nodes
         protected AnimationPlayer _Animation;
+        protected Area _Area;
         //Units state machine
         public override void _Ready()
         {
             base._Ready();
             _Navigation = GetParent().GetNode<Spatial>("DetourNavigationMesh");
             _Animation = GetNode<AnimationPlayer>("AnimationPlayer");
+            _Area = GetNode<Area>("InteractionArea");
+            StatSetup();
         }
         public override void _PhysicsProcess(float delta)
         {
@@ -107,7 +110,7 @@ namespace Unit
         public override void UnitEnteredTheArea(Node unit)
         {
             var UnitInArea = unit as Unit;
-            if(UnitInArea.Team == Team.Enemy /*|| UnitInArea.Team == Team.Player*/)
+            if(UnitInArea != null && UnitInArea.Team == Team.Enemy /*|| UnitInArea.Team == Team.Player*/)
             {
                 GD.Print("Unit entered: " + unit.Name);
                 _IsEnemyInRange = true;
@@ -121,7 +124,7 @@ namespace Unit
         public override void UnitExitedTheArea(Node unit)
         {
             var ExitedUnit = unit as Unit;
-            if(ExitedUnit.Team == Team.Enemy)
+            if(ExitedUnit != null && ExitedUnit.Team == Team.Enemy)
             {
                 GD.Print("Unit exited: " + unit.Name);
                 _IsEnemyInRange = false;

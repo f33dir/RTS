@@ -70,16 +70,12 @@ namespace Unit
         {
             _SelectionRing = GetNode<MeshInstance>("SelectionRing");
             _Timer = GetNode<Timer>("AttackTimer");
-            this.StatSetup();
+            // this.StatSetup();
             _HPBar = GetNode<HealthBar>("HPBar");
             _Timer.OneShot = false;
             _Timer.WaitTime = _AttackSpeed;
         }
         //Getters & setters
-        public int ID
-        {
-            get { return _ID; }
-        }
         public int HP
         {
             get { return _HP; }

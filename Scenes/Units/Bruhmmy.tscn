@@ -54,4 +54,7 @@ material/0 = SubResource( 6 )
 
 [node name="HPBar" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.74218, 0 )
+
+[node name="Position3D" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8018, 0 )
 [connection signal="timeout" from="AttackTimer" to="." method="OnTimeoutComplete"]
