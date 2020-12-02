@@ -35,7 +35,7 @@ namespace Unit
             _Bullet = GD.Load<PackedScene>("res://Scenes/Units/Bullet.tscn");
             StatSetup();
             _Timer.OneShot = false;
-            _Timer.WaitTime = _AttackSpeed;
+            _Timer.WaitTime = _AttackSpeed/10;
         }
         public float AttackRange
         {
@@ -69,8 +69,8 @@ namespace Unit
             //default init
             _HP = 100;
             _AttackPower = 25;
-            _AttackRange = 15f;
-            _AttackSpeed = 1f;
+            _AttackRange = 35f;
+            _AttackSpeed = 15f;
             _Cost = 25;
             _CanAttackNow = true;
             _Team = Team.Empty;
@@ -79,7 +79,7 @@ namespace Unit
             _IsTargetInRange = false;
             _State = State.AttackOnSight;
             var AreaScaleVector = Vector3.One;
-            AreaScaleVector *= 2f;
+            AreaScaleVector *= _AttackRange/10;
             AreaScaleVector.y = 1f;
             _Area.Scale = AreaScaleVector;
         }
@@ -111,7 +111,9 @@ namespace Unit
             if(_Area.Owner == Body)
                 return;
             var EnteredUnit = Body as Unit;
-            if(EnteredUnit != null && EnteredUnit.Team == Team.Enemy || EnteredUnit.Team == Team.Enemy1)
+            if(EnteredUnit == null)
+                return;
+            if(EnteredUnit.Team == Team.Enemy || EnteredUnit.Team == Team.Enemy1)
             {
                 _EnemiesInRange.Add(EnteredUnit);
                 if(_Target == null)

@@ -57,7 +57,7 @@ namespace Unit
         protected bool _IsDead = false;
         //protected Queue<ComplexBehavior> _ComplexCommandOrder;
         // Godot nodes and it's dependencies that Unit MUST have
-        protected Spatial _Player;
+        protected Player.Player _Player;
         protected Spatial _Navigation;
         protected Vector3[] _PathTo;
         protected int _PathIndex = 0;
@@ -70,6 +70,7 @@ namespace Unit
         {
             _SelectionRing = GetNode<MeshInstance>("SelectionRing");
             _Timer = GetNode<Timer>("AttackTimer");
+            _Player = GetParent().GetParent().GetNode<Player.Player>("Player");
             // this.StatSetup();
             _HPBar = GetNode<HealthBar>("HPBar");
             _Timer.OneShot = false;

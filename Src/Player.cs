@@ -80,10 +80,10 @@ namespace Player
                 }
                 else
                 {
-                    foreach (var Unit in _SelectedUnits)
-                    {
-                        Unit.Target = Unit;
-                    }
+                    // foreach (var Unit in _SelectedUnits)
+                    // {
+                    //     Unit.Target = null;
+                    // }
                     MoveSelectedUnits(GetViewport().GetMousePosition());
                 }
             }
@@ -113,6 +113,15 @@ namespace Player
         public CameraBase.CameraBase GetCamera()
         {
             return _Camera;
+        }
+        public Godot.Collections.Array<Unit.Unit> SelectedUnits
+        {
+            get { return _SelectedUnits;}
+            set
+            {
+                if(value != null)
+                    _SelectedUnits = value;
+            }
         }
     }
 }

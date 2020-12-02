@@ -41,6 +41,7 @@ namespace Unit
         {
             if(_IsDead)
             {
+                _Player.SelectedUnits.Remove(this);
                 this.Hide();
                 QueueFree();
             }
