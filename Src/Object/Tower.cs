@@ -13,8 +13,8 @@ namespace Unit
         protected float _AttackSpeed;
         protected Team _Team;
         protected State _State;
-        protected Unit _Target;
-        protected Godot.Collections.Array<Unit> _EnemiesInRange;
+        protected DynamicUnit _Target;
+        protected Godot.Collections.Array<DynamicUnit> _EnemiesInRange;
         //Flags
         protected bool _CanAttackNow;
         protected bool _IsEnemyInRange;
@@ -41,7 +41,7 @@ namespace Unit
         {
             get {return _AttackRange;} 
         }
-        public Unit Target
+        public DynamicUnit Target
         {
             get { return _Target; }
             set
@@ -68,13 +68,13 @@ namespace Unit
         {
             //default init
             _HP = 100;
-            _AttackPower = 25;
+            _AttackPower = 50;
             _AttackRange = 35f;
             _AttackSpeed = 15f;
             _Cost = 25;
             _CanAttackNow = true;
             _Team = Team.Empty;
-            _EnemiesInRange = new Godot.Collections.Array<Unit>();
+            _EnemiesInRange = new Godot.Collections.Array<DynamicUnit>();
             _IsEnemyInRange = false;
             _IsTargetInRange = false;
             _State = State.AttackOnSight;
@@ -88,8 +88,8 @@ namespace Unit
             if(_Target != null)
             {
                 LookAt(_Target.GlobalTransform.origin,Vector3.Up);
-                if(this.RotationDegrees.x != 0)
-                    this.RotationDegrees = new Vector3(0,this.RotationDegrees.y,this.RotationDegrees.z);
+                if(RotationDegrees.x != 0)
+                    RotationDegrees = new Vector3(0,RotationDegrees.y,RotationDegrees.z);
             }
             switch (_State)
             {
@@ -110,7 +110,7 @@ namespace Unit
             GD.Print("Body entered -> " + Body.Name);
             if(_Area.Owner == Body)
                 return;
-            var EnteredUnit = Body as Unit;
+            var EnteredUnit = Body as DynamicUnit;
             if(EnteredUnit == null)
                 return;
             if(EnteredUnit.Team == Team.Enemy || EnteredUnit.Team == Team.Enemy1)
@@ -131,7 +131,7 @@ namespace Unit
         public void BodyExitedTheArea(Node Body)
         {
             GD.Print("Body exited -> " + Body.Name);
-            var ExitedUnit = Body as Unit;
+            var ExitedUnit = Body as DynamicUnit;
             if(ExitedUnit != null && (ExitedUnit.Team == Team.Enemy1 || ExitedUnit.Team == Team.Enemy))
             {
                 _EnemiesInRange.Remove(ExitedUnit);
@@ -166,7 +166,7 @@ namespace Unit
                 Vector3 TargetPosition = _Target.GlobalTransform.origin;
                 TargetPosition.y += 1;
                 bullet.LookAt(TargetPosition,Vector3.Up);
-                bullet.Target = _Target;
+                // bullet.Target = _Target;
                 bullet.Damage = _AttackPower;
                 _Timer.Start();
             }

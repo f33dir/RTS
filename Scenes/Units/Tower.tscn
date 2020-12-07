@@ -19,7 +19,7 @@ albedo_color = Color( 0.905882, 0.584314, 0.0862745, 1 )
 ]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18932, 0 )
 input_ray_pickable = false
-collision_layer = 2
+collision_layer = 0
 collision_mask = 2
 script = ExtResource( 2 )
 

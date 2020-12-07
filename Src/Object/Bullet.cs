@@ -7,39 +7,42 @@ namespace Unit
     {
         protected const int SPEED = 5;
         protected Tower _Parent;
-        protected Unit _Target;
+        protected DynamicUnit _Target;
+        protected CollisionShape _AOEAreaCollision;
+        protected DynamicUnit _PrimaryTarget;
         protected int _Damage;
         public override void _Ready()
         {
-            // _Target = _Parent.Target;
-            // _Parent = GetParent() as Tower
+            _AOEAreaCollision = GetNode<CollisionShape>("AOEArea/CollisionShape");
             SetAsToplevel(true);
         }
         public override void _PhysicsProcess(float delta)
         {
             ApplyImpulse(Transform.basis.z, -Transform.basis.z*SPEED);
-            // if(_Target != null)
-            // {
-            //     // LookAt(_Target.GlobalTransform.origin,Vector3.Up);
-            //     // MoveAndCollide(_Target.GlobalTransform.origin);
-            // }
         }
         public void _on_Bullet_body_entered(Node body)
         {
-            Unit EnteredUnit = body as Unit;
+            DynamicUnit EnteredUnit = body as DynamicUnit;
             if(EnteredUnit != null)
                 if(EnteredUnit.Team == Team.Enemy || EnteredUnit.Team == Team.Enemy1)
                 {
                     EnteredUnit.HP -= _Damage;
+                    _PrimaryTarget = EnteredUnit;
                     QueueFree();
                 }
                 else QueueFree();
             else QueueFree();
         }
-        public Unit Target
+        public void _on_Bullet_AOE_body_entered(Node body)
         {
-            get{ return _Target;}
-            set{ _Target = value;}
+            DynamicUnit EnteredUnit = body as DynamicUnit;
+            if(EnteredUnit != null)
+                if((EnteredUnit.Team == Team.Enemy || EnteredUnit.Team == Team.Enemy1) && _PrimaryTarget != null)
+                {
+                    if(EnteredUnit != _PrimaryTarget)
+                        EnteredUnit.HP -= _Damage;
+                    QueueFree();
+                }
         }
         public int Damage
         {

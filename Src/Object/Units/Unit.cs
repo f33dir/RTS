@@ -71,7 +71,6 @@ namespace Unit
             _SelectionRing = GetNode<MeshInstance>("SelectionRing");
             _Timer = GetNode<Timer>("AttackTimer");
             _Player = GetParent().GetParent().GetNode<Player.Player>("Player");
-            // this.StatSetup();
             _HPBar = GetNode<HealthBar>("HPBar");
             _Timer.OneShot = false;
             _Timer.WaitTime = _AttackSpeed;

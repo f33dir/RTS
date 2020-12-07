@@ -290,7 +290,7 @@ extents = Vector3( 1.16519, 1.19976, 1.19023 )
 "Units",
 ]]
 collision_layer = 2
-collision_mask = 2
+collision_mask = 4
 script = ExtResource( 5 )
 
 [node name="Body" type="Spatial" parent="."]
@@ -387,12 +387,5 @@ visible = false
 mesh = SubResource( 12 )
 material/0 = ExtResource( 3 )
 
-[node name="AttackTimer" type="Timer" parent="."]
-
 [node name="InteractionArea" parent="." instance=ExtResource( 4 )]
-
-[node name="Position3D" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50799, 0 )
-[connection signal="timeout" from="AttackTimer" to="." method="OnTimeoutComplete"]
-[connection signal="body_entered" from="InteractionArea" to="." method="UnitEnteredTheArea"]
-[connection signal="body_exited" from="InteractionArea" to="." method="UnitExitedTheArea"]
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_InteractionArea_body_entered"]

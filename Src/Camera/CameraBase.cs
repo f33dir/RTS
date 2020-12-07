@@ -22,17 +22,17 @@ namespace CameraBase
         {
             Vector2 mousePos = GetViewport().GetMousePosition();
             CalculateMove(mousePos,delta);
-            if(Input.IsActionJustPressed("alt_command"))
-            {
-                SelectionBox._startSelPos = mousePos;
-                StartSelPos = mousePos;
-            }
-            if(Input.IsActionPressed("alt_command"))
-            {
-                SelectionBox._mousePos = mousePos;
-                SelectionBox._isVisible = true;
-            }
-            else SelectionBox._isVisible = false;
+            // if(Input.IsActionJustPressed("alt_command"))
+            // {
+            //     SelectionBox._startSelPos = mousePos;
+            //     StartSelPos = mousePos;
+            // }
+            // if(Input.IsActionPressed("alt_command"))
+            // {
+            //     SelectionBox._mousePos = mousePos;
+            //     SelectionBox._isVisible = true;
+            // }
+            // else SelectionBox._isVisible = false;
             if(Input.IsActionJustReleased("zoom_in"))
             {
                 Vector3 moveVec = GlobalTransform.origin.Normalized();
@@ -86,61 +86,61 @@ namespace CameraBase
                 return (Unit.Unit)result["collider"];
             return null;
         }
-        //Select "selected" units
-        public Godot.Collections.Array<Unit.Unit> SelectUnits(Vector2 mousePos, Godot.Collections.Array<Unit.Unit> Units)
-        {
-            Godot.Collections.Array<Unit.Unit> NewSelectedUnits = new Godot.Collections.Array<Unit.Unit>();
-            if(mousePos.DistanceSquaredTo(StartSelPos) < 9)
-            {
-                var unit = GetUnitUnderMouse(mousePos);
-                if(unit != null)
-                {
-                    // if(unit.Team == Team.Player)
-                        NewSelectedUnits.Add((Unit.Unit)unit);
-                }
-            }
-            else NewSelectedUnits = GetUnitsInBox(StartSelPos,mousePos);
-            if(NewSelectedUnits.Count != 0)
-            {
-                foreach (var unit in Units)
-                {
-                    if(unit != null)
-                        unit.Deselect();
-                }
-                foreach (var unit in NewSelectedUnits)
-                {
-                    unit.Select();
-                }
-                return NewSelectedUnits;
-            }
-            return NewSelectedUnits;
-        }
+        // Select "selected" units
+        // public Godot.Collections.Array<Unit.Unit> SelectUnits(Vector2 mousePos, Godot.Collections.Array<Unit.Unit> Units)
+        // {
+        //     Godot.Collections.Array<Unit.Unit> NewSelectedUnits = new Godot.Collections.Array<Unit.Unit>();
+        //     if(mousePos.DistanceSquaredTo(StartSelPos) < 9)
+        //     {
+        //         var unit = GetUnitUnderMouse(mousePos);
+        //         if(unit != null)
+        //         {
+        //             // if(unit.Team == Team.Player)
+        //                 NewSelectedUnits.Add((Unit.Unit)unit);
+        //         }
+        //     }
+        //     else NewSelectedUnits = GetUnitsInBox(StartSelPos,mousePos);
+        //     if(NewSelectedUnits.Count != 0)
+        //     {
+        //         foreach (var unit in Units)
+        //         {
+        //             if(unit != null)
+        //                 unit.Deselect();
+        //         }
+        //         foreach (var unit in NewSelectedUnits)
+        //         {
+        //             unit.Select();
+        //         }
+        //         return NewSelectedUnits;
+        //     }
+        //     return NewSelectedUnits;
+        // }
         //Get units in SelectionBox
-        public Godot.Collections.Array<Unit.Unit> GetUnitsInBox(Vector2 TopLeft, Vector2 BottomRight)
-        {
-            if( TopLeft.x > BottomRight.x)
-            {
-                var temp = TopLeft.x;
-                TopLeft.x = BottomRight.x;
-                BottomRight.x = temp;
-            }
-            if(TopLeft.y > BottomRight.y)
-            {
-                var temp = TopLeft.y;
-                TopLeft.y = BottomRight.y;
-                BottomRight.y = temp;
-            }
-            var Box = new Rect2(TopLeft, BottomRight - TopLeft);
-            Godot.Collections.Array<Unit.Unit> BoxSelectedUnits = new Godot.Collections.Array<Unit.Unit>();
-            foreach (var unit in GetTree().GetNodesInGroup("Units"))
-            {
-                Unit.Unit clone = unit as Unit.Unit;
+        // public Godot.Collections.Array<Unit.Unit> GetUnitsInBox(Vector2 TopLeft, Vector2 BottomRight)
+        // {
+        //     if( TopLeft.x > BottomRight.x)
+        //     {
+        //         var temp = TopLeft.x;
+        //         TopLeft.x = BottomRight.x;
+        //         BottomRight.x = temp;
+        //     }
+        //     if(TopLeft.y > BottomRight.y)
+        //     {
+        //         var temp = TopLeft.y;
+        //         TopLeft.y = BottomRight.y;
+        //         BottomRight.y = temp;
+        //     }
+        //     var Box = new Rect2(TopLeft, BottomRight - TopLeft);
+        //     Godot.Collections.Array<Unit.Unit> BoxSelectedUnits = new Godot.Collections.Array<Unit.Unit>();
+        //     foreach (var unit in GetTree().GetNodesInGroup("Units"))
+        //     {
+        //         Unit.Unit clone = unit as Unit.Unit;
 
-                if(unit as Unit.Unit != null && Box.HasPoint(Cam.UnprojectPosition((unit as Unit.Unit).GlobalTransform.origin)) && (unit as Unit.Unit).Team == Team.Enemy)
-                    BoxSelectedUnits.Add((Unit.Unit)unit);
-            }
-            return BoxSelectedUnits;
-        }
+        //         if(unit as Unit.Unit != null && Box.HasPoint(Cam.UnprojectPosition((unit as Unit.Unit).GlobalTransform.origin)) && (unit as Unit.Unit).Team == Team.Enemy)
+        //             BoxSelectedUnits.Add((Unit.Unit)unit);
+        //     }
+        //     return BoxSelectedUnits;
+        // }
         //Project a RayCast form camera to cursor position check for collision with smth
         public Godot.Collections.Dictionary RaycastFromMousePosition(Vector2 mousePos, uint CollisionMask) // определение положения курсора на карте
         {

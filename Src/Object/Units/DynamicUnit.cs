@@ -4,53 +4,69 @@ using System.Collections.Generic;
 
 namespace Unit
 {
-    public enum RangedUnitID
+    public class DynamicUnit: KinematicBody
     {
-        Sharpshooter,
-        Sniper,
-        Tank,
-    }
-    public enum MeleeUnitID
-    {
-        Brawler,
-        Samurai,
-        Builder,
-    }
-    public class DynamicUnit: Unit
-    {
-        //Unit group-specific parameters
-        protected bool _IsRanged = true;
-        protected bool _IsSemiRanged = false;
-        protected bool _IsInvisible = false;
-        protected bool _HasTrueSight = false;
-        protected int _MainResource;
-        protected int _AttackRange = MIN_ATTACK_RANGE;
         //Godot nodes
         protected AnimationPlayer _Animation;
         protected Area _Area;
-        //Units state machine
+        protected Spatial _Navigation;
+        protected KinematicBody _Target;
+        protected HealthBar _HPBar;
+        protected Player.Player _Player;
+        protected Team _Team;
+        //Pathfinding
+        protected Vector3[] _PathTo;
+        protected uint _PathIndex;
+        //Enemy parameters
+        protected int _HP;
+        protected int _Protection;
+        protected float _MoveSpeed;
+        
         public override void _Ready()
         {
-            base._Ready();
             _Navigation = GetParent().GetNode<Spatial>("DetourNavigationMesh");
             _Animation = GetNode<AnimationPlayer>("AnimationPlayer");
             _Area = GetNode<Area>("InteractionArea");
+            _Target = GetParent().GetNode<KinematicBody>("DefenseLocation");
+            _HPBar = GetNode<HealthBar>("HPBar");
+            _Player = GetParent().GetParent().GetNode<Player.Player>("Player");
+            _PathIndex = 0;
             StatSetup();
+        }
+        public int HP
+        {
+            get { return _HP; }
+            set
+            {
+                if(value > _HPBar.MaxValue)
+                    _HPBar.MaxValue = value;
+                _HP = value;
+                _HPBar.UpdateBar(_HP);
+            }
+        }
+        public Team Team
+        {
+            get { return _Team;}
+        }
+        public float MoveSpeed
+        {
+            get { return _MoveSpeed;}
+            set
+            {
+                if (value > 0)
+                    _MoveSpeed = value;
+            }
         }
         public override void _PhysicsProcess(float delta)
         {
-            if(_IsDead)
+            if(HP <= 0)
             {
-                _Player.SelectedUnits.Remove(this);
                 this.Hide();
                 QueueFree();
             }
-            switch(_State)
-            {
-                case State.Rest:
-                    break;
-                case State.GoingTo:
+            if(_Player.Start)
                 if(_Animation != null)
+                {
                     _Animation.Play("Walk");
                     if(_PathTo != null)
                         if(_PathIndex < _PathTo.Length)
@@ -60,115 +76,39 @@ namespace Unit
                                 _PathIndex += 1;
                             else
                             {
-                                MoveAndSlideWithSnap(MoveVec.Normalized()*5,Vector3.Zero,Vector3.Up);
+                                MoveAndSlideWithSnap(MoveVec.Normalized()*_MoveSpeed,Vector3.Zero,Vector3.Up);
                             }
                         }
-                        else State = State.Rest;
-                    break;
-                case State.Attacking:
-                    if(!_AbleToAttack)
-                        break;
-                    if(_CanAttackNow)
-                    {
-                        // if(_Animation != null)
-                        //     _Animation.Play("attack");
-                        InteractWith(_Target);
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-        public override void TargetCheck()
-        {
-            if(_Target != null && _Target != this as Unit)
-                switch(this._Target.Team)
-                {
-                    case Team.Enemy:
-                        this._State = State.Attacking;
-                        break;
-                    case Team.Enemy1:
-                        this._State = State.Attacking;
-                        break;
-                    case Team.Player:
-                        this._State = State.GoingTo;
-                        // this.State = State.Attacking;
-                        break;
-                    default:
-                        break;
+                        else
+                        {
+                            _PathTo = null;
+                            _PathIndex = 0;
+                        }
                 }
         }
-        public override void MoveTo(Vector3 Target)
+        public void MoveTo()
         {
-            this.LookAt(Target,Vector3.Up);
-            if(this.RotationDegrees.x != 0)
-                this.RotationDegrees = new Vector3(0,this.RotationDegrees.y,this.RotationDegrees.z);
-            var DetourPath = _Navigation.Call("find_path",GlobalTransform.origin,Target) as Godot.Collections.Dictionary;
+            LookAt(_Target.GlobalTransform.origin,Vector3.Up);
+            if(RotationDegrees.x != 0)
+                RotationDegrees = new Vector3(0,RotationDegrees.y,RotationDegrees.z);
+            var DetourPath = _Navigation.Call("find_path",GlobalTransform.origin,_Target.GlobalTransform.origin) as Godot.Collections.Dictionary;
             _PathTo = DetourPath["points"] as Vector3[];
             _PathIndex = 0;
-            _State = State.GoingTo;
         }
-        public override void UnitEnteredTheArea(Node unit)
+        public void _on_InteractionArea_body_entered(Node body)
         {
-            var UnitInArea = unit as Unit;
-            if(UnitInArea != null && UnitInArea.Team == Team.Enemy /*|| UnitInArea.Team == Team.Player*/)
+            KinematicBody Target = body as KinematicBody;
+            if(Target == _Target)
             {
-                GD.Print("Unit entered: " + unit.Name);
-                _IsEnemyInRange = true;
-                if(UnitInArea == this._Target && this.State == State.GoingTo)
-                {
-                    this.State = State.Attacking;
-                    _CanAttackNow = true;
-                }
+                _Player.Lives -= 1;
+                QueueFree();
             }
         }
-        public override void UnitExitedTheArea(Node unit)
+        virtual public void StatSetup()
         {
-            var ExitedUnit = unit as Unit;
-            if(ExitedUnit != null && ExitedUnit.Team == Team.Enemy)
-            {
-                GD.Print("Unit exited: " + unit.Name);
-                _IsEnemyInRange = false;
-            }
-        }
-        public override void InteractWith(Unit unit)
-        {
-            if(unit.Team == Team.Enemy || unit.Team == Team.Enemy1)
-            {
-                if(_IsEnemyInRange && _CanAttackNow)
-                {
-                    while(_CanAttackNow)
-                    {
-                        _CanAttackNow = false;
-                        if(_Animation != null)
-                            _Animation.Play("attack");  
-                        LookAt(unit.GlobalTransform.origin,Vector3.Up);
-                        if(this.RotationDegrees.x != 0)
-                            this.RotationDegrees = new Vector3(0,this.RotationDegrees.y,this.RotationDegrees.z);
-                        GD.Print(this.State);
-                        PhysicalAttack(unit);
-                        _Timer.Start();
-                    }
-                    if(unit == null)
-                    {
-                        this.State = State.Rest;
-                        _CanAttackNow = true;
-                        _PathTo = null;
-                        _PathIndex = 0;
-                    }
-                }
-                else if(!_IsEnemyInRange && _CanAttackNow && unit.IsInsideTree())
-                {
-                    this.State = State.GoingTo;
-                    MoveTo(unit.GlobalTransform.origin);
-                }
-            }
-        }
-        virtual public void PhysicalAttack(Unit unit)
-        {
-                unit.HP = unit.HP - this.AttackPower;
-                GD.Print(this.Name + " attack speed is: " + _AttackSpeed);
-                GD.Print(unit.Name +  " HP is: " + unit.HP);
-        }
+            _HP = 100;
+            _Protection = 1;
+            _MoveSpeed = 5f;
+        }    
     }
 }

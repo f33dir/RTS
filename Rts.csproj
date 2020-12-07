@@ -33,13 +33,14 @@
     <Compile Include="Src\Object\Tower.cs" />
     <Compile Include="Src\Object\Units\AT_AT.cs" />
     <Compile Include="Src\Object\Units\Bruhmmy.cs" />
-    <Compile Include="Src\Object\Units\Tank.cs" />
+    <!-- <Compile Include="Src\Object\Units\Tank.cs" /> -->
     <Compile Include="Src\Object\Units\testUnit.cs" />
     <Compile Include="Src\Object\Units\Unit.cs" />
     <Compile Include="Src\Object\Buildings\BuildingUnit.cs" />
     <Compile Include="Src\Object\Units\DynamicUnit.cs" />
-    <Compile Include="Src\Object\Units\Sharpshooter.cs" />
+    <!-- <Compile Include="Src\Object\Units\Sharpshooter.cs" /> -->
     <Compile Include="Src\Player.cs" />
+    <Compile Include="Src\Object\Units\AttackModifier.cs" />
     <Compile Include="Src\Building\BuilderManager.cs" />
     <Compile Include="Src\Building\PlayerBuilderManager.cs" />
   </ItemGroup>

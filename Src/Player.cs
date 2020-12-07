@@ -19,109 +19,48 @@ namespace Player
     }
     public class Player : Spatial
     {
-        private Godot.Collections.Array<Unit.Unit> _SelectedUnits;
-        private Unit.Unit _CurrentUnit;
-        private MouseModifier _Modifier;
-        private bool _ShiftModifier;
-        private uint _Resource;
-        private Team _Team = Team.Player;
+        private int _Resource;
+        private int _Lives;
+        private bool _Start = false;
         private CameraBase.CameraBase _Camera;
         //Setup
         public override void _Ready()
         {
             _Camera = GetParent().GetNode<CameraBase.CameraBase>("CameraBase");
-            _SelectedUnits = new Godot.Collections.Array<Unit.Unit>();
+            _Resource = 100;
+            _Lives = 5;
         }
         //Player interactions
         public override void _Process(float delta)
         {
-            if(Input.IsActionJustReleased("alt_command"))
-            {
-                if(_Modifier == MouseModifier.Attack)
-                {
-                    if(_SelectedUnits.Count != 0)
-                    {
-                        foreach (var Unit in _SelectedUnits)
-                            Unit.State = State.AttackOnSight;
-                        MoveSelectedUnits(GetViewport().GetMousePosition());
-                    }
-                }
-                else if(_CurrentUnit != null)
-                    _CurrentUnit = null;
-                else
-                {
-                    if(_Camera.SelectUnits(GetViewport().GetMousePosition(),_SelectedUnits).Count != 0)
-                        _SelectedUnits = _Camera.SelectUnits(GetViewport().GetMousePosition(),_SelectedUnits);
-                    GD.Print("Selected units:");
-                    foreach (var unit in _SelectedUnits)
-                    {
-                        GD.Print("-> " + unit.Name);
-                    }
-                }
-            }
             if(Input.IsActionJustPressed("action_command"))
             {
-                if(_Modifier == MouseModifier.Attack)
-                    _Modifier = MouseModifier.None;
-                var unit = _Camera.GetUnitUnderMouse(GetViewport().GetMousePosition());
-                if(unit != null && unit.Team == Team.Player)
-                    if(_SelectedUnits.Count == 0 && unit != null)
-                    {
-                        unit.Select();
-                        _SelectedUnits.Add(unit);
-                    }
-                if(unit != null && (unit.Team == Team.Enemy || unit.Team == Team.Player))
-                {
-                    foreach (var SelectedUnit in _SelectedUnits)
-                    {
-                        SelectedUnit.Target = unit;
-                        SelectedUnit.TargetCheck();
-                    }
-                }
-                else
-                {
-                    // foreach (var Unit in _SelectedUnits)
-                    // {
-                    //     Unit.Target = null;
-                    // }
-                    MoveSelectedUnits(GetViewport().GetMousePosition());
-                }
+                _Start = true;
+                GetTree().CallGroup("Units", "MoveTo");
             }
-            if(Input.IsActionJustPressed("Tab"))
-            {
-                if(_CurrentUnit != null && _SelectedUnits != null &&_SelectedUnits.Count != 0)
-                {
-                    _CurrentUnit = _SelectedUnits[(_SelectedUnits.IndexOf(_CurrentUnit)+1)%_SelectedUnits.Count];
-                }
-            }
-            if(Input.IsActionJustPressed("AttackModifier"))
-                _Modifier = MouseModifier.Attack;
-            // if(Input.IsActionJustPressed("exit"))
+            if(_Lives <= 0) 
+                GetTree().Quit(); // грубо, но для теста сойдет
         }
-        //Self-explanatory
-        public void MoveSelectedUnits(Vector2 MousePos)
+        public int Lives
         {
-            var result = _Camera.RaycastFromMousePosition(MousePos,(uint)CollisionMask.Environment);
-            if(result != null && result.Count != 0)
-                foreach (var unit in _SelectedUnits)
-                {
-                    unit.State = State.GoingTo;
-                    unit.MoveTo((Vector3)result["position"]);
-                    GD.Print(unit.State);
-                }
+            get { return _Lives;}
+            set
+            {
+                _Lives = value;
+            }
         }
+        //возможно юзается где-то еще
         public CameraBase.CameraBase GetCamera()
         {
             return _Camera;
         }
-        public Godot.Collections.Array<Unit.Unit> SelectedUnits
+        public bool Start
         {
-            get { return _SelectedUnits;}
-            set
-            {
-                if(value != null)
-                    _SelectedUnits = value;
-            }
+            get{ return _Start; }
+        }
+        public CameraBase.CameraBase Camera
+        {
+            get{ return _Camera; }
         }
     }
 }
