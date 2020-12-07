@@ -10,6 +10,7 @@ namespace Unit
         Player = 0,
         Enemy,
         Enemy1,
+        Neutral
     }
     public enum State // What unit doing at the moment
     {

@@ -1,0 +1,642 @@
+[33mcommit 2b7588ccb24dceab262d2066a9aaaff7ee0c22e5[m[33m ([m[1;36mHEAD -> [m[1;32mTD[m[33m, [m[1;31morigin/TD[m[33m)[m
+Author: fenryux <vlmkovalenko@gmail.com>
+Date:   Mon Dec 7 18:52:43 2020 +0300
+
+    Towers shoot properly, enemies lower the score if they contach with target
+
+[33mcommit 4366f201c204c75bca2e210c3e593e2050367369[m
+Author: fenryux <vlmkovalenko@gmail.com>
+Date:   Wed Dec 2 17:43:23 2020 +0300
+
+    cringe test lvl added
+
+[33mcommit bae0a970b2af1da64e6b2b2fe3c80de75b0a5347[m
+Author: fenryux <vlmkovalenko@gmail.com>
+Date:   Mon Nov 30 19:27:52 2020 +0300
+
+    Tower added + auto-shoot at enemy in range (need visual polishing but works)
+
+[33mcommit 90597b9233ba10be18ac2ace0988b2209e5d6c60[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 49da8bf b168803
+Author: fenryux <55600745+fenryux@users.noreply.github.com>
+Date:   Thu Nov 19 22:08:29 2020 +0300
+
+    Merge branch 'Object' into master
+
+[33mcommit 49da8bf447606150c99804c96a97624d80b83719[m
+Merge: 931ae38 3af354a
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Thu Nov 19 21:16:27 2020 +0300
+
+    Merge branch 'F33dir'
+
+[33mcommit 3af354a748675e434de44132c6602dff27ab7c0b[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Thu Nov 19 21:15:24 2020 +0300
+
+    stage 2
+
+[33mcommit b168803ef0a1349cba3be734dd5b8685086b78cd[m
+Author: fenryux <vlmkovalenko@gmail.com>
+Date:   Thu Nov 19 21:13:29 2020 +0300
+
+    pre-merge commit
+
+[33mcommit bf9f50cebe4a105ab51775fc8d2e90337b5b2d4b[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Thu Nov 19 15:07:55 2020 +0300
+
+    fixed basement in editor
+
+[33mcommit 81eb86238bb367f1f7a87191ef00ee5f1f2ce999[m[33m ([m[1;31morigin/F33dir[m[33m)[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Thu Nov 19 01:01:15 2020 +0300
+
+    fixed crash on death
+
+[33mcommit 13c8e15d7438e5377e6307696aac5ba20b0847f5[m
+Merge: 2c0b579 e0bd47f
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Wed Nov 18 15:55:54 2020 +0300
+
+    Merge branch 'Object' into F33dir
+
+[33mcommit 2c0b579fef06a9a6a256a423516262cb06b66451[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Wed Nov 18 15:49:37 2020 +0300
+
+    wip
+
+[33mcommit e0bd47fc4dc006d8c4d617c7ffad43f697ced669[m
+Author: fenryux <vlmkovalenko@gmail.com>
+Date:   Mon Nov 16 20:24:53 2020 +0300
+
+    Animations fixed (for worker and at-at)
+
+[33mcommit af49569a3ad377deedcfc3b2ce2b185ee79bdb93[m
+Author: fenryux <vlmkovalenko@gmail.com>
+Date:   Sun Nov 15 18:58:01 2020 +0300
+
+    Animation node added to units, currently bugged,so animation import parameters are needed to be fixed
+
+[33mcommit eb93b754fea62baba37bc0e3270ddf8d9a201872[m
+Author: fenryux <vlmkovalenko@gmail.com>
+Date:   Sat Nov 14 22:50:05 2020 +0300
+
+    More units with imported models
+
+[33mcommit 4d8319d6d112650083c7c250c8e688035066edfc[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Nov 13 18:32:21 2020 +0300
+
+    added buildermanager
+
+[33mcommit 0df61af132db61d3dcf9d63b94e373df58eb931f[m
+Author: fenryux <vlmkovalenko@gmail.com>
+Date:   Fri Nov 13 16:27:26 2020 +0300
+
+    Units can move to target & interact with it
+
+[33mcommit 4094c049439fa0f81ca3a25c7288926279bd90d8[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Wed Nov 11 14:20:52 2020 +0300
+
+    added ranged warrior
+
+[33mcommit a0632e6a0cc4ccb94acb7946665d0574a99a6c8b[m
+Author: fenryux <vlmkovalenko@gmail.com>
+Date:   Tue Nov 10 22:21:53 2020 +0300
+
+    HP bar added
+
+[33mcommit ffbf65a06965c47a411133d3aac991c410905618[m
+Author: fenryux <fenryux@github.com>
+Date:   Tue Nov 10 00:34:18 2020 +0300
+
+    Camera can zoom in/out now
+
+[33mcommit e50eb7b08a5d8189dd16e8f7195295c477f9fd90[m
+Author: fenryux <fenryux@github.com>
+Date:   Fri Nov 6 19:10:04 2020 +0300
+
+    Health bar placeholder
+
+[33mcommit 931ae38e02376a7cc99e04f55c4876b1ba78143b[m[33m ([m[1;31morigin/UIBrch[m[33m)[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Nov 6 18:04:36 2020 +0300
+
+    Update README.md
+
+[33mcommit e3d353496dea9839fb18257daf747f3688b57c69[m
+Merge: 00ceae4 92dd136
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Nov 6 17:52:15 2020 +0300
+
+    Merge branch 'F33dir'
+
+[33mcommit 92dd136044ce53b146d20d8c814a2812f8cebc7c[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Nov 6 17:51:59 2020 +0300
+
+    merge showcase
+
+[33mcommit 699bdc29f8e97935f208daf5833553d8eae53247[m
+Merge: f4524ba 066f1f3
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Nov 6 16:47:17 2020 +0300
+
+    merge
+
+[33mcommit f4524bafece4165a6c0e3fbf107de784fba58801[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Nov 6 16:44:51 2020 +0300
+
+    content
+
+[33mcommit 066f1f3612ad3c10312a54424b2547d3c1a091fd[m
+Author: fenryux <fenryux@github.com>
+Date:   Fri Nov 6 00:07:52 2020 +0300
+
+    Units attack according to their attack speed
+
+[33mcommit 9e66398fb221f2af3e185f4ba83e0bf6b03fe52c[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Mon Nov 2 18:59:16 2020 +0300
+
+    fixed ramps
+
+[33mcommit 348953df0571ad2680742f9775154e8d1101ffb8[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Mon Nov 2 00:06:57 2020 +0300
+
+    fixed ramp positions
+
+[33mcommit 2b5193b208780071ebc09728252d668eb5937e90[m
+Author: fenryux <fenryux@github.com>
+Date:   Mon Nov 2 00:03:29 2020 +0300
+
+    fix for buddies
+
+[33mcommit 0047d5ae2b26f35016c3458ffdea54d7decb329b[m
+Merge: c775af8 6d9ace2
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Sun Nov 1 20:42:16 2020 +0300
+
+    merged from object
+
+[33mcommit c775af8d985b9e55a00905dc8a04668eedc9eac7[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Sun Nov 1 20:28:46 2020 +0300
+
+    some
+
+[33mcommit fbbb0809fc6a9d183c9e70b44bf7662361cd42a3[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Sun Nov 1 20:28:36 2020 +0300
+
+    sum
+
+[33mcommit 6d9ace2011ac4ae656bce147a2da05f423331ce4[m
+Author: fenryux <fenryux@github.com>
+Date:   Fri Oct 30 00:04:32 2020 +0300
+
+    Teams added + Area
+
+[33mcommit 4e0a4ee72c3a98c9ac564b6935191a68970b8bb7[m
+Author: fenryux <fenryux@github.com>
+Date:   Wed Oct 28 20:45:42 2020 +0300
+
+    New test model + architecture implemented succesfully (kinda)
+
+[33mcommit 35b10dd95f60374e1f71eeb32a1331214a8f5573[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Mon Oct 26 18:02:02 2020 +0300
+
+    almost ok with saving
+
+[33mcommit 494789a702d72c58f73afad2f46791443b4f2c95[m
+Author: fenryux <fenryux@github.com>
+Date:   Mon Oct 26 17:32:59 2020 +0300
+
+    Architecture changes
+
+[33mcommit e977f7ac657cf0bc9b279910d3f32ff1ea639ea0[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Mon Oct 26 17:08:41 2020 +0300
+
+    tile editor done
+
+[33mcommit 4613d990aab3da0556b761637daab61b29a4cd45[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Mon Oct 26 08:54:10 2020 +0300
+
+    added idea to gitignore
+
+[33mcommit 00ceae4eda3c9a4e4b8eaf83f85f5763b2850520[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Mon Oct 26 08:52:17 2020 +0300
+
+    Update README.md
+
+[33mcommit 2c9ea5a69c6307abef3b6f9de41ac56b1f48e4ed[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Mon Oct 26 08:51:31 2020 +0300
+
+    Create README.md
+
+[33mcommit 3a82d4649bb6cbea6f093d5e9d98b44bedf87abe[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Mon Oct 26 08:50:08 2020 +0300
+
+    showcase time
+
+[33mcommit d3bb16a4c8582a9f0156543db16a27b48d31fba5[m
+Merge: b56a90e 15f7939
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Mon Oct 26 00:03:35 2020 +0300
+
+    merge from object
+
+[33mcommit b56a90edbd06489aa1cf088aedc47de3c75452c4[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Sun Oct 25 23:53:14 2020 +0300
+
+    editor work in progress
+
+[33mcommit 15f793914e66288d38b464abf45960e7ab966350[m
+Author: fenryux <fenryux@github.com>
+Date:   Sun Oct 25 19:56:16 2020 +0300
+
+    post-merge fix
+
+[33mcommit 3de3ffe95913c13444b0e65ce4c08365297070d6[m
+Merge: 2397857 0b90e56
+Author: fenryux <fenryux@github.com>
+Date:   Sun Oct 25 19:23:10 2020 +0300
+
+    meh, merging
+
+[33mcommit 23978575708f544b8e04152cff30b15b6e0997a0[m
+Author: fenryux <fenryux@github.com>
+Date:   Sun Oct 25 19:20:20 2020 +0300
+
+    Selectable units
+
+[33mcommit 0b90e56170efdee2f72da51795cd58ec326f7739[m
+Merge: 0234ee4 0d2b8cd
+Author: fenryux <55600745+fenryux@users.noreply.github.com>
+Date:   Mon Oct 19 21:42:01 2020 +0300
+
+    Merge pull request #5 from f33dir/master
+    
+    Merging from master
+
+[33mcommit 0234ee4fb6df38fd4eb652516cee312b2f841093[m
+Author: fenryux <fenryux@github.com>
+Date:   Mon Oct 19 21:37:55 2020 +0300
+
+    Bugfix(hope so)
+
+[33mcommit 2508aff5dab89d31f70ef5e449ac8b2545373682[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Oct 16 19:23:42 2020 +0300
+
+    various bugs
+
+[33mcommit 0d2b8cd3f02ec21c76995be0104130421bc8b88a[m
+Merge: a6a7c25 6b09d75
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Oct 16 18:22:16 2020 +0300
+
+    Merge pull request #4 from f33dir/F33dir
+    
+    Remerge due to my incompitence
+
+[33mcommit 6b09d75422ec0f8e7ae63b9cef12ce4f8dee4dce[m
+Merge: 3d8a597 432fa2e
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Oct 16 18:19:11 2020 +0300
+
+    remerge
+
+[33mcommit 3d8a5971455ef7fb706f9a6f093f14b9d2faff7d[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Oct 16 18:12:42 2020 +0300
+
+    test
+
+[33mcommit a6a7c25dfca129dfef3f19943dfae39207016aa8[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Oct 16 13:49:42 2020 +0300
+
+    merging stage 1
+
+[33mcommit e6c3f86e51eef09057d7a9a0201b0ffe2bbb5038[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Oct 16 13:46:01 2020 +0300
+
+    added loading of static objects from map
+
+[33mcommit 432fa2e693b1610eb3ffa61b9347f8d461b04955[m
+Author: fenryux <fenryux@github.com>
+Date:   Thu Oct 15 17:17:41 2020 +0300
+
+    Moving units to mouse position
+
+[33mcommit b66e741ed13b38d04c2fa40de3ef00e50d4e1587[m
+Author: fenryux <fenryux@github.com>
+Date:   Thu Oct 15 17:17:01 2020 +0300
+
+    Moving units to mouse position (with pathfinding)
+
+[33mcommit 0836b26499baa89478ecde06327d9e6b5de48e52[m
+Merge: 102252d 175a499
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Thu Oct 15 01:09:10 2020 +0300
+
+    merged from object
+
+[33mcommit 102252d9bfa7b8e6b9f2c09a4c2c07184e361929[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Thu Oct 15 01:06:17 2020 +0300
+
+    added placing object
+
+[33mcommit 389426d8253110c6e8ace6fb4a2999c6808c21ca[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Tue Oct 13 01:34:23 2020 +0300
+
+    MapManager:LoadStaticObject
+
+[33mcommit 326d7f4937a02a3e1c9505c86dcd94a1858b0c08[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Tue Oct 13 00:49:02 2020 +0300
+
+    checkout
+
+[33mcommit 175a49965e9e59432d357559ddbb1b9f480e235a[m
+Author: fenryux <fenryux@github.com>
+Date:   Tue Oct 13 00:43:26 2020 +0300
+
+    Raycast added
+
+[33mcommit 411d431f7b7bf7e07f4ea01bcb268a7b736c800c[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Mon Oct 12 14:43:13 2020 +0300
+
+    Minor
+
+[33mcommit 3b0ffcdad362c1c1c3bdb310e174e36065f7a5b6[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Mon Oct 12 01:25:48 2020 +0300
+
+    fixed camera
+
+[33mcommit cd2970a172223b2d874785f7a2b7a0bbd2adfb3d[m
+Merge: cc89b99 c334516
+Author: fenryux <55600745+fenryux@users.noreply.github.com>
+Date:   Mon Oct 12 00:29:31 2020 +0300
+
+    Merge pull request #3 from f33dir/master
+    
+    update
+
+[33mcommit c3345168267807d0f32e3fcaebc60043e02ed6f9[m
+Merge: 333d228 cc89b99
+Author: fenryux <55600745+fenryux@users.noreply.github.com>
+Date:   Mon Oct 12 00:29:09 2020 +0300
+
+    Merge branch 'Object' into master
+
+[33mcommit 333d228c23f3c7e16f67e54857cf8fd3938e427d[m
+Merge: bb1186a 7d08bd0
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Sun Oct 11 23:47:21 2020 +0300
+
+    merged
+
+[33mcommit 7d08bd08476350601da31f2d3edcedf4dbee3936[m[33m ([m[1;32mMap[m[33m)[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Sun Oct 11 23:41:51 2020 +0300
+
+    merging
+
+[33mcommit cc89b993fa4cef0298dcb2101b25edd0d99c44f1[m
+Author: fenryux <fenryux@github.com>
+Date:   Sun Oct 11 22:35:13 2020 +0300
+
+    fix?
+
+[33mcommit fa75d9f631969697c84c7fa55355f4bee3cd715f[m
+Author: fenryux <fenryux@github.com>
+Date:   Sun Oct 11 22:27:51 2020 +0300
+
+    Bolvanki
+
+[33mcommit 2e5439b3467012843a04e05faf4ba5345945fad7[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Sun Oct 11 13:02:11 2020 +0300
+
+    pulls
+
+[33mcommit 04004c0a69f04c4fdffa4308b8b9665d3c463460[m[33m ([m[1;31morigin/Map[m[33m)[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Sun Oct 11 12:41:05 2020 +0300
+
+    camera working with mouse
+
+[33mcommit 90f6b7846f216bed9f7400cada57932aa21b357b[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Sun Oct 11 00:37:46 2020 +0300
+
+    cleaned some cache
+
+[33mcommit aeea1f33ac7f2315c791b174a2dc0efa8b2d33f8[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Sun Oct 11 00:37:04 2020 +0300
+
+    some missings
+
+[33mcommit 8384145bdf50ef4817aebf2fe716f836b54577db[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Sun Oct 11 00:36:46 2020 +0300
+
+    Camera: early stage done
+
+[33mcommit bb1186a9330d19a0a2039994af038e9ceef86b3f[m
+Author: fenryux <fenryux@github.com>
+Date:   Fri Oct 9 14:28:19 2020 +0300
+
+    blob movement fixed(kinda)
+
+[33mcommit bd8f8bcacd8b31648fcf3a0c5321d174beacf2cf[m
+Author: fenryux <fenryux@github.com>
+Date:   Thu Oct 8 21:46:01 2020 +0300
+
+    object
+
+[33mcommit faad1cecb96e1d9bfe48e191d0c91e9460026dc1[m
+Author: fenryux <fenryux@github.com>
+Date:   Wed Oct 7 18:07:14 2020 +0300
+
+    moving blob
+
+[33mcommit 91da22752eb74fe86979e94198b7e24c4e7fe283[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Tue Oct 6 22:05:07 2020 +0300
+
+    map attached to system
+
+[33mcommit 35609818b3ef7146052b7b3db7a68719d90bb110[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Sun Oct 4 20:38:27 2020 +0300
+
+    dealing with map
+
+[33mcommit fde06a8be94a51ba286a031a43cae6c540244443[m
+Author: fenryux <foruseifitneed@yandex.ru>
+Date:   Sun Oct 4 18:07:09 2020 +0300
+
+    object nav setup(kinda)
+
+[33mcommit 697b10e90a5c583b28e1d5e11efc29113a7b28be[m
+Author: fenryux <foruseifitneed@yandex.ru>
+Date:   Sun Oct 4 17:54:14 2020 +0300
+
+    Object setup
+
+[33mcommit 146e3b358a4deabb72b22cd041c6161312a70142[m
+Merge: 808c705 44a044b
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Tue Sep 29 13:18:43 2020 +0300
+
+    Merge pull request #2 from f33dir/Map
+    
+    ignore: added blob
+
+[33mcommit 44a044b62dce1d8cf1cd2f170de9788df7dbdd75[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Tue Sep 29 13:16:56 2020 +0300
+
+    ignore: added blob
+
+[33mcommit 808c7052d5403c735c002b9bc8f4b35d9dcd68b0[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Tue Sep 29 12:47:37 2020 +0300
+
+    edited ignore
+
+[33mcommit a58647029816362e0929ad75f83d19a13c435722[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Tue Sep 29 12:46:56 2020 +0300
+
+    edited .gitignore
+
+[33mcommit 053fffde3e8b9806be739a6fdf26c9da87c6caea[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Tue Sep 29 12:40:15 2020 +0300
+
+    mistake
+
+[33mcommit b8130615884fdbf31e2ab1e4a9363165076f1c4a[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Sep 25 14:08:45 2020 +0300
+
+    ignore
+
+[33mcommit d2401c6cd3cbaf7638ae157c753d109413f960d6[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Sep 25 14:07:24 2020 +0300
+
+    cleaning temp folders
+
+[33mcommit ece6f528294a8db828f98081322785e4b3f4b552[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Tue Sep 22 12:41:52 2020 +0300
+
+    _
+
+[33mcommit 22eb9830f91651b866a67c9a00d7ada61c2c888f[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Tue Sep 22 12:36:55 2020 +0300
+
+    added gitignore
+
+[33mcommit 349850fe5170bcd26bbf9557fe0580b87803edd3[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Tue Sep 22 12:33:29 2020 +0300
+
+    init commit
+
+[33mcommit 66aaf36fcc52dbd32a2165dc2144575178ceca3c[m
+Merge: 4206b03 4156735
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Tue Sep 22 12:22:05 2020 +0300
+
+    reset2
+
+[33mcommit 41567357606fe8d4029308c153c666b5541e3887[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Tue Sep 22 12:19:52 2020 +0300
+
+    reset
+
+[33mcommit d8537273cda561d875934e77c4c6492cb7aa4f18[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Sun Sep 20 00:44:49 2020 +0300
+
+    reload 4 me
+
+[33mcommit 4cf951be429c98d3e288a55117336f84e9cf77a9[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Sun Sep 20 00:43:32 2020 +0300
+
+    fix bites
+
+[33mcommit 4206b038bdd5d92694763d9df1015f69b467efe7[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Sat Sep 19 15:02:10 2020 +0300
+
+    added folders)
+
+[33mcommit 7fd595618cd8f0e6f380576d7c75f1c0ee84825d[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Sep 18 11:54:44 2020 +0300
+
+    should be fine
+
+[33mcommit 12cdc0fe6628c70581f3e44b9434fe0bd09d4321[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Sep 18 11:53:40 2020 +0300
+
+    removed build
+
+[33mcommit 81e74ec3a96adaef555c26ce2d4581a0165801c9[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Sep 18 11:42:56 2020 +0300
+
+    idk but now it seems to work
+
+[33mcommit 7e378f0f0de534b013449d313f965e77d8bf7da3[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Sep 18 10:36:55 2020 +0300
+
+    added ogre
+
+[33mcommit 9fd66da572ecb9e745c8973c59d810528a4ecbde[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Fri Sep 18 09:38:03 2020 +0300
+
+    restart
+
+[33mcommit 59c2454a9eac54a46799de3486902c75887aa547[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Thu Sep 17 15:04:34 2020 +0300
+
+    init commit
+
+[33mcommit 859f4a2d65874ea12e394e00d60a8889d6f6c31b[m
+Author: f33dir <arseniy.tarasov@gmail.com>
+Date:   Thu Sep 17 14:54:53 2020 +0300
+
+    Initial commit
