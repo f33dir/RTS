@@ -5,9 +5,9 @@ namespace Unit
 {
     public class Bullet : RigidBody
     {
-        protected const int SPEED = 5;
-        protected Tower _Parent;
-        protected DynamicUnit _Target;
+        protected const int SPEED = 10;
+        // protected Tower _Parent;
+        // protected DynamicUnit _Target;
         protected CollisionShape _AOEAreaCollision;
         protected DynamicUnit _PrimaryTarget;
         protected int _Damage;
