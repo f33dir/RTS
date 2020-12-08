@@ -14,6 +14,7 @@ namespace Unit
         protected HealthBar _HPBar;
         protected Player.Player _Player;
         protected Team _Team;
+        protected Position3D _Position;
         //Pathfinding
         protected Vector3[] _PathTo;
         protected uint _PathIndex;
@@ -30,9 +31,14 @@ namespace Unit
             _Target = GetParent().GetNode<KinematicBody>("DefenseLocation");
             _HPBar = GetNode<HealthBar>("HPBar");
             _Player = GetParent().GetParent().GetNode<Player.Player>("Player");
+            _Position = GetNode<Position3D>("Position3D");
             _PathIndex = 0;
             StatSetup();
         }
+        // public Vector3 Position
+        // {
+        //     get { return _Position.GlobalTransform.origin;}
+        // }
         public int HP
         {
             get { return _HP; }

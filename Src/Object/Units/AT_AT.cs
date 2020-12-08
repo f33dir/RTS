@@ -9,7 +9,7 @@ namespace Unit
         {
             HP = 1000;
             _Team = Team.Enemy;
-            _MoveSpeed = 5;
+            _MoveSpeed = 1.5f;
         }
     }
 }
