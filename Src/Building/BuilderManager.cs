@@ -6,11 +6,15 @@ namespace BuildingManager
     public class BuilderManager : Spatial
     {
         private Map.MapManager _mapmanager;
+        private Spatial Arrow;
         private Map.Map _map;
         private Map.Map _otherworldmap;
         private Dictionary<Player.Player, PlayerBuildingManager> _playerBuilders;  
         public override void _Ready()
         {
+            var arrowscene = ResourceLoader.Load<PackedScene>("res://Scenes/Units/arrow.tscn");
+            Arrow = (Spatial)arrowscene.Instance();
+            AddChild(Arrow);
             _playerBuilders = new Dictionary<Player.Player, PlayerBuildingManager>();
             _mapmanager = GetParent().GetNode<Map.MapManager>("MapManager");
             _map = _mapmanager.GetMap();
@@ -28,10 +32,11 @@ namespace BuildingManager
             foreach(var a in _playerBuilders.Values)
             {
                 var dic =  a.player.GetCamera().RaycastFromMousePosition(a.player.GetViewport().GetMousePosition(),1);
-                if(dic.Contains("Collider"))
+                if(dic.Contains("collider"))
                 {
-                    var col = dic["Collider"] as StaticBody;
+                    var col = dic["collider"] as StaticBody;
                     a._cursorPos = PointToGrid(a.player,col.GlobalTransform.origin);
+                    Arrow.Translation = getRealPosition(a._cursorPos);
                 }
             }
         }
@@ -39,13 +44,15 @@ namespace BuildingManager
         {
             _playerBuilders[player]._currentBuilding = building;
         }
-        public void ShowSilhouette(ref Player.Player player)
+        public void ShowArrow(ref Player.Player player)
         {
-            _playerBuilders[player]._showSilhouette = true;
+            // _playerBuilders[player]._showSilhouette = true;
+            Arrow.Visible = true;
         }
-        public void HideSilhouette(ref Player.Player player)
+        public void HideArrow(ref Player.Player player)
         {   
-            _playerBuilders[player]._showSilhouette = false;
+            // _playerBuilders[player]._showSilhouette = false;
+            Arrow.Visible = false;
         }
         public void build(Player.Player player)
         {

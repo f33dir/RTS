@@ -16,6 +16,8 @@ namespace Map{
 
     public class Map 
     {
+        public Vector2 BasePos;
+        public Vector2 StartPos;
         private String _mapName;
         public int _sizeX;
         public int _sizeY;
