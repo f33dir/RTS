@@ -28,13 +28,15 @@
     <Compile Include="Src\Map\Map.cs" />
     <Compile Include="Src\Map\ColliderBuilder.cs" />
     <Compile Include="Src\Object\Bullet.cs" />
+    <Compile Include="Src\Object\GenericTower.cs" />
     <Compile Include="Src\Object\HealthBar.cs" />
     <Compile Include="Src\Object\HealthBar2D.cs" />
     <Compile Include="Src\Object\Tower.cs" />
     <Compile Include="Src\Object\Units\AT_AT.cs" />
-    <Compile Include="Src\Object\Units\Bruhmmy.cs" />
+    <Compile Include="Src\Object\Units\Body.cs" />
+    <!-- <Compile Include="Src\Object\Units\Bruhmmy.cs" /> -->
     <!-- <Compile Include="Src\Object\Units\Tank.cs" /> -->
-    <Compile Include="Src\Object\Units\testUnit.cs" />
+    <!-- <Compile Include="Src\Object\Units\testUnit.cs" /> -->
     <Compile Include="Src\Object\Units\Unit.cs" />
     <Compile Include="Src\Object\Units\BuilderUnit.cs" />
     <Compile Include="Src\Object\Buildings\BuildingUnit.cs" />

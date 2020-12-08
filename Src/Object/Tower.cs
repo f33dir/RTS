@@ -3,7 +3,7 @@ using System;
 
 namespace Unit
 {
-    public class Tower : KinematicBody
+    public class Tower : BuildingUnit
     {
         //Parameters
         protected int _Cost;
@@ -34,8 +34,6 @@ namespace Unit
             _Muzzle = GetNode<Spatial>("Body/Gun/Muzzle");
             _Bullet = GD.Load<PackedScene>("res://Scenes/Units/Bullet.tscn");
             StatSetup();
-            _Timer.OneShot = false;
-            _Timer.WaitTime = _AttackSpeed/10;
         }
         public float AttackRange
         {
@@ -82,6 +80,8 @@ namespace Unit
             AreaScaleVector *= _AttackRange/10;
             AreaScaleVector.y = 1f;
             _Area.Scale = AreaScaleVector;
+            _Timer.OneShot = false;
+            _Timer.WaitTime = _AttackSpeed/10;
         }
         public override void _Process(float delta)
         {
@@ -97,9 +97,7 @@ namespace Unit
                     break;
                 case State.AttackOnSight:
                     if(_Target != null)
-                    {
                         Attack();
-                    }
                     break;
                 default:
                     break;
@@ -164,9 +162,8 @@ namespace Unit
                 var bullet = bullet_scene as Bullet;
                 _Muzzle.AddChild(bullet_scene);
                 Vector3 TargetPosition = _Target.GlobalTransform.origin;
-                TargetPosition.y += 1;
+                TargetPosition.y += 2f;
                 bullet.LookAt(TargetPosition,Vector3.Up);
-                // bullet.Target = _Target;
                 bullet.Damage = _AttackPower;
                 _Timer.Start();
             }

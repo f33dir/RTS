@@ -35,8 +35,11 @@ namespace Player
         {
             if(Input.IsActionJustPressed("action_command"))
             {
-                _Start = true;
-                GetTree().CallGroup("Units", "MoveTo");
+                if(!_Start)
+                {
+                    _Start = true;
+                    GetTree().CallGroup("Units", "MoveTo");
+                }
             }
             if(_Lives <= 0) 
                 GetTree().Quit(); // грубо, но для теста сойдет
