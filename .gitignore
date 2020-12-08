@@ -12,3 +12,5 @@ data_*/
 /.idea
 *.mlpd
 *.blob
+*.import
+*.material
