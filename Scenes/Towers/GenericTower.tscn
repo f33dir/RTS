@@ -29,7 +29,9 @@ albedo_color = Color( 0.435294, 0.611765, 0.803922, 1 )
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 1, 2.1133, 1 )
 
-[node name="GenericTower" type="KinematicBody"]
+[node name="GenericTower" type="KinematicBody" groups=[
+"Towers",
+]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 script = ExtResource( 3 )
 
@@ -43,9 +45,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.01149, 0 )
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
 
-[node name="Muzzle" type="Spatial" parent="Body/Gun" groups=[
-"Units",
-]]
+[node name="Muzzle" type="Spatial" parent="Body/Gun"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.053258, 0, -1.42229 )
 
 [node name="AttackTimer" type="Timer" parent="."]

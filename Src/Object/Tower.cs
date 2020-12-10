@@ -19,6 +19,8 @@ namespace Unit
         protected bool _CanAttackNow;
         protected bool _IsEnemyInRange;
         protected bool _IsTargetInRange;
+        protected bool _IsAOE;
+        protected bool _IsFreezing;
         //Godot nodes
         //protected HealthBar _HPBar; 
         protected Godot.Timer _Timer;
@@ -165,6 +167,8 @@ namespace Unit
                 TargetPosition.y += 2f;
                 bullet.LookAt(TargetPosition,Vector3.Up);
                 bullet.Damage = _AttackPower;
+                bullet.IsAOE = _IsAOE;
+                bullet.IsFreezing = _IsFreezing;
                 _Timer.Start();
             }
         }
