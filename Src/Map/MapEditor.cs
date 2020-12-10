@@ -7,6 +7,7 @@ namespace Map
         private CameraBase.CameraBase _editorCam;
         private MapManager _mapManager;
         private MapTile _selectedMapTile;
+        
         public override void _Ready()
         {
             
@@ -74,6 +75,14 @@ namespace Map
         {
             _mapManager.NewEmptyMap(40,40);
         }
+        public void SetPortal(){
+            var pos3d = PointToGrid();
+            _mapManager.SetPortal(new Vector2(pos3d.x,pos3d.z));
+        }
+        public void SetBase(){
+            var pos3d = PointToGrid();
+            _mapManager.SetBase(new Vector2(pos3d.x,pos3d.z));
+        }
         public override void _Process(float delta)
         {
             if(Input.IsActionJustPressed("editor_placetile"))
@@ -99,6 +108,12 @@ namespace Map
             if(Input.IsActionJustPressed("editor_changetile"))
             {
                 ChangeTile();
+            }
+            if(Input.IsActionJustPressed("editor_placeportal")){
+                SetPortal();
+            }
+            if(Input.IsActionJustPressed("editor_placebase")){
+                SetBase();
             }
         }
     }

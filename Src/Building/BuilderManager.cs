@@ -18,14 +18,20 @@ namespace BuildingManager
             _playerBuilders = new Dictionary<Player.Player, PlayerBuildingManager>();
             _mapmanager = GetParent().GetNode<Map.MapManager>("MapManager");
             _map = _mapmanager.GetMap();
-            //debug
             var testplayer =  GetTree().CurrentScene.GetNode<Player.Player>("Player");
             AddPlayerBuildingManager(testplayer);
-            var res  = ResourceLoader.Load<PackedScene>("res://Scenes/Units/BuildingUnit.tscn");
-            Unit.BuildingUnit k = (Unit.BuildingUnit)res.Instance();
-            SetBuilding(ref testplayer, ref k);
-            if(IsBuildable(testplayer))
-                build(testplayer);
+            var res  = ResourceLoader.Load<PackedScene>("res://Scenes/Units/Portal.tscn");
+            Unit.BuildingUnit portal = (Unit.BuildingUnit)res.Instance();
+            SetBuilding(ref testplayer, ref portal);
+            _playerBuilders[testplayer]._cursorPos = _map.PortalPos;
+            build(testplayer);
+            res  = ResourceLoader.Load<PackedScene>("res://Scenes/Units/Base.tscn");
+            Unit.BuildingUnit BaseBuilding; 
+            BaseBuilding = (Unit.BuildingUnit)res.Instance();
+            SetBuilding(ref testplayer, ref BaseBuilding);
+            _playerBuilders[testplayer]._cursorPos = _map.BasePos;
+            build(testplayer);
+            HideArrow();
         }
         public override void _PhysicsProcess(float delta)
         {
@@ -44,12 +50,12 @@ namespace BuildingManager
         {
             _playerBuilders[player]._currentBuilding = building;
         }
-        public void ShowArrow(ref Player.Player player)
+        public void ShowArrow()
         {
             // _playerBuilders[player]._showSilhouette = true;
             Arrow.Visible = true;
         }
-        public void HideArrow(ref Player.Player player)
+        public void HideArrow()
         {   
             // _playerBuilders[player]._showSilhouette = false;
             Arrow.Visible = false;

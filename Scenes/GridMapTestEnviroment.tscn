@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Camera/CameraBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/godot-navigation-lite/bin/navigation.gdnlib" type="GDNativeLibrary" id=2]
@@ -7,8 +7,6 @@
 [ext_resource path="res://addons/godot-navigation-lite/bin/navmesh_parameters.gdns" type="Script" id=5]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Src/Building/BuilderManager.cs" type="Script" id=7]
-[ext_resource path="res://Scenes/Units/AT-AT.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Units/Worker.tscn" type="PackedScene" id=9]
 
 [sub_resource type="NativeScript" id=1]
 class_name = "DetourNavigationMesh"
@@ -39,9 +37,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.78927, 9.60557 )
 [node name="DetourNavigation" type="Spatial" parent="."]
 script = ExtResource( 3 )
 
-[node name="Worker" parent="DetourNavigation" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2728, 3.27996, 6.64936 )
-
 [node name="DetourNavigationMesh" type="Spatial" parent="DetourNavigation"]
 script = SubResource( 1 )
 parameters = SubResource( 2 )
@@ -50,8 +45,5 @@ parameters = SubResource( 2 )
 
 [node name="BuilderManager" type="Spatial" parent="DetourNavigation/DetourNavigationMesh"]
 script = ExtResource( 7 )
-
-[node name="AT_AT" parent="DetourNavigation" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5311, 1.8603, 4.28678 )
 
 [node name="Player" parent="." instance=ExtResource( 6 )]

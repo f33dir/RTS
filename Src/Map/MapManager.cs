@@ -15,6 +15,14 @@ namespace Map{
         public Map GetLoadedMap(){
             return _loadedMap;
         }
+        public void SetPortal(Vector2 pos)
+        {
+            _loadedMap.PortalPos = pos;
+        }
+        public void SetBase(Vector2 pos)
+        {
+            _loadedMap.BasePos = pos;
+        }
         public override void _Process(float delta)
         {
             if(Input.IsActionJustPressed("debug")){

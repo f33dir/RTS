@@ -1,11 +1,10 @@
 using Godot;
 using System;
 
-public class Portal : KinematicBody
+public class Base : Unit.BuildingUnit
 {
     public override void _Ready()
     {
         
     }
-
 }

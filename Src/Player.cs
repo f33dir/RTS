@@ -28,7 +28,7 @@ namespace Player
         {
             _Camera = GetParent().GetNode<CameraBase.CameraBase>("CameraBase");
             _Resource = 100;
-            _Lives = 5;
+            _Lives = 50;
         }
         //Player interactions
         public override void _Process(float delta)

@@ -22,6 +22,7 @@ namespace Unit
         protected int _HP;
         protected int _Protection;
         protected float _MoveSpeed;
+        protected int _Damage;
         
         public override void _Ready()
         {
@@ -106,7 +107,7 @@ namespace Unit
             KinematicBody Target = body as KinematicBody;
             if(Target == _Target)
             {
-                _Player.Lives -= 1;
+                _Player.Lives -= _Damage;
                 QueueFree();
             }
         }
