@@ -73,7 +73,7 @@ namespace Map
         }
         public void NewMap()
         {
-            _mapManager.NewEmptyMap(40,40);
+            _mapManager.NewEmptyMap(25,25);
         }
         public void SetPortal(){
             var pos3d = PointToGrid();

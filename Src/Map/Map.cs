@@ -66,7 +66,7 @@ namespace Map{
         {
             _sizeX = sizex;
             _sizeY = sizey;
-            MapTile tile = new MapTile(TileType.Plain);
+            MapTile tile = new MapTile(tileType);
             Matrix = new MapTile[_sizeX,_sizeY];
             for(int i = 0;i<_sizeX;i++)
             {

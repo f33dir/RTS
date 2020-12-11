@@ -41,7 +41,7 @@ namespace Player
                     GetTree().CallGroup("Units", "MoveTo");
                 }
             }
-            if(_Lives <= 0) 
+            if(_Lives <= 0)
                 GetTree().Quit(); // грубо, но для теста сойдет
         }
         public int Lives

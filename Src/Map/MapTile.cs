@@ -34,7 +34,7 @@ namespace Map{
         }
         public MapTile()
         {
-            Type = TileType.Plain;
+            Type = TileType.Basement;
         }
         public MapTile(TileType type)
         {
