@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://TempRes/Material_001.material" type="Material" id=1]
 [ext_resource path="res://Scenes/Units/HPBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Units/InteractionArea.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Src/Object/Units/Bug.cs" type="Script" id=4]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Cube"
@@ -40,10 +41,15 @@ tracks/0/keys = PoolRealArray( 0, 1, 0, 0, 0, 2.66454e-15, -7.10543e-15, 4.6566e
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 2.60516, 0.908097, 1.26159 )
 
-[node name="Bug" type="KinematicBody"]
+[node name="Bug" type="KinematicBody" groups=[
+"Units",
+]]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource( 4 )
 
 [node name="Body" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.67237, -0.0549587, 0.372964 )
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0.291981, 0, 2.70365 )
 
 [node name="Skeleton" type="Skeleton" parent="Body"]
 bones/0/name = "bone"
@@ -61,9 +67,14 @@ material/0 = null
 anims/Walk = SubResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.927516, 0 )
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 0.927516, 0 )
 shape = SubResource( 4 )
 
 [node name="HPBar" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.87687, 0 )
 
 [node name="InteractionArea" parent="." instance=ExtResource( 3 )]
+
+[node name="Timer" type="Timer" parent="."]
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_InteractionArea_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="OnTimeoutComplete"]
