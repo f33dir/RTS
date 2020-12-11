@@ -22,6 +22,8 @@ namespace Unit
             AreaScaleVector *= _AttackRange/10;
             // AreaScaleVector.y = 1f;
             _Area.Scale = AreaScaleVector;
+            // _IsAOE = true;
+            // _IsFreezing = true;
         }
     }
 }

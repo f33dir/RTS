@@ -18,6 +18,7 @@ radius = 0.15
 height = 0.2
 
 [sub_resource type="SphereShape" id=5]
+radius = 6.0
 
 [node name="Bullet" type="RigidBody"]
 input_ray_pickable = false
@@ -47,3 +48,4 @@ collision_mask = 2
 shape = SubResource( 5 )
 disabled = true
 [connection signal="body_entered" from="Area" to="." method="_on_Bullet_body_entered"]
+[connection signal="body_entered" from="AOEArea" to="." method="_on_Bullet_AOE_body_entered"]

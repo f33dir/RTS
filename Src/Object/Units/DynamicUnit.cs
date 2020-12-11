@@ -15,6 +15,7 @@ namespace Unit
         protected Player.Player _Player;
         protected Team _Team;
         protected Position3D _Position;
+        protected Timer _SlowDebuffTimer;
         //Pathfinding
         protected Vector3[] _PathTo;
         protected uint _PathIndex;
@@ -29,6 +30,9 @@ namespace Unit
             _Navigation = GetParent().GetNode<Spatial>("DetourNavigationMesh");
             _Animation = GetNode<AnimationPlayer>("AnimationPlayer");
             _Area = GetNode<Area>("InteractionArea");
+            _SlowDebuffTimer = GetNode<Timer>("Timer");
+            _SlowDebuffTimer.OneShot = true;
+            _SlowDebuffTimer.WaitTime = 3;
             _Target = GetParent().GetNode<KinematicBody>("DefenseLocation");
             _HPBar = GetNode<HealthBar>("HPBar");
             _Player = GetParent().GetParent().GetNode<Player.Player>("Player");
@@ -117,5 +121,13 @@ namespace Unit
             _Protection = 1;
             _MoveSpeed = 5f;
         }    
+        public void OnTimeoutComplete()
+        {
+            _MoveSpeed /= 0.75f;
+        }
+        public Timer SlowDebuffTimer
+        {
+            get{ return _SlowDebuffTimer;}
+        }
     }
 }
