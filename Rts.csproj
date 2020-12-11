@@ -37,7 +37,7 @@
     <Compile Include="Src\Object\Units\AT_AT.cs" />
     <Compile Include="Src\Object\Units\Body.cs" />
     <!-- <Compile Include="Src\Object\Units\Bruhmmy.cs" /> -->
-    <!-- <Compile Include="Src\Object\Units\Tank.cs" /> -->
+    <Compile Include="Src\Object\Units\Tank.cs" />
     <!-- <Compile Include="Src\Object\Units\testUnit.cs" /> -->
     <Compile Include="Src\Object\Units\Unit.cs" />
     <Compile Include="Src\Object\Units\BuilderUnit.cs" />
