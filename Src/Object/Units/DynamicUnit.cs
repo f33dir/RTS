@@ -33,7 +33,7 @@ namespace Unit
             _SlowDebuffTimer = GetNode<Timer>("Timer");
             _SlowDebuffTimer.OneShot = true;
             _SlowDebuffTimer.WaitTime = 3;
-            _Target = GetParent().GetNode<KinematicBody>("DefenseLocation");
+            _Target = GetParent().GetNode("DetourNavigationMesh").GetNode("BuilderManager").GetNode<KinematicBody>("Base");
             _HPBar = GetNode<HealthBar>("HPBar");
             _Player = GetParent().GetParent().GetNode<Player.Player>("Player");
             _Position = GetNode<Position3D>("Position3D");
@@ -75,7 +75,7 @@ namespace Unit
                 this.Hide();
                 QueueFree();
             }
-            if(_Player.Start)
+            // if(_Player.Start)
                 if(_Animation != null)
                 {
                     _Animation.Play("Walk");
@@ -84,7 +84,11 @@ namespace Unit
                         {
                             Vector3 MoveVec = (_PathTo[_PathIndex] - GlobalTransform.origin);
                             if(MoveVec.Length() < 0.1)
+                            {
                                 _PathIndex += 1;
+                                if(_PathIndex < _PathTo.Length)
+                                    LookAt(_PathTo[_PathIndex],Vector3.Up);
+                            }
                             else
                             {
                                 MoveAndSlideWithSnap(MoveVec.Normalized()*_MoveSpeed,Vector3.Zero,Vector3.Up);
@@ -111,7 +115,7 @@ namespace Unit
             KinematicBody Target = body as KinematicBody;
             if(Target == _Target)
             {
-                // _Player.Lives -= Damage;
+                _Player.Lives -= Damage;
                 QueueFree();
             }
         }

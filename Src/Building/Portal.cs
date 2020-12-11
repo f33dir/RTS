@@ -20,7 +20,7 @@ public class Portal : Unit.BuildingUnit
         _Tank = ResourceLoader.Load<PackedScene>("res://Scenes/Units/Tank.tscn");
         _LocalTree = GetParent().GetParent().GetParent();
         _spawntimer = GetNode<Timer>("SpawnTimer");
-        _spawntimer.WaitTime = 0.5f;
+        _spawntimer.WaitTime = 0.8f;
         SpawnWave();
     }
     public void SpawnWave()
@@ -75,8 +75,11 @@ public class Portal : Unit.BuildingUnit
         {
             var enemy = _SpawnQueue.Dequeue();
             _LocalTree.AddChild(enemy);
+            enemy.Transform = this.Transform;
             SetupEnemy(wave,enemy);
             _spawntimer.Start();
+            enemy.MoveTo();
+
         }
     }
 }
