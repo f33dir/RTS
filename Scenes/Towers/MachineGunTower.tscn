@@ -63,7 +63,7 @@ mesh = SubResource( 1 )
 material/0 = null
 
 [node name="Gun" type="MeshInstance" parent="Body"]
-transform = Transform( 0.467585, 0, 0, 0, 0.467585, 0, 0, 0, 0.467585, 0, 3.24594, 0 )
+transform = Transform( -7.61793e-08, 0, -0.467585, 0, 0.467585, 0, 0.467585, 0, -7.61793e-08, 0, 3.24594, 0 )
 mesh = SubResource( 2 )
 material/0 = null
 

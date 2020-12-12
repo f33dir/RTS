@@ -41,6 +41,10 @@ namespace Player
                     GetTree().CallGroup("Units", "MoveTo");
                 }
             }
+            if(Input.IsActionJustPressed("alt_command"))
+            {
+                GetTree().CallGroup("Towers", "Upgrade");
+            }
             if(_Lives <= 0) 
                 GetTree().Quit(); // грубо, но для теста сойдет
         }

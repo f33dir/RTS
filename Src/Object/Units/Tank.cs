@@ -14,7 +14,7 @@ namespace Unit
             _HP = 500;
             _Protection = 50;
             _MainResource = 5;
-            _Team = Team.Player;
+            _Team = Team.Enemy;
         }
     }
 }
