@@ -25,6 +25,8 @@ namespace Player
         private int _Lives;
         private bool _Start = false;
         private CameraBase.CameraBase _Camera;
+        [Signal]
+        public delegate void WaveStart();
         //Setup
         public override void _Ready()
         {
@@ -35,6 +37,10 @@ namespace Player
         //Player interactions
         public override void _Process(float delta)
         {
+            if(Input.IsActionJustPressed("StartWave"))
+            {
+                EmitSignal(nameof(WaveStart));
+            }
             int selector = -1;
             if(Input.IsActionJustPressed("build_tower1"))
             {

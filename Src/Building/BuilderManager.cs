@@ -70,11 +70,14 @@ namespace BuildingManager
         }
         public void build(ref Player.Player player)
         {
+
             var building = _playerBuilders[player]._currentBuilding;
+            var cursorpos = _playerBuilders[player]._cursorPos;
             var pos = getRealPosition(_playerBuilders[player]._cursorPos);
             AddChild(_playerBuilders[player]._currentBuilding);
             building.Translate(pos);
             HideArrow();
+            _map.Matrix[(int)cursorpos.x,(int)cursorpos.y].Type = Map.TileType.Basement;
         }
         private Vector2 PointToGrid(Player.Player player,Vector3 position)
         {

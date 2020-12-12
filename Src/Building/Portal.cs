@@ -23,6 +23,7 @@ public class Portal : Unit.BuildingUnit
         _spawntimer = GetNode<Timer>("SpawnTimer");
         _spawntimer.WaitTime = 0.8f;
         SpawnWave();
+        GetNode("/root/Environment/Player").Connect("WaveStart",this,"HandleStartSignal");
     }
     public void SpawnWave()
     {
@@ -86,7 +87,12 @@ public class Portal : Unit.BuildingUnit
         }
         else
         {
-            AbleToSpawn = true;
+             AbleToSpawn = true;
         }
+    }
+    public void HandleStartSignal()
+    {
+        GD.Print("gotcha");
+        SpawnWave();
     }
 }
