@@ -75,12 +75,16 @@ namespace Map
         {
             _mapManager.NewEmptyMap(25,25);
         }
-        public void SetPortal(){
-            var pos3d = PointToGrid();
+        public void SetPortal2(Vector3 pos3d){
+            // var pos3d = PointToGrid();
+            _mapManager.SetPortal2(new Vector2(pos3d.x,pos3d.z));
+        }
+        public void SetPortal(Vector3 pos3d){
+            // var pos3d = PointToGrid();
             _mapManager.SetPortal(new Vector2(pos3d.x,pos3d.z));
         }
-        public void SetBase(){
-            var pos3d = PointToGrid();
+        public void SetBase(Vector3 pos3d){
+            // var pos3d = PointToGrid();
             _mapManager.SetBase(new Vector2(pos3d.x,pos3d.z));
         }
         public override void _Process(float delta)
@@ -109,11 +113,22 @@ namespace Map
             {
                 ChangeTile();
             }
-            if(Input.IsActionJustPressed("editor_placeportal")){
-                SetPortal();
+            if(Input.IsActionJustPressed("editor_placeportal"))
+            {
+                SetPortal(PointToGrid());
             }
-            if(Input.IsActionJustPressed("editor_placebase")){
-                SetBase();
+            if(Input.IsActionJustPressed("editor_placebase"))
+            {
+                SetBase(PointToGrid());
+            }
+            if(Input.IsActionJustPressed("editor_placeportal2")){
+                SetPortal2(PointToGrid());
+            }
+            if(Input.IsActionJustPressed("editor_resetbuildings"))
+            {
+                SetBase(new Vector3(0,0,0));
+                SetPortal(new Vector3(0,0,0));
+                SetPortal2(new Vector3(0,0,0));
             }
         }
     }

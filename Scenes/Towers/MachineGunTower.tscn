@@ -55,6 +55,8 @@ extents = Vector3( 1.42127, 2.34761, 1 )
 [node name="MachineGunTower" type="KinematicBody" groups=[
 "Towers",
 ]]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource( 3 )
 
 [node name="Body" type="MeshInstance" parent="."]

@@ -24,14 +24,22 @@ namespace BuildingManager
             Unit.BuildingUnit portal = (Unit.BuildingUnit)res.Instance();
             SetBuilding(ref testplayer, ref portal);
             _playerBuilders[testplayer]._cursorPos = _map.PortalPos;
-            build(testplayer);
+            build(ref testplayer);
+            if(_map.Portal2Pos!=new Vector2(0,0))
+            {
+                Unit.BuildingUnit portal2 = (Unit.BuildingUnit)res.Instance();
+                SetBuilding(ref testplayer, ref portal2);
+                _playerBuilders[testplayer]._cursorPos = _map.Portal2Pos;
+                build(ref testplayer);
+            }
             res  = ResourceLoader.Load<PackedScene>("res://Scenes/Units/Base.tscn");
             Unit.BuildingUnit BaseBuilding; 
             BaseBuilding = (Unit.BuildingUnit)res.Instance();
             SetBuilding(ref testplayer, ref BaseBuilding);
             _playerBuilders[testplayer]._cursorPos = _map.BasePos;
-            build(testplayer);
+            build(ref testplayer);
             HideArrow();
+            testplayer.BuilderManager = this;
         }
         public override void _PhysicsProcess(float delta)
         {
@@ -60,12 +68,13 @@ namespace BuildingManager
             // _playerBuilders[player]._showSilhouette = false;
             Arrow.Visible = false;
         }
-        public void build(Player.Player player)
+        public void build(ref Player.Player player)
         {
             var building = _playerBuilders[player]._currentBuilding;
             var pos = getRealPosition(_playerBuilders[player]._cursorPos);
             AddChild(_playerBuilders[player]._currentBuilding);
             building.Translate(pos);
+            HideArrow();
         }
         private Vector2 PointToGrid(Player.Player player,Vector3 position)
         {
@@ -90,7 +99,7 @@ namespace BuildingManager
             Vector3 position = new Vector3(GridPosition.x*2+1f,height+1,GridPosition.y*2+1f);
             return position;
         }
-        public bool IsBuildable(Player.Player player)
+        public bool IsBuildable(ref Player.Player player)
         {
             bool Possible = true;
             var building = _playerBuilders[player]._currentBuilding;
@@ -100,8 +109,8 @@ namespace BuildingManager
             {
                 for(int j = 0;j<building._GridSizeY;j++)
                 {
-                    if((_map.Matrix[(int)pointer.x+i,(int)pointer.x+j].Height != cursortile.Height)
-                    ||(_map.Matrix[(int)pointer.x+i,(int)pointer.x+j].Type != Map.TileType.Plain))
+                    if((_map.Matrix[(int)pointer.x+i,(int)pointer.y+j].Height != cursortile.Height)
+                    ||(_map.Matrix[(int)pointer.x+i,(int)pointer.y+j].Type != Map.TileType.Plain))
                     {
                         Possible = false;
                     };

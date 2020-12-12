@@ -16,6 +16,5 @@ namespace BuildingManager
             _cursorPos = new Vector2(3,4);
             _showSilhouette = false;
         }
-        
     }
 }

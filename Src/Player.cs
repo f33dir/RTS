@@ -19,6 +19,8 @@ namespace Player
     }
     public class Player : Spatial
     {
+        public BuildingManager.BuilderManager BuilderManager;
+        private bool cmnd = false;
         private int _Resource;
         private int _Lives;
         private bool _Start = false;
@@ -33,16 +35,57 @@ namespace Player
         //Player interactions
         public override void _Process(float delta)
         {
-            if(Input.IsActionJustPressed("action_command"))
+            int selector = -1;
+            if(Input.IsActionJustPressed("build_tower1"))
             {
-                if(!_Start)
-                {
-                    _Start = true;
-                    GetTree().CallGroup("Units", "MoveTo");
-                }
+                selector = 0;
             }
+            if(Input.IsActionJustPressed("build_tower2"))
+            {
+                selector = 1;
+            }
+            if(Input.IsActionJustPressed("build_tower3"))
+            {
+                selector = 2;
+            }
+            if(selector!= -1)
+                StartBuild(selector);
+            var p = this;
+            if(Input.IsActionJustPressed("action_command")&&(cmnd))
+                if(BuilderManager.IsBuildable(ref p))
+                {
+                    BuilderManager.build(ref p);
+                    cmnd = false;
+                }
             if(_Lives <= 0)
                 GetTree().Quit(); // грубо, но для теста сойдет
+        }
+        //gameplay functions
+        private void StartBuild(int selector)
+        {
+            PackedScene a=ResourceLoader.Load<PackedScene>("res://Scenes/Towers/GenericTower.tscn");
+            switch(selector)
+            {
+                case 0:
+                    a =ResourceLoader.Load<PackedScene>("res://Scenes/Towers/GenericTower.tscn");
+                    cmnd = true;
+                    break;
+                case 1:
+                    a =ResourceLoader.Load<PackedScene>("res://Scenes/Towers/FreezingTower.tscn");
+                    cmnd = true;
+                    break;
+                case 2:
+                    cmnd =true;
+                    a =ResourceLoader.Load<PackedScene>("res://Scenes/Towers/MachineGunTower.tscn");
+                    break;
+            }
+            if(selector!=-1)
+            {
+                BuilderManager.ShowArrow();
+            }
+            var b = a.Instance() as Unit.BuildingUnit;
+            var p = this;
+            BuilderManager.SetBuilding(ref p,ref b);
         }
         public int Lives
         {

@@ -15,6 +15,10 @@ namespace Map{
         public Map GetLoadedMap(){
             return _loadedMap;
         }
+        public void SetPortal2(Vector2 pos)
+        {
+            _loadedMap.Portal2Pos = pos;
+        }
         public void SetPortal(Vector2 pos)
         {
             _loadedMap.PortalPos = pos;

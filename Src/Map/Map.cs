@@ -18,6 +18,7 @@ namespace Map{
     {
         public Vector2 BasePos = new Vector2(0,0);
         public Vector2 PortalPos = new Vector2(0,0);
+        public Vector2 Portal2Pos = new Vector2(0,0);
         private String _mapName;
         public int _sizeX;
         public int _sizeY;

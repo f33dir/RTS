@@ -12,6 +12,7 @@ public class Portal : Unit.BuildingUnit
     private int _wave = 0;
     private int _enemycount = 5;
     private Timer _spawntimer;
+    public bool AbleToSpawn =true; 
     private int wave = 3;
     public override void _Ready()
     {
@@ -25,33 +26,36 @@ public class Portal : Unit.BuildingUnit
     }
     public void SpawnWave()
     {
-        ++wave;
-        
-        var det = wave % 3;
-        switch(det)
+        if(AbleToSpawn)
         {
-            case 0:
+            ++wave;    
+            var det = wave % 3;
+            switch(det)
+            {
+                case 0:
+                    for(int i = 0;i<_enemycount;i++)
+                    {
+                        _SpawnQueue.Enqueue(MakeEnemy(_Tank));
+                    }
+                    _spawntimer.Start();
+                    break;
+                case 1:
+                    for(int i = 0;i<_enemycount;i++)
+                    {
+                        _SpawnQueue.Enqueue(MakeEnemy(_ATAT));
+                    }
+                    _spawntimer.Start();
+                    break;
+                case 2:
                 for(int i = 0;i<_enemycount;i++)
-                {
-                    _SpawnQueue.Enqueue(MakeEnemy(_Tank));
-                }
-                _spawntimer.Start();
-                break;
-            case 1:
-                for(int i = 0;i<_enemycount;i++)
-                {
-                    _SpawnQueue.Enqueue(MakeEnemy(_ATAT));
-                }
-                _spawntimer.Start();
-                break;
-            case 2:
-            for(int i = 0;i<_enemycount;i++)
-                {
-                    _SpawnQueue.Enqueue(MakeEnemy(_Bug));
-                }
-                _spawntimer.Start();
-                _enemycount++;
-                break;
+                    {
+                        _SpawnQueue.Enqueue(MakeEnemy(_Bug));
+                    }
+                    _spawntimer.Start();
+                    _enemycount++;
+                    break;
+            }
+            AbleToSpawn = false;
         }
     }
     private Unit.DynamicUnit MakeEnemy(PackedScene unitScene)
@@ -79,7 +83,10 @@ public class Portal : Unit.BuildingUnit
             SetupEnemy(wave,enemy);
             _spawntimer.Start();
             enemy.MoveTo();
-
+        }
+        else
+        {
+            AbleToSpawn = true;
         }
     }
 }
