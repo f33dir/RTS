@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://addons/godot-navigation-lite/bin/navigation.gdnlib" type="GDNativeLibrary" id=1]
 [ext_resource path="res://Scenes/Camera/CameraBase.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://addons/godot-navigation-lite/bin/navmesh_parameters.gdns" type="Script" id=5]
 [ext_resource path="res://Scenes/Towers/MachineGunTower.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Units/Bug.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Interface.tscn" type="PackedScene" id=8]
 
 [sub_resource type="NativeScript" id=1]
 class_name = "DetourNavigationMesh"
@@ -193,3 +194,5 @@ transform = Transform( -0.999454, 0, -0.0330333, 0, 1, 0, 0.0330333, 0, -0.99945
 
 [node name="MachineGunTower" parent="DetourNavigation" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.53772, 8.65508 )
+
+[node name="Interface" parent="." instance=ExtResource( 8 )]
