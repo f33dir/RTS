@@ -33,6 +33,7 @@ namespace Unit
         public override void _Ready()
         {
             // _HPBar = GetNode<HealthBar>("HPBar");
+            _Player = GetParent().GetParent().GetNode<Player.Player>("Player");
             _Timer = GetNode<Timer>("AttackTimer");
             _Area = GetNode<Area>("InteractionArea");
             _Muzzle = GetNode<Spatial>("Body/Gun/Muzzle");
@@ -189,21 +190,25 @@ namespace Unit
         }
         public override void Upgrade()
         {
-            if(_LvL < 10)
+            if(_Player.Resource >= _Cost)
             {
-                _LvL++;
-                _AttackPower += _AttackPower / 4;
-                _AttackSpeed -= _AttackSpeed / 4;
-                _Timer.WaitTime = _AttackSpeed / 10;
-                Scale *= 1.1f;
-            }
-            if(_LvL >= 5)
-                _IsAOE = true;
-            if(_LvL == 10)
-            {
-                _IsFreezing = true;
-                _AttackSpeed = 1f;
-                _Timer.WaitTime = _AttackSpeed / 10;
+                if(_LvL < 10)
+                {
+                    _LvL++;
+                    _AttackPower += _AttackPower / 4;
+                    _AttackSpeed -= _AttackSpeed / 4;
+                    _Timer.WaitTime = _AttackSpeed / 10;
+                    Scale *= 1.1f;
+                    _Player.Resource -= _Cost;
+                }
+                if(_LvL >= 5)
+                    _IsAOE = true;
+                if(_LvL == 10)
+                {
+                    _IsFreezing = true;
+                    _AttackSpeed = 1f;
+                    _Timer.WaitTime = _AttackSpeed / 10;
+                }
             }
         }
     }
