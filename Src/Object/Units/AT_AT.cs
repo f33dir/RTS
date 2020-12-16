@@ -7,7 +7,7 @@ namespace Unit
     {
         public override void StatSetup()
         {
-            HP = 1000;
+            // HP = 1000;
             _Cost = 50;
             _Team = Team.Enemy;
             _MoveSpeed = 1.5f;

@@ -12,6 +12,7 @@ public class Portal : Unit.BuildingUnit
     private int _wave = 0;
     private int _enemycount = 5;
     private Timer _spawntimer;
+    private Timer _waveTimer;
     public bool AbleToSpawn =true; 
     private int wave = 3;
     public override void _Ready()
@@ -21,8 +22,9 @@ public class Portal : Unit.BuildingUnit
         _Tank = ResourceLoader.Load<PackedScene>("res://Scenes/Units/Tank.tscn");
         _LocalTree = GetParent().GetParent().GetParent();
         _spawntimer = GetNode<Timer>("SpawnTimer");
+        _waveTimer = GetNode<Timer>("WaveTimer");
         _spawntimer.WaitTime = 0.8f;
-        SpawnWave();
+        _waveTimer.WaitTime = 10f;
         GetNode("/root/Environment/Player").Connect("WaveStart",this,"HandleStartSignal");
     }
     public void SpawnWave()
@@ -65,14 +67,16 @@ public class Portal : Unit.BuildingUnit
         return enemy;
     }
     private void SetupEnemy(int wave,Unit.DynamicUnit enemy){
+        wave*= 10;
         float speed = (1.5f+0.05f*wave);
-        float size = (1 + 0.01f*wave);
+        float size = (1 + 0.001f*wave);
         int damage = (wave/10)+1;
         int hp  = wave*5;
         enemy.HP = hp;
         enemy.Damage = damage;
         enemy.MoveSpeed = speed;
-        enemy.Scale = new Vector3(size,size,size);
+        // enemy.Scale = new Vector3(size,size,size);
+        enemy.Cost = 5+ (wave / 2);
     }
     public void _on_SpawnTimer_timeout()
     {
@@ -87,12 +91,17 @@ public class Portal : Unit.BuildingUnit
         }
         else
         {
-             AbleToSpawn = true;
+            AbleToSpawn = true;
+            _waveTimer.Start();
         }
     }
     public void HandleStartSignal()
     {
         GD.Print("gotcha");
+        SpawnWave();
+    }
+    public void _on_WaveTimer_timeout()
+    {
         SpawnWave();
     }
 }

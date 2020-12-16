@@ -8,10 +8,10 @@ namespace Unit
         public override void StatSetup()
         {
             // _HP = 1000;
-            _AttackPower = 150;
+            _AttackPower = 80;
             _AttackRange = 50f;
             _AttackSpeed = 5f;
-            _Cost = 100;
+            _Cost = 250;
             _CanAttackNow = true;
             _Team = Team.Empty;
             _EnemiesInRange = new Godot.Collections.Array<DynamicUnit>();

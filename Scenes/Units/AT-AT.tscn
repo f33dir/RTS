@@ -301,7 +301,7 @@ bones/0/name = "bone"
 bones/0/parent = -1
 bones/0/rest = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0810515, 0.432764, 4.62783e-08 )
 bones/0/enabled = true
-bones/0/bound_children = [ NodePath("BoneAttachment 2") ]
+bones/0/bound_children = [  ]
 bones/1/name = "bone_1"
 bones/1/parent = 0
 bones/1/rest = Transform( -0.40143, -0.851033, -0.338522, 0.635219, -0.524966, 0.566486, -0.659811, 0.0123692, 0.75133, -0.0620418, -0.0603638, 0.724235 )
@@ -336,7 +336,7 @@ bones/7/name = "bone_7"
 bones/7/parent = 0
 bones/7/rest = Transform( 0.999858, -0.0168301, -3.95669e-08, 0.0168301, 0.999858, -1.35024e-07, 4.18338e-08, 1.34339e-07, 1, -0.620603, 0.539422, -6.18823e-08 )
 bones/7/enabled = true
-bones/7/bound_children = [ NodePath("BoneAttachment") ]
+bones/7/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Body/Skeleton"]
 transform = Transform( 0.999858, -0.0168301, -3.95669e-08, 0.0168301, 0.999858, -1.35024e-07, 4.18338e-08, 1.34339e-07, 1, -0.539551, 0.972186, -1.5604e-08 )
@@ -388,6 +388,8 @@ mesh = SubResource( 12 )
 material/0 = ExtResource( 3 )
 
 [node name="InteractionArea" parent="." instance=ExtResource( 4 )]
+collision_layer = 0
+collision_mask = 4
 
 [node name="Position3D" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40889, 0 )

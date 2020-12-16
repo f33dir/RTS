@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/PlayerIngamePause.cs" type="Script" id=1]
+[ext_resource path="res://Resources/interface placeholder.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 76, 86, 286, 116 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 793, 86, 286, 116 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 429, 86, 286, 116 )
+
+[node name="Pause" type="Control"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 0.986667
+margin_bottom = 7.0
+grow_vertical = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ButtonBox" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonCountinueBox" type="MarginContainer" parent="ButtonBox"]
+margin_left = 369.0
+margin_top = 122.0
+margin_right = 655.0
+margin_bottom = 238.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ButtonCountinue" type="TextureButton" parent="ButtonBox/ButtonCountinueBox"]
+margin_right = 286.0
+margin_bottom = 116.0
+size_flags_horizontal = 4
+action_mode = 0
+texture_normal = SubResource( 1 )
+stretch_mode = 3
+
+[node name="ButtonSettingsBox" type="MarginContainer" parent="ButtonBox"]
+margin_left = 369.0
+margin_top = 242.0
+margin_right = 655.0
+margin_bottom = 358.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ButtonSettings" type="TextureButton" parent="ButtonBox/ButtonSettingsBox"]
+margin_right = 286.0
+margin_bottom = 116.0
+keep_pressed_outside = true
+texture_normal = SubResource( 2 )
+stretch_mode = 3
+
+[node name="ButtonExitBox" type="MarginContainer" parent="ButtonBox"]
+margin_left = 369.0
+margin_top = 362.0
+margin_right = 655.0
+margin_bottom = 478.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ButtonExit" type="TextureButton" parent="ButtonBox/ButtonExitBox"]
+margin_right = 286.0
+margin_bottom = 116.0
+texture_normal = SubResource( 3 )
+stretch_mode = 3
+[connection signal="button_down" from="ButtonBox/ButtonCountinueBox/ButtonCountinue" to="." method="_on_ButtonCountinue_button_down"]

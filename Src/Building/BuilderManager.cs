@@ -70,7 +70,6 @@ namespace BuildingManager
         }
         public void build(ref Player.Player player)
         {
-
             var building = _playerBuilders[player]._currentBuilding;
             var cursorpos = _playerBuilders[player]._cursorPos;
             var pos = getRealPosition(_playerBuilders[player]._cursorPos);

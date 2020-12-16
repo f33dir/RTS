@@ -56,6 +56,7 @@ namespace Unit
             else
             {
                 _AOEAreaCollision.Disabled = false;
+                
             }
         }
         public void _on_Bullet_AOE_body_entered(Node body)

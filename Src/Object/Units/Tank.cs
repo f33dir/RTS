@@ -7,9 +7,8 @@ namespace Unit
     {
         public override void StatSetup()
         {
-            _HP = 500;
+            // _HP = 500;
             _Cost = 100;
-            _MainResource = 5;
             _Team = Team.Enemy;
         }
     }

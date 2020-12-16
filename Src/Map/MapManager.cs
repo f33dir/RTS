@@ -77,9 +77,13 @@ namespace Map{
         public Map GetMap(String path)
         {
             Map output = new Map(40,40,TileType.Basement);
+            // var file = new File();s
+            // file.Open(path + "mapfile",File.ModeFlags.ReadWrite);
+            // String content = file.GetAsText();
             if(System.IO.File.Exists(path+"/mapfile"))
             {
                 output  = Newtonsoft.Json.JsonConvert.DeserializeObject<Map>(System.IO.File.ReadAllText(path+ "mapfile"));
+                    // content);
             }
             return output;
         }

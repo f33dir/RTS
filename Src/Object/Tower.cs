@@ -6,7 +6,7 @@ namespace Unit
     public class Tower : BuildingUnit
     {
         //Parameters
-        protected int _LvL = 0;
+        protected int _LvL = 1;
         protected int _Cost;
         protected int _HP;
         protected int _AttackPower;
@@ -33,7 +33,7 @@ namespace Unit
         public override void _Ready()
         {
             // _HPBar = GetNode<HealthBar>("HPBar");
-            _Player = GetParent().GetParent().GetNode<Player.Player>("Player");
+            _Player = GetNode<Player.Player>("/root/Environment/Player");
             _Timer = GetNode<Timer>("AttackTimer");
             _Area = GetNode<Area>("InteractionArea");
             _Muzzle = GetNode<Spatial>("Body/Gun/Muzzle");
@@ -44,6 +44,11 @@ namespace Unit
         public float AttackRange
         {
             get {return _AttackRange;} 
+        }
+        public int Cost
+        {
+            get{return _Cost;}
+            set{_Cost = value;}
         }
         public DynamicUnit Target
         {
@@ -73,7 +78,7 @@ namespace Unit
             //default init
             _HP = 100;
             _AttackPower = 50;
-            _AttackRange = 35f;
+            _AttackRange = 5f;
             _AttackSpeed = 15f;
             _Cost = 25;
             _CanAttackNow = true;
@@ -190,7 +195,7 @@ namespace Unit
         }
         public override void Upgrade()
         {
-            if(_Player.Resource >= _Cost)
+            if(_Player.Resource >= _Cost*(_LvL))
             {
                 if(_LvL < 10)
                 {
@@ -198,8 +203,8 @@ namespace Unit
                     _AttackPower += _AttackPower / 4;
                     _AttackSpeed -= _AttackSpeed / 4;
                     _Timer.WaitTime = _AttackSpeed / 10;
-                    Scale *= 1.1f;
-                    _Player.Resource -= _Cost;
+                    Scale *= 1.01f;
+                    _Player.Resource -= _Cost*(_LvL);
                 }
                 if(_LvL >= 5)
                     _IsAOE = true;

@@ -20,7 +20,8 @@ namespace Player
     public class Player : Spatial
     {
         public BuildingManager.BuilderManager BuilderManager;
-        private bool cmnd = false;
+        private bool _Cmnd = false;
+        private int _CurrentTowerCost =0;
         private int _Resource;
         private int _Lives;
         private bool _Start = false;
@@ -35,8 +36,8 @@ namespace Player
             _Camera = GetParent().GetNode<CameraBase.CameraBase>("CameraBase");
             _ResourceLabel = GetParent().GetNode<Label>("Interface/ResourceCounter/Label");
             _LifeLabel = GetParent().GetNode<Label>("Interface/LifeCounter/Label");
-            _Resource = 100;
-            _Lives = 5;
+            Resource = 150;
+            Lives = 50;
         }
         //Player interactions
         public override void _Process(float delta)
@@ -61,20 +62,37 @@ namespace Player
             if(selector!= -1)
                 StartBuild(selector);
             var p = this;
-            if(Input.IsActionJustPressed("action_command")&&(cmnd))
-                if(BuilderManager.IsBuildable(ref p))
+            if(Input.IsActionJustPressed("action_command"))
                 {
-                    BuilderManager.build(ref p);
-                    cmnd = false;
+                    BuilderManager.HideArrow();
+                    if((_Cmnd)&&(_CurrentTowerCost<=_Resource))
+                    {
+                        {
+                            if(BuilderManager.IsBuildable(ref p))
+                            {
+                                Resource -=_CurrentTowerCost;
+                                BuilderManager.build(ref p);
+                                _Cmnd = false;
+                                _CurrentTowerCost = 0;
+                            }
+                        }   
+                    }
                 }
             if(Input.IsActionJustPressed("alt_command"))
             {
-                GetTree().CallGroup("Towers", "Upgrade");
+                var obj = Camera.RaycastFromMousePosition(GetViewport().GetMousePosition(),8);
+                if(obj.Contains("collider"))
+                {
+                    var tower = obj["collider"] as Unit.Tower;
+                    if(tower != null)
+                    {
+                        tower.Upgrade();
+                    }
+                }
             }
             if(_Lives <= 0) 
                 GetTree().Quit(); // грубо, но для теста сойдет
         }
-        
         //gameplay functions
         private void StartBuild(int selector)
         {
@@ -83,17 +101,18 @@ namespace Player
             {
                 case 0:
                     a =ResourceLoader.Load<PackedScene>("res://Scenes/Towers/GenericTower.tscn");
-                    cmnd = true;
+                    _CurrentTowerCost = 100;
                     break;
                 case 1:
                     a =ResourceLoader.Load<PackedScene>("res://Scenes/Towers/FreezingTower.tscn");
-                    cmnd = true;
+                    _CurrentTowerCost =150;
                     break;
                 case 2:
-                    cmnd =true;
+                    _CurrentTowerCost = 250;
                     a =ResourceLoader.Load<PackedScene>("res://Scenes/Towers/MachineGunTower.tscn");
                     break;
             }
+            _Cmnd =true;
             if(selector!=-1)
             {
                 BuilderManager.ShowArrow();

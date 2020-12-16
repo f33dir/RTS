@@ -27,6 +27,7 @@ namespace Unit
         
         public override void _Ready()
         {
+        
             _Navigation = GetParent().GetNode<Spatial>("DetourNavigationMesh");
             _Animation = GetNode<AnimationPlayer>("AnimationPlayer");
             _Area = GetNode<Area>("InteractionArea");
@@ -38,12 +39,18 @@ namespace Unit
             _Player = GetParent().GetParent().GetNode<Player.Player>("Player");
             _Position = GetNode<Position3D>("Position3D");
             _PathIndex = 0;
+            _HPBar.MaxValue = 10;
             StatSetup();
+            
         }
         // public Vector3 Position
         // {
         //     get { return _Position.GlobalTransform.origin;}
         // }
+        public int Cost{
+            get{return _Cost;}
+            set{_Cost = value;}
+        }
         public int HP
         {
             get { return _HP; }
@@ -75,6 +82,11 @@ namespace Unit
                 this.Hide();
                 _Player.Resource += _Cost;
                 QueueFree();
+            }
+            if(this.Transform.origin.DistanceTo(_Target.Transform.origin)<3)
+            {
+                _Player.Lives -= Damage;
+                QueueFree();    
             }
             // if(_Player.Start)
                 if(_Animation != null)
@@ -111,15 +123,15 @@ namespace Unit
             _PathTo = DetourPath["points"] as Vector3[];
             _PathIndex = 0;
         }
-        public void _on_InteractionArea_body_entered(Node body)
-        {
-            KinematicBody Target = body as KinematicBody;
-            if(Target == _Target)
-            {
-                _Player.Lives -= Damage;
-                QueueFree();
-            }
-        }
+        // public void _on_InteractionArea_body_entered(Node body)
+        // {
+        //     KinematicBody Target = body as KinematicBody;
+        //     if(Target == _Target)
+        //     {
+        //         _Player.Lives -= Damage;
+        //         QueueFree();
+        //     }
+        // }
         virtual public void StatSetup()
         {
             _HP = 100;

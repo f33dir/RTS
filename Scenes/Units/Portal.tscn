@@ -12,4 +12,7 @@ mesh = ExtResource( 1 )
 material/0 = null
 
 [node name="SpawnTimer" type="Timer" parent="."]
+
+[node name="WaveTimer" type="Timer" parent="."]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
