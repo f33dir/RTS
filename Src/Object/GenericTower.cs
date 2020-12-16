@@ -7,7 +7,7 @@ namespace Unit
     {
         public override void StatSetup()
         {
-            _HP = 1000;
+            // _HP = 1000;
             _AttackPower = 150;
             _AttackRange = 50f;
             _AttackSpeed = 7f;
@@ -24,6 +24,8 @@ namespace Unit
             _Area.Scale = AreaScaleVector;
             // _IsAOE = true;
             // _IsFreezing = true;
+            _Timer.OneShot = false;
+            _Timer.WaitTime = _AttackSpeed/10;
         }
     }
 }

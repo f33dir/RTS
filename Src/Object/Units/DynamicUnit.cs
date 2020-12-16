@@ -21,7 +21,7 @@ namespace Unit
         protected uint _PathIndex;
         //Enemy parameters
         protected int _HP;
-        protected int _Protection;
+        protected int _Cost;
         protected float _MoveSpeed;
         public int Damage{get;set;}
         
@@ -73,6 +73,7 @@ namespace Unit
             if(HP <= 0)
             {
                 this.Hide();
+                _Player.Resource += _Cost;
                 QueueFree();
             }
             // if(_Player.Start)
@@ -122,7 +123,7 @@ namespace Unit
         virtual public void StatSetup()
         {
             _HP = 100;
-            _Protection = 1;
+            _Cost = 25;
             _MoveSpeed = 5f;
         }    
         public void OnTimeoutComplete()

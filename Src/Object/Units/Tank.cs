@@ -8,8 +8,9 @@ namespace Unit
         public override void StatSetup()
         {
             _HP = 500;
-            _Protection = 50;
-            _Team = Team.Player;
+            _Cost = 100;
+            _MainResource = 5;
+            _Team = Team.Enemy;
         }
     }
 }

@@ -27,12 +27,16 @@ namespace Player
         private CameraBase.CameraBase _Camera;
         [Signal]
         public delegate void WaveStart();
+        private Label _ResourceLabel;
+        private Label _LifeLabel;
         //Setup
         public override void _Ready()
         {
             _Camera = GetParent().GetNode<CameraBase.CameraBase>("CameraBase");
+            _ResourceLabel = GetParent().GetNode<Label>("Interface/ResourceCounter/Label");
+            _LifeLabel = GetParent().GetNode<Label>("Interface/LifeCounter/Label");
             _Resource = 100;
-            _Lives = 50;
+            _Lives = 5;
         }
         //Player interactions
         public override void _Process(float delta)
@@ -63,9 +67,14 @@ namespace Player
                     BuilderManager.build(ref p);
                     cmnd = false;
                 }
-            if(_Lives <= 0)
+            if(Input.IsActionJustPressed("alt_command"))
+            {
+                GetTree().CallGroup("Towers", "Upgrade");
+            }
+            if(_Lives <= 0) 
                 GetTree().Quit(); // грубо, но для теста сойдет
         }
+        
         //gameplay functions
         private void StartBuild(int selector)
         {
@@ -99,7 +108,20 @@ namespace Player
             set
             {
                 _Lives = value;
+                _LifeLabel.Text = _Lives.ToString();
             }
+        }
+        public int Resource
+        {
+            get{ return _Resource;}
+            set
+            {
+                if(value >= 0 && value <= 1000)
+                    _Resource = value;
+                if(value < 0)
+                    _Resource = 0;
+                _ResourceLabel.Text = _Resource.ToString();
+            }   
         }
         //возможно юзается где-то еще
         public CameraBase.CameraBase GetCamera()
