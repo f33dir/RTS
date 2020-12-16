@@ -6,6 +6,7 @@ namespace Unit
     public class Tower : BuildingUnit
     {
         //Parameters
+        protected int _LvL = 0;
         protected int _Cost;
         protected int _HP;
         protected int _AttackPower;
@@ -27,14 +28,17 @@ namespace Unit
         protected Area _Area;
         protected Spatial _Muzzle;
         protected PackedScene _Bullet;
+        protected MeshInstance _Gun;
         //Methods
         public override void _Ready()
         {
             // _HPBar = GetNode<HealthBar>("HPBar");
+            _Player = GetParent().GetParent().GetNode<Player.Player>("Player");
             _Timer = GetNode<Timer>("AttackTimer");
             _Area = GetNode<Area>("InteractionArea");
             _Muzzle = GetNode<Spatial>("Body/Gun/Muzzle");
             _Bullet = GD.Load<PackedScene>("res://Scenes/Units/Bullet.tscn");
+            _Gun = GetNode<MeshInstance>("Body/Gun");
             StatSetup();
         }
         public float AttackRange
@@ -89,9 +93,9 @@ namespace Unit
         {
             if(_Target != null)
             {
-                LookAt(_Target.GlobalTransform.origin,Vector3.Up);
-                if(RotationDegrees.x != 0)
-                    RotationDegrees = new Vector3(0,RotationDegrees.y,RotationDegrees.z);
+                _Gun.LookAt(_Target.GlobalTransform.origin,Vector3.Up);
+                if(_Gun.RotationDegrees.x != 0)
+                    _Gun.RotationDegrees = new Vector3(0,_Gun.RotationDegrees.y - 90,_Gun.RotationDegrees.z);
             }
             switch (_State)
             {
@@ -119,10 +123,10 @@ namespace Unit
                 if(_Target == null)
                 {
                     _Target = EnteredUnit;
-                    LookAt(_Target.GlobalTransform.origin,Vector3.Up);
+                    _Gun.LookAt(_Target.GlobalTransform.origin,Vector3.Up);
                     GD.Print("Looking at -> " + _Target.Name);
-                    if(RotationDegrees.x != 0)
-                        RotationDegrees = new Vector3(0,RotationDegrees.y,RotationDegrees.z);
+                    if(_Gun.RotationDegrees.x != 0)
+                        _Gun.RotationDegrees = new Vector3(0,_Gun.RotationDegrees.y - 90,_Gun.RotationDegrees.z);
                     _IsTargetInRange = true;
                 }
             }
@@ -137,11 +141,11 @@ namespace Unit
                 _EnemiesInRange.Remove(ExitedUnit);
                 if(ExitedUnit == _Target)
                 {
-                    LookAt(GlobalTransform.origin,Vector3.Up);
+                    _Gun.LookAt(GlobalTransform.origin,Vector3.Up);
                     GD.Print("Stopped looking at -> " + _Target.Name);
                     _Target = null;
-                    if(RotationDegrees.x != 0)
-                        RotationDegrees = new Vector3(0,RotationDegrees.y,RotationDegrees.z);
+                    if(_Gun.RotationDegrees.x != 0)
+                        _Gun.RotationDegrees = new Vector3(0,_Gun.RotationDegrees.y - 90,_Gun.RotationDegrees.z);
                     _IsTargetInRange = false;
                 }
                 if(_Target == null && _EnemiesInRange.Count != 0)
@@ -183,6 +187,29 @@ namespace Unit
             if(_Target == null)
                 GD.Print(Name + " has no target");
             else GD.Print(Name + " target -> " + _Target.Name);
+        }
+        public override void Upgrade()
+        {
+            if(_Player.Resource >= _Cost)
+            {
+                if(_LvL < 10)
+                {
+                    _LvL++;
+                    _AttackPower += _AttackPower / 4;
+                    _AttackSpeed -= _AttackSpeed / 4;
+                    _Timer.WaitTime = _AttackSpeed / 10;
+                    Scale *= 1.1f;
+                    _Player.Resource -= _Cost;
+                }
+                if(_LvL >= 5)
+                    _IsAOE = true;
+                if(_LvL == 10)
+                {
+                    _IsFreezing = true;
+                    _AttackSpeed = 1f;
+                    _Timer.WaitTime = _AttackSpeed / 10;
+                }
+            }
         }
     }
 }
