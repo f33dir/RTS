@@ -6,12 +6,17 @@ namespace BuildingManager
     public class BuilderManager : Spatial
     {
         private Map.MapManager _mapmanager;
+        private Player.Player player1;
+        private MeshInstance SelectionRing;
         private Spatial Arrow;
         private Map.Map _map;
         private Map.Map _otherworldmap;
         private Dictionary<Player.Player, PlayerBuildingManager> _playerBuilders;  
         public override void _Ready()
         {
+            var ringscene = ResourceLoader.Load<PackedScene>("res://Scenes/SelectionRing.tscn");
+            SelectionRing = (MeshInstance)ringscene.Instance();
+            AddChild(SelectionRing);
             var arrowscene = ResourceLoader.Load<PackedScene>("res://Scenes/Units/arrow.tscn");
             Arrow = (Spatial)arrowscene.Instance();
             AddChild(Arrow);
@@ -19,6 +24,7 @@ namespace BuildingManager
             _mapmanager = GetParent().GetNode<Map.MapManager>("MapManager");
             _map = _mapmanager.GetMap();
             var testplayer =  GetTree().CurrentScene.GetNode<Player.Player>("Player");
+            player1 = GetTree().CurrentScene.GetNode<Player.Player>("Player");
             AddPlayerBuildingManager(testplayer);
             var res  = ResourceLoader.Load<PackedScene>("res://Scenes/Units/Portal.tscn");
             Unit.BuildingUnit portal = (Unit.BuildingUnit)res.Instance();
@@ -51,6 +57,12 @@ namespace BuildingManager
                     var col = dic["collider"] as StaticBody;
                     a._cursorPos = PointToGrid(a.player,col.GlobalTransform.origin);
                     Arrow.Translation = getRealPosition(a._cursorPos);
+                    SelectionRing.Translation = Arrow.Translation;
+                    var building = _playerBuilders[player1]._currentBuilding as Unit.Tower;
+                    if(building!=null)
+                    {
+                        SelectionRing.Scale = new Vector3(building.AttackRange,1f,building.AttackRange);
+                    }
                 }
             }
         }
@@ -62,11 +74,13 @@ namespace BuildingManager
         {
             // _playerBuilders[player]._showSilhouette = true;
             Arrow.Visible = true;
+            SelectionRing.Visible = true;
         }
         public void HideArrow()
         {   
             // _playerBuilders[player]._showSilhouette = false;
             Arrow.Visible = false;
+            SelectionRing.Visible = false;
         }
         public void build(ref Player.Player player)
         {

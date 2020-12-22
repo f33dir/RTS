@@ -10,7 +10,8 @@ namespace Unit
         protected int _Cost;
         protected int _HP;
         protected int _AttackPower;
-        protected float _AttackRange;
+        [Export]
+        protected float _AttackRange = 5f;
         protected float _AttackSpeed;
         protected Team _Team;
         protected State _State;

@@ -43,6 +43,7 @@ extents = Vector3( 1, 2.15214, 1 )
 collision_layer = 8
 collision_mask = 8
 script = ExtResource( 3 )
+_AttackRange = 15.0
 
 [node name="Body" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.994131, 0 )

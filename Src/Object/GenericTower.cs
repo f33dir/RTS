@@ -5,6 +5,7 @@ namespace Unit
 {
     public class GenericTower : Tower
     {
+        int hp =1000;
         public override void StatSetup()
         {
             // _HP = 1000;
@@ -12,6 +13,7 @@ namespace Unit
             _AttackRange = 20f;
             _AttackSpeed = 7f;
             _Cost = 100;
+            _HP = this.hp;
             _CanAttackNow = true;
             _Team = Team.Empty;
             _EnemiesInRange = new Godot.Collections.Array<DynamicUnit>();
@@ -26,6 +28,6 @@ namespace Unit
             // _IsFreezing = true;
             _Timer.OneShot = false;
             _Timer.WaitTime = _AttackSpeed/10;
-        }
+        } 
     }
 }
