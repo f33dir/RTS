@@ -30,6 +30,7 @@ namespace Unit
         protected Spatial _Muzzle;
         protected PackedScene _Bullet;
         protected MeshInstance _Gun;
+        protected MeshInstance _SelectionRing;
         //Methods
         public override void _Ready()
         {
@@ -40,7 +41,20 @@ namespace Unit
             _Muzzle = GetNode<Spatial>("Body/Gun/Muzzle");
             _Bullet = GD.Load<PackedScene>("res://Scenes/Units/Bullet.tscn");
             _Gun = GetNode<MeshInstance>("Body/Gun");
+            _SelectionRing = GetNode<MeshInstance>("SelectionRing");
             StatSetup();
+        }
+        public void Select()
+        {
+            _SelectionRing.Show();
+        }
+        public void Deselect()
+        {
+            _SelectionRing.Hide();
+        }
+        public int LvL
+        {
+            get{ return _LvL;}
         }
         public float AttackRange
         {

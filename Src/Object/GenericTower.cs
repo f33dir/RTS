@@ -23,6 +23,9 @@ namespace Unit
             var AreaScaleVector = Vector3.One;
             AreaScaleVector *= _AttackRange/10;
             // AreaScaleVector.y = 1f;
+            var SelectionScaleVector = AreaScaleVector*3.75f;
+            SelectionScaleVector.y = 0.1f;
+            _SelectionRing.Scale = SelectionScaleVector;
             _Area.Scale = AreaScaleVector;
             // _IsAOE = true;
             // _IsFreezing = true;

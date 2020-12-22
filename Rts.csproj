@@ -24,6 +24,7 @@
     <Compile Include="Src\Building\Portal.cs" />
     <Compile Include="Src\Camera\CameraBase.cs" />
     <Compile Include="Src\Camera\SelectionBox.cs" />
+    <Compile Include="Src\Interface.cs" />
     <Compile Include="Src\Map\MapEditor.cs" />
     <Compile Include="Src\Map\MapTile.cs" />
     <Compile Include="Src\Map\MapFileManager.cs" />

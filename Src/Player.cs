@@ -26,16 +26,19 @@ namespace Player
         private int _Lives;
         private bool _Start = false;
         private CameraBase.CameraBase _Camera;
+        private Unit.Tower _SelectedTower;
         [Signal]
         public delegate void WaveStart();
         private Label _ResourceLabel;
         private Label _LifeLabel;
+        private Interface _Interface;
         //Setup
         public override void _Ready()
         {
             _Camera = GetParent().GetNode<CameraBase.CameraBase>("CameraBase");
             _ResourceLabel = GetParent().GetNode<Label>("Interface/ResourceCounter/Label");
             _LifeLabel = GetParent().GetNode<Label>("Interface/LifeCounter/Label");
+            _Interface = GetParent().GetNode<Interface>("Interface");
             Resource = 150;
             Lives = 50;
         }
@@ -81,12 +84,31 @@ namespace Player
             if(Input.IsActionJustPressed("alt_command"))
             {
                 var obj = Camera.RaycastFromMousePosition(GetViewport().GetMousePosition(),8);
+                // if(obj.Contains("collider"))
+                // {
+                //     var tower = obj["collider"] as Unit.Tower;
+                //     if(tower != null)
+                //     {
+                //         tower.Upgrade();
+                //     }
+                // }
                 if(obj.Contains("collider"))
                 {
-                    var tower = obj["collider"] as Unit.Tower;
-                    if(tower != null)
+                    if(_SelectedTower != null)
+                        _SelectedTower.Deselect();
+                    SelectedTower = obj["collider"] as Unit.Tower;
+                    _Interface.UpdateStats();
+                    SelectedTower.Select();
+                }
+            }
+            if(Input.IsActionJustPressed("UpgradeTower"))
+            {
+                if(_SelectedTower != null)
+                {
+                    if(_Resource >= _SelectedTower.Cost)
                     {
-                        tower.Upgrade();
+                        _SelectedTower.Upgrade();
+                        _Interface.UpdateStats();
                     }
                 }
             }
@@ -120,6 +142,17 @@ namespace Player
             var b = a.Instance() as Unit.BuildingUnit;
             var p = this;
             BuilderManager.SetBuilding(ref p,ref b);
+        }
+        public Unit.Tower SelectedTower
+        {
+            get { return _SelectedTower;}
+            set
+            {
+                if(value != null)
+                {
+                    _SelectedTower = value;
+                }
+            }
         }
         public int Lives
         {

@@ -22,17 +22,17 @@ namespace CameraBase
         {
             Vector2 mousePos = GetViewport().GetMousePosition();
             CalculateMove(mousePos,delta);
-            // if(Input.IsActionJustPressed("alt_command"))
-            // {
-            //     SelectionBox._startSelPos = mousePos;
-            //     StartSelPos = mousePos;
-            // }
-            // if(Input.IsActionPressed("alt_command"))
-            // {
-            //     SelectionBox._mousePos = mousePos;
-            //     SelectionBox._isVisible = true;
-            // }
-            // else SelectionBox._isVisible = false;
+            if(Input.IsActionJustPressed("alt_command"))
+            {
+                SelectionBox._startSelPos = mousePos;
+                StartSelPos = mousePos;
+            }
+            if(Input.IsActionPressed("alt_command"))
+            {
+                SelectionBox._mousePos = mousePos;
+                SelectionBox._isVisible = true;
+            }
+            else SelectionBox._isVisible = false;
             if(Input.IsActionJustReleased("zoom_in"))
             {
                 Vector3 moveVec = GlobalTransform.origin.Normalized();
@@ -79,44 +79,44 @@ namespace CameraBase
             GlobalTranslate(moveVec*delta*MOVE_SPEED);
         }
         //Get single unit right under mouse
-        public Unit.Unit GetUnitUnderMouse(Vector2 mousePos)
+        public Unit.Tower GetUnitUnderMouse(Vector2 mousePos)
         {
-            var result = RaycastFromMousePosition(mousePos,2);
+            var result = RaycastFromMousePosition(mousePos,4);
             if(result != null && result.Count != 0 && result["collider"] != null)
-                return (Unit.Unit)result["collider"];
+                return (Unit.Tower)result["collider"];
             return null;
         }
         // Select "selected" units
-        // public Godot.Collections.Array<Unit.Unit> SelectUnits(Vector2 mousePos, Godot.Collections.Array<Unit.Unit> Units)
-        // {
-        //     Godot.Collections.Array<Unit.Unit> NewSelectedUnits = new Godot.Collections.Array<Unit.Unit>();
-        //     if(mousePos.DistanceSquaredTo(StartSelPos) < 9)
-        //     {
-        //         var unit = GetUnitUnderMouse(mousePos);
-        //         if(unit != null)
-        //         {
-        //             // if(unit.Team == Team.Player)
-        //                 NewSelectedUnits.Add((Unit.Unit)unit);
-        //         }
-        //     }
-        //     else NewSelectedUnits = GetUnitsInBox(StartSelPos,mousePos);
-        //     if(NewSelectedUnits.Count != 0)
-        //     {
-        //         foreach (var unit in Units)
-        //         {
-        //             if(unit != null)
-        //                 unit.Deselect();
-        //         }
-        //         foreach (var unit in NewSelectedUnits)
-        //         {
-        //             unit.Select();
-        //         }
-        //         return NewSelectedUnits;
-        //     }
-        //     return NewSelectedUnits;
-        // }
-        //Get units in SelectionBox
-        // public Godot.Collections.Array<Unit.Unit> GetUnitsInBox(Vector2 TopLeft, Vector2 BottomRight)
+        public Godot.Collections.Array<Unit.Tower> SelectUnits(Vector2 mousePos, Godot.Collections.Array<Unit.Tower> Units)
+        {
+            Godot.Collections.Array<Unit.Tower> NewSelectedUnits = new Godot.Collections.Array<Unit.Tower>();
+            if(mousePos.DistanceSquaredTo(StartSelPos) < 9)
+            {
+                var unit = GetUnitUnderMouse(mousePos);
+                if(unit != null)
+                {
+                    // if(unit.Team == Team.Player)
+                        NewSelectedUnits.Add((Unit.Tower)unit);
+                }
+            }
+            // else NewSelectedUnits = GetUnitsInBox(StartSelPos,mousePos);
+            if(NewSelectedUnits.Count != 0)
+            {
+                foreach (var unit in Units)
+                {
+                    if(unit != null)
+                        unit.Deselect();
+                }
+                foreach (var unit in NewSelectedUnits)
+                {
+                    unit.Select();
+                }
+                return NewSelectedUnits;
+            }
+            return NewSelectedUnits;
+        }
+        // Get units in SelectionBox
+        // public Godot.Collections.Array<Unit.Tower> GetUnitsInBox(Vector2 TopLeft, Vector2 BottomRight)
         // {
         //     if( TopLeft.x > BottomRight.x)
         //     {
@@ -131,13 +131,12 @@ namespace CameraBase
         //         BottomRight.y = temp;
         //     }
         //     var Box = new Rect2(TopLeft, BottomRight - TopLeft);
-        //     Godot.Collections.Array<Unit.Unit> BoxSelectedUnits = new Godot.Collections.Array<Unit.Unit>();
+        //     Godot.Collections.Array<Unit.Tower> BoxSelectedUnits = new Godot.Collections.Array<Unit.Tower>();
         //     foreach (var unit in GetTree().GetNodesInGroup("Units"))
         //     {
-        //         Unit.Unit clone = unit as Unit.Unit;
-
-        //         if(unit as Unit.Unit != null && Box.HasPoint(Cam.UnprojectPosition((unit as Unit.Unit).GlobalTransform.origin)) && (unit as Unit.Unit).Team == Team.Enemy)
-        //             BoxSelectedUnits.Add((Unit.Unit)unit);
+        //         // Unit.Tower clone = unit as Unit.Tower;
+        //         if(unit as Unit.Tower != null && Box.HasPoint(Cam.UnprojectPosition((unit as Unit.Tower).GlobalTransform.origin)))
+        //             BoxSelectedUnits.Add((Unit.Tower)unit);
         //     }
         //     return BoxSelectedUnits;
         // }
