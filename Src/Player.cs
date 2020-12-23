@@ -100,6 +100,12 @@ namespace Player
                     _Interface.UpdateStats();
                     SelectedTower.Select();
                 }
+                else if (_SelectedTower != null)
+                {
+                    _SelectedTower.Deselect();
+                    _SelectedTower = null;
+                    _Interface.UpdateStats();
+                }
             }
             if(Input.IsActionJustPressed("UpgradeTower"))
             {
