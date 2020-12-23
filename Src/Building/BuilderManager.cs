@@ -61,7 +61,7 @@ namespace BuildingManager
                     var building = _playerBuilders[player1]._currentBuilding as Unit.Tower;
                     if(building!=null)
                     {
-                        SelectionRing.Scale = new Vector3(building.AttackRange,1f,building.AttackRange);
+                        SelectionRing.Scale = new Vector3(building.AttackRange-2.5f,1f,building.AttackRange-2.5f);
                     }
                 }
             }

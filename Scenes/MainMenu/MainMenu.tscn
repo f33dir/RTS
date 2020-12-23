@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Src/Menu/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://Resources/99-996701_game-main-menu-background.jpg" type="Texture" id=2]
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = 0.259918
+margin_right = 25.0
+margin_bottom = 0.259888
+rect_scale = Vector2( 0.979178, 0.993272 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="99-996701_game-main-menu-background" type="Sprite" parent="."]
+position = Vector2( 299.878, 146.005 )
+texture = ExtResource( 2 )
+
+[node name="Button1" type="Button" parent="."]
+margin_left = 54.0
+margin_top = 115.0
+margin_right = 477.0
+margin_bottom = 257.0
+text = "PLAY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="."]
+margin_left = 53.0
+margin_top = 423.0
+margin_right = 476.0
+margin_bottom = 565.0
+rect_scale = Vector2( 1, 1.01316 )
+text = "EXIT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button3" type="Button" parent="."]
+margin_left = 53.0
+margin_top = 269.0
+margin_right = 476.0
+margin_bottom = 411.0
+text = "OPTIONS"

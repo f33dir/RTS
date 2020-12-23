@@ -5,43 +5,41 @@ using System.Collections.Generic;
 namespace Map{
 public class MapFileManager : Node
     {
-        private List<DirectoryInfo> _maps;
+        private List<String> _maps = new List<string>();
         public  string MapPath{get; set;}
         public string CurrentMapPath{get;set;}
         public int ParseMaps()
         {
+            _maps.Clear();
+            _maps.Add("res://Maps/Map1/");
+            _maps.Add("res://Maps/Map2/");
             if(System.IO.Directory.Exists(MapPath)){
-                _maps.Clear();
-                var paths = System.IO.Directory.GetFiles(MapPath,"mapinfo",SearchOption.AllDirectories);
+                
+                var paths = System.IO.Directory.GetFiles(MapPath,"mapfile",SearchOption.AllDirectories);
                 foreach(var pth in paths)
                 {
                     DirectoryInfo dir = new DirectoryInfo(pth);
                     dir = dir.Parent;
-                    _maps.Add(dir);
+                    _maps.Add(dir.ToString());
                 }
                 return 0;
             }
             return 1;
         }
 
-        public int ChooseMap(int index)
+        public void ChooseMap()
         {
-            if(_maps.Count>index)
-            {
-                CurrentMapPath = _maps[index].ToString();
-                return 0;   
-            }
-            else
-            {
-                return 1;
-            } 
+            var list = GetTree().CurrentScene.GetNode("MapList") as   ItemList;
+            var items = list.GetSelectedItems();
+            var item = items[0];
+                CurrentMapPath = _maps[item]; 
         }
 
         public override void _Ready()
         {
             //debug 
-            MapPath = "Maps/Map1/";
-            CurrentMapPath = "Maps/Map1/";
+            MapPath = "/home/f33dir/Temp/";
+            CurrentMapPath = "/home/f33dir/Temp/editor/";
         }
     }
 }

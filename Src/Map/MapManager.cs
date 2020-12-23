@@ -76,15 +76,17 @@ namespace Map{
         }
         public Map GetMap(String path)
         {
+            var file = new File();
             Map output = new Map(40,40,TileType.Basement);
-            // var file = new File();s
-            // file.Open(path + "mapfile",File.ModeFlags.ReadWrite);
-            // String content = file.GetAsText();
-            if(System.IO.File.Exists(path+"/mapfile"))
+            if(path[0] =='r')
             {
-                output  = Newtonsoft.Json.JsonConvert.DeserializeObject<Map>(System.IO.File.ReadAllText(path+ "mapfile"));
-                    // content);
-            }
+                    file.Open(path + "mapfile",File.ModeFlags.ReadWrite);
+                    String content = file.GetAsText();
+                    output = Newtonsoft.Json.JsonConvert.DeserializeObject<Map>(content);
+                return output;
+            };
+            if(System.IO.File.Exists(path+"/mapfile"))
+                output  = Newtonsoft.Json.JsonConvert.DeserializeObject<Map>(System.IO.File.ReadAllText(path+ "/mapfile"));
             return output;
         }
         public void BuildMap(string mapPath)

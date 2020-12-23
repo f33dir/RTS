@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Src/Menu/SelectLevel.gd" type="Script" id=1]
+[ext_resource path="res://Resources/99-996701_game-main-menu-background.jpg" type="Texture" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends ItemList
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+onready var manager = $\"/root/MapFileManager\"
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta):
+#	manager.CurrentMapPath = Array(get_selected_items())[0]
+	pass
+"
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="99-996701_game-main-menu-background" type="Sprite" parent="."]
+position = Vector2( 337.909, 174.328 )
+texture = ExtResource( 3 )
+
+[node name="MapList" type="ItemList" parent="."]
+margin_right = 548.0
+margin_bottom = 597.0
+allow_reselect = true
+max_text_lines = 6
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" type="Button" parent="."]
+margin_left = 565.238
+margin_top = 412.587
+margin_right = 987.238
+margin_bottom = 581.587
+text = "Start"
+
+[node name="Editor" type="Button" parent="."]
+margin_left = 582.0
+margin_top = 23.0
+margin_right = 982.0
+margin_bottom = 164.0
+text = "Editor"
+[connection signal="item_selected" from="MapList" to="." method="_select_map"]
