@@ -27,5 +27,10 @@ public class Interface : Control
             _CurrentTowerLabel.Show();
             // (_SelectedTowerLabel.GetParent() as NinePatchRect).Show();
         }
+        else
+        {
+            _SelectedTowerLabel.Hide();
+            _CurrentTowerLabel.Hide();
+        }
     }
 }
