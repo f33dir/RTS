@@ -11,8 +11,11 @@ namespace CameraBase
         private const float MOVE_SPEED = 30;
         private const float RAY_LENGTH = 10000;
         private const float ZOOM_SPEED = 25;
-        private const float MAX_ZOOM_IN = 3;   // basically just y limitations
-        private const float MAX_ZOOM_OUT = 15; // currently doesn't work (saddly)
+        private const float MAX_ZOOM_IN = 13;   // basically just y limitations
+        private const float MAX_ZOOM_OUT = 25; // currently doesn't work (saddly)
+        private const float MAX_X_MOVE_VALUE = 40;
+        private const float MAX_Z_MOVE_VALUE = 50;
+        private const float MIN_MOVE_VALUE = 10;
         //Godot nodes
         private Godot.Camera Cam;
         private Vector2 StartSelPos;
@@ -63,20 +66,26 @@ namespace CameraBase
         // Calculate camera movement if cursor is at the window border
         public void CalculateMove(Vector2 mousePos, float delta)
         {
-            Vector2 vecSize = GetViewport().Size;
-            Vector3 moveVec = Vector3.Zero;
+            GD.Print("x -> " + GlobalTransform.origin.x + " z -> " + GlobalTransform.origin.z);
+            // if(Mathf.Abs(GlobalTransform.origin.x) <= 15 || Mathf.Abs(GlobalTransform.origin.z) <= 25 )
+            // {
+                // public static int X_MOVE_MARGIN = 0;
+                
+                Vector2 vecSize = GetViewport().Size;
+                Vector3 moveVec = Vector3.Zero;
 
-            if(mousePos.x < MOVE_MARGIN)
-                moveVec.x -= 1;
-            if(mousePos.y < MOVE_MARGIN)
-                moveVec.z -= 1;
-            if(mousePos.x > vecSize.x - MOVE_MARGIN)
-                moveVec.x += 1;
-            if(mousePos.y > vecSize.y - MOVE_MARGIN)
-                moveVec.z += 1;
-            
-            moveVec = moveVec.Rotated(Vector3.Up,RotationDegrees.y);
-            GlobalTranslate(moveVec*delta*MOVE_SPEED);
+                if(mousePos.x < MOVE_MARGIN && GlobalTransform.origin.x >= MIN_MOVE_VALUE)
+                    moveVec.x -= 1;
+                if(mousePos.y < MOVE_MARGIN  && GlobalTransform.origin.z >= MIN_MOVE_VALUE)
+                    moveVec.z -= 1;
+                if(mousePos.x > vecSize.x - MOVE_MARGIN  && GlobalTransform.origin.x <= MAX_X_MOVE_VALUE)
+                    moveVec.x += 1;
+                if(mousePos.y > vecSize.y - MOVE_MARGIN  && GlobalTransform.origin.z <= MAX_Z_MOVE_VALUE)
+                    moveVec.z += 1;
+                
+                moveVec = moveVec.Rotated(Vector3.Up,RotationDegrees.y);
+                GlobalTranslate(moveVec*delta*MOVE_SPEED);
+            // }
         }
         //Get single unit right under mouse
         public Unit.Tower GetUnitUnderMouse(Vector2 mousePos)
