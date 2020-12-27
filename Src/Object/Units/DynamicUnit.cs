@@ -83,7 +83,7 @@ namespace Unit
                 _Player.Resource += _Cost;
                 QueueFree();
             }
-            if(this.Transform.origin.DistanceTo(_Target.Transform.origin)<3)
+            if(this.Transform.origin.DistanceTo(_Target.Transform.origin)<5)
             {
                 _Player.Lives -= Damage;
                 QueueFree();    
