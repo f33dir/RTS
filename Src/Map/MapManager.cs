@@ -41,7 +41,7 @@ namespace Map{
         private void BuildCurrentMap(Map inputMap)
         {
             Gridmap.Clear();
-            _tileset =ResourceLoader.Load(_mapfilemanager.CurrentMapPath+"tileset.meshlib")as MeshLibrary;
+            // _tileset =ResourceLoader.Load(_mapfilemanager.CurrentMapPath+"tileset.meshlib")as MeshLibrary;
             if(_tileset==null)
             {
                 _tileset = ResourceLoader.Load("res://Resources/tilesets/defaulttileset.meshlib")as MeshLibrary;
