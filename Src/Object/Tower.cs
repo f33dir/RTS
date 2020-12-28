@@ -31,6 +31,7 @@ namespace Unit
         protected PackedScene _Bullet;
         protected MeshInstance _Gun;
         protected MeshInstance _SelectionRing;
+        protected AudioStreamPlayer3D _AudioPlayer;
         //Methods
         public override void _Ready()
         {
@@ -42,6 +43,7 @@ namespace Unit
             _Bullet = GD.Load<PackedScene>("res://Scenes/Units/Bullet.tscn");
             _Gun = GetNode<MeshInstance>("Body/Gun");
             _SelectionRing = GetNode<MeshInstance>("SelectionRing");
+            _AudioPlayer = GetNode<AudioStreamPlayer3D>("Audio");
             StatSetup();
         }
         public void Select()
@@ -184,6 +186,8 @@ namespace Unit
             while(_CanAttackNow)
             {
                 _CanAttackNow = false;
+                if(_AudioPlayer != null)
+                    _AudioPlayer.Play();
                 var bullet_scene = _Bullet.Instance();
                 var bullet = bullet_scene as Bullet;
                 _Muzzle.AddChild(bullet_scene);

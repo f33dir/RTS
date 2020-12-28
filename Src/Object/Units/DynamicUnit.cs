@@ -83,11 +83,11 @@ namespace Unit
                 _Player.Resource += _Cost;
                 QueueFree();
             }
-            if(this.Transform.origin.DistanceTo(_Target.Transform.origin)<5)
-            {
-                _Player.Lives -= Damage;
-                QueueFree();    
-            }
+            // if(this.Transform.origin.DistanceTo(_Target.Transform.origin)<5)
+            // {
+            //     _Player.Lives -= Damage;
+            //     QueueFree();    
+            // }
             // if(_Player.Start)
                 if(_Animation != null)
                 {
@@ -123,15 +123,15 @@ namespace Unit
             _PathTo = DetourPath["points"] as Vector3[];
             _PathIndex = 0;
         }
-        // public void _on_InteractionArea_body_entered(Node body)
-        // {
-        //     KinematicBody Target = body as KinematicBody;
-        //     if(Target == _Target)
-        //     {
-        //         _Player.Lives -= Damage;
-        //         QueueFree();
-        //     }
-        // }
+        public void _on_InteractionArea_body_entered(Node body)
+        {
+            // KinematicBody Target = body as KinematicBody;
+            if(body as KinematicBody == _Target)
+            {
+                _Player.Lives -= Damage;
+                QueueFree();
+            }
+        }
         virtual public void StatSetup()
         {
             _HP = 100;
