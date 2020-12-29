@@ -33,7 +33,7 @@ namespace CameraBase
             if(Input.IsActionPressed("alt_command"))
             {
                 SelectionBox._mousePos = mousePos;
-                SelectionBox._isVisible = true;
+                // SelectionBox._isVisible = true;
             }
             else SelectionBox._isVisible = false;
             if(Input.IsActionJustReleased("zoom_in"))
@@ -43,7 +43,6 @@ namespace CameraBase
                 moveVec.z -= MOVE_SPEED;
                 moveVec = moveVec.Rotated(Vector3.Up,RotationDegrees.y);
                 GlobalTranslate(moveVec.Normalized());
-                GD.Print(GlobalTransform.origin);
             }
             if(Input.IsActionJustReleased("zoom_out"))
             {
@@ -52,7 +51,6 @@ namespace CameraBase
                 moveVec.z += MOVE_SPEED;
                 moveVec = moveVec.Rotated(Vector3.Up,RotationDegrees.y);
                 GlobalTranslate(moveVec.Normalized());
-                GD.Print(GlobalTransform.origin);
             }
         }
         // Getting references to needed nodes & basic setup
@@ -65,12 +63,7 @@ namespace CameraBase
         }
         // Calculate camera movement if cursor is at the window border
         public void CalculateMove(Vector2 mousePos, float delta)
-        {
-            GD.Print("x -> " + GlobalTransform.origin.x + " z -> " + GlobalTransform.origin.z);
-            // if(Mathf.Abs(GlobalTransform.origin.x) <= 15 || Mathf.Abs(GlobalTransform.origin.z) <= 25 )
-            // {
-                // public static int X_MOVE_MARGIN = 0;
-                
+        {       
                 Vector2 vecSize = GetViewport().Size;
                 Vector3 moveVec = Vector3.Zero;
 
@@ -85,7 +78,6 @@ namespace CameraBase
                 
                 moveVec = moveVec.Rotated(Vector3.Up,RotationDegrees.y);
                 GlobalTranslate(moveVec*delta*MOVE_SPEED);
-            // }
         }
         //Get single unit right under mouse
         public Unit.Tower GetUnitUnderMouse(Vector2 mousePos)
@@ -108,7 +100,6 @@ namespace CameraBase
                         NewSelectedUnits.Add((Unit.Tower)unit);
                 }
             }
-            // else NewSelectedUnits = GetUnitsInBox(StartSelPos,mousePos);
             if(NewSelectedUnits.Count != 0)
             {
                 foreach (var unit in Units)
@@ -125,30 +116,6 @@ namespace CameraBase
             return NewSelectedUnits;
         }
         // Get units in SelectionBox
-        // public Godot.Collections.Array<Unit.Tower> GetUnitsInBox(Vector2 TopLeft, Vector2 BottomRight)
-        // {
-        //     if( TopLeft.x > BottomRight.x)
-        //     {
-        //         var temp = TopLeft.x;
-        //         TopLeft.x = BottomRight.x;
-        //         BottomRight.x = temp;
-        //     }
-        //     if(TopLeft.y > BottomRight.y)
-        //     {
-        //         var temp = TopLeft.y;
-        //         TopLeft.y = BottomRight.y;
-        //         BottomRight.y = temp;
-        //     }
-        //     var Box = new Rect2(TopLeft, BottomRight - TopLeft);
-        //     Godot.Collections.Array<Unit.Tower> BoxSelectedUnits = new Godot.Collections.Array<Unit.Tower>();
-        //     foreach (var unit in GetTree().GetNodesInGroup("Units"))
-        //     {
-        //         // Unit.Tower clone = unit as Unit.Tower;
-        //         if(unit as Unit.Tower != null && Box.HasPoint(Cam.UnprojectPosition((unit as Unit.Tower).GlobalTransform.origin)))
-        //             BoxSelectedUnits.Add((Unit.Tower)unit);
-        //     }
-        //     return BoxSelectedUnits;
-        // }
         //Project a RayCast form camera to cursor position check for collision with smth
         public Godot.Collections.Dictionary RaycastFromMousePosition(Vector2 mousePos, uint CollisionMask) // определение положения курсора на карте
         {

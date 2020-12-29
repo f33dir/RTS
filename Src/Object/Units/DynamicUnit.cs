@@ -23,6 +23,7 @@ namespace Unit
         protected int _HP;
         protected int _Cost;
         protected float _MoveSpeed;
+        protected bool _IsFreezed;
         public int Damage{get;set;}
         
         public override void _Ready()
@@ -43,10 +44,14 @@ namespace Unit
             StatSetup();
             
         }
-        // public Vector3 Position
-        // {
-        //     get { return _Position.GlobalTransform.origin;}
-        // }
+        public bool IsFreezed
+        {
+            get{ return _IsFreezed;}
+            set
+            {
+                _IsFreezed = value;
+            }
+        }
         public int Cost{
             get{return _Cost;}
             set{_Cost = value;}
@@ -83,11 +88,6 @@ namespace Unit
                 _Player.Resource += _Cost;
                 QueueFree();
             }
-            // if(this.Transform.origin.DistanceTo(_Target.Transform.origin)<5)
-            // {
-            //     _Player.Lives -= Damage;
-            //     QueueFree();    
-            // }
             // if(_Player.Start)
                 if(_Animation != null)
                 {
@@ -141,6 +141,7 @@ namespace Unit
         public void OnTimeoutComplete()
         {
             _MoveSpeed /= 0.75f;
+            _IsFreezed = false;
         }
         public Timer SlowDebuffTimer
         {
