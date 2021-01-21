@@ -78,15 +78,14 @@ namespace Map{
         {
             var file = new File();
             Map output = new Map(40,40,TileType.Basement);
-            if(path[0] =='r')
+            if(path[0] == 'r')
             {
-                    file.Open(path + "mapfile",File.ModeFlags.ReadWrite);
-                    String content = file.GetAsText();
-                    output = Newtonsoft.Json.JsonConvert.DeserializeObject<Map>(content);
+                MapResource content = ResourceLoader.Load<MapResource>(path + "mapfile.tres");
+                output = Newtonsoft.Json.JsonConvert.DeserializeObject<Map>(content.content);
                 return output;
-            };
-            if(System.IO.File.Exists(path+"/mapfile"))
-                output  = Newtonsoft.Json.JsonConvert.DeserializeObject<Map>(System.IO.File.ReadAllText(path+ "/mapfile"));
+            }
+            else if(System.IO.File.Exists(path+"/mapfile.json"))
+                output  = Newtonsoft.Json.JsonConvert.DeserializeObject<Map>(System.IO.File.ReadAllText(path+ "/mapfile.json"));
             return output;
         }
         public void BuildMap(string mapPath)
@@ -132,7 +131,7 @@ namespace Map{
             {
                 System.IO.Directory.CreateDirectory(_mapfilemanager.CurrentMapPath);
             }
-            System.IO.File.WriteAllText(_mapfilemanager.CurrentMapPath+"mapfile",map);
+            System.IO.File.WriteAllText(_mapfilemanager.CurrentMapPath+"mapfile.json",map);
             if(!System.IO.File.Exists(_mapfilemanager.CurrentMapPath+"tileset.meshlib"))
             {
                 var meshlib = new Godot.File();
@@ -154,7 +153,7 @@ namespace Map{
             String str;
             str = Newtonsoft.Json.JsonConvert.SerializeObject(output);
             GD.Print("beep");
-            String testMapPath = (_mapfilemanager.MapPath+"mapfile");
+            String testMapPath = (_mapfilemanager.MapPath+"mapfile.json");
             System.IO.File.WriteAllText(testMapPath,str);
         }
         public override void _Ready()

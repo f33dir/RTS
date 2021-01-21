@@ -15,7 +15,7 @@ public class MapFileManager : Node
             _maps.Add("res://Maps/Map2/");
             if(System.IO.Directory.Exists(MapPath)){
                 
-                var paths = System.IO.Directory.GetFiles(MapPath,"mapfile",SearchOption.AllDirectories);
+                var paths = System.IO.Directory.GetFiles(MapPath,"mapfile.json  ",SearchOption.AllDirectories);
                 foreach(var pth in paths)
                 {
                     DirectoryInfo dir = new DirectoryInfo(pth);

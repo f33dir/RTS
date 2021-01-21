@@ -53,5 +53,6 @@
     <Compile Include="Src\Object\Units\AttackModifier.cs" />
     <Compile Include="Src\Building\BuilderManager.cs" />
     <Compile Include="Src\Building\PlayerBuilderManager.cs" />
+    <Compile Include="Src\Map\MapResource.cs" />
   </ItemGroup>
 </Project>
