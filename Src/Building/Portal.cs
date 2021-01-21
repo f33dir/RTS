@@ -74,7 +74,7 @@ public class Portal : Unit.BuildingUnit
         int hp  = wave*5;
         enemy.HP = hp;
         enemy.Damage = damage;
-        enemy.MoveSpeed = speed*4;
+        enemy.MoveSpeed = speed;
         // enemy.Scale = new Vector3(size,size,size);
         enemy.Cost = 5+ (wave / 2);
     }

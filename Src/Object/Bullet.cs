@@ -27,8 +27,13 @@ namespace Unit
                     unit.HP -= _Damage;
                     if(_IsFreezing)
                     {
-                        unit.MoveSpeed *= 0.75f;
-                        unit.SlowDebuffTimer.Start();
+                        if(!unit.IsFreezed)
+                        {
+                            unit.IsFreezed = true;
+                            unit.MoveSpeed *= 0.75f;
+                            unit.SlowDebuffTimer.Start();
+                        }
+                        else unit.SlowDebuffTimer.Start();
                     }
                 }
                 QueueFree();
@@ -45,8 +50,13 @@ namespace Unit
                         EnteredUnit.HP -= _Damage;
                         if(_IsFreezing)
                         {
-                            EnteredUnit.MoveSpeed *= 0.75f;
-                            EnteredUnit.SlowDebuffTimer.Start();
+                            if(!EnteredUnit.IsFreezed)
+                            {
+                                EnteredUnit.IsFreezed = true;
+                                EnteredUnit.MoveSpeed *= 0.75f;
+                                EnteredUnit.SlowDebuffTimer.Start();
+                            }
+                            else EnteredUnit.SlowDebuffTimer.Start();
                         }
                         QueueFree();
                     }
