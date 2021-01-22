@@ -1,5 +1,5 @@
 extends Control
-
+onready var sound = $"/root/SoundEngine"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var play = $Button1
@@ -8,6 +8,7 @@ func _ready():
 	play.connect("pressed",self,"_button_play_pressed")
 	settings.connect("pressed",self,"_button_settings_pressed")
 	exit.connect("pressed",self,"_button_exit_pressed")
+	sound.PlayMenuMusic()
 	pass
 
 func _button_exit_pressed():

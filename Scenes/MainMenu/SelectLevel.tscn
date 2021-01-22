@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Src/Menu/SelectLevel.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Sounds/rts cringe.wav" type="AudioStream" id=2]
 [ext_resource path="res://Resources/99-996701_game-main-menu-background.jpg" type="Texture" id=3]
 
 [sub_resource type="GDScript" id=1]
@@ -59,4 +60,9 @@ margin_top = 23.0
 margin_right = 982.0
 margin_bottom = 164.0
 text = "Editor"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -10.279
+autoplay = true
 [connection signal="item_selected" from="MapList" to="." method="_select_map"]
